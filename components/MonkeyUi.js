@@ -1,8 +1,8 @@
 import Row from "./layout/row.jsx";
 import Col from "./layout/col.jsx";
 
-var BiosanUi = {
+var MonkeyUi = {
 	Row : Row,
 	Col : Col
 }
-export default BiosanUi;
+export default MonkeyUi;

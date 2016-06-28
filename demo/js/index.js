@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BiosanUi from '../../components/BiosanUi.js'
+import MonkeyUi from '../../components/MonkeyUi.js'
 
-var Row = BiosanUi.Row;
-var Col = BiosanUi.Col;
+var Row = MonkeyUi.Row;
+var Col = MonkeyUi.Col;
 
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
 
