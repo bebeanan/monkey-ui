@@ -10,7 +10,7 @@ export default class Col extends React.Component{
 		super(props);
 		this.props = props;
 	}
-
+	
 	render(){
 		let props = this.props;
 		const { span, order, offset, push, pull, className, children,...others} = this.props;

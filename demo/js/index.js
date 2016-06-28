@@ -8,5 +8,10 @@ var Col = MonkeyUi.Col;
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
 
 ReactDOM.render(
-<Row/>,
+  <div>
+    <Row>
+		<Col>123</Col>
+    </Row>
+  </div>
+,
  document.getElementById('hello'));

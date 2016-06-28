@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./components/monkeyui');
+module.exports = require('./lib/monkeyui');

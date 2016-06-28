@@ -1,5 +1,5 @@
-import Row from "./layout/row.jsx";
-import Col from "./layout/col.jsx";
+import Row from "./layout/row";
+import Col from "./layout/col";
 
 var MonkeyUi = {
 	Row : Row,
