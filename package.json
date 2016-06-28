@@ -1,20 +1,26 @@
 {
   "name": "monkeyui",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "title": "monkeyui",
+  "description": "react components.",
+  "author": "bebeanan",
+  "license": "MIT",
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
   },
   "dependencies": {
     "classnames": "~2.2.0",
-    "css-animation": "^1.2.5",
-    "gregorian-calendar": "~4.1.0",
-    "gregorian-calendar-format": "~4.1.0",
-    "normalize.css": "^4.1.1",
-    "warning": "~3.0.0",
-    "html-webpack-plugin":""
+    "css-animation": "^1.2.5"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bebeanan/monkey-ui.git"
+  },
+  "keywords": [
+    "monkeyui",
+    "bebeanan"
+  ],
   "devDependencies": {
     "babel": "",
     "babel-core": "",
