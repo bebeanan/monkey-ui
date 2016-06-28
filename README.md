@@ -3,12 +3,13 @@
 
 
 ##build:
-<code> npm install -g webpack	</code>	
+<code> npm install -g webpack</code>	
+
 <code> npm install </code>
+
 <code> webpack </code>
 
-
-##dev run
+##dev run:
 <code>
 	npm run dev 
 	http://localhost:8080/index.html
