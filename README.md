@@ -10,7 +10,6 @@
 <code> webpack </code>
 
 ##dev run:
-<code>
-	npm run dev 
-	http://localhost:8080/index.html
-</code>
+<code> npm run dev </code>
+
+<code>	http://localhost:8080/index.html</code>
