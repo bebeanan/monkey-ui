@@ -2,12 +2,11 @@
 基于react的前端框架，参考antd
 
 
-##build
-<code>
-	npm install -g webpack		
-	npm install 
-	webpack 
-</code>
+##build:
+<code> npm install -g webpack	</code>	
+<code> npm install </code>
+<code> webpack </code>
+
 
 ##dev run
 <code>
