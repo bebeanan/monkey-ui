@@ -4,19 +4,13 @@
 
 ##build
 <code>
-	npm install -g webpack
-</code>
-<code>
-	npm install
-</code>
-<code>
-	webpack 
+	npm install -g webpack	<br/>
+	npm install <br/>
+	webpack <br/>
 </code>
 
 ##dev run
 <code>
-	npm run dev
-</code>
-<code>
+	npm run dev <br/>
 	http://localhost:8080/index.html
 </code>
