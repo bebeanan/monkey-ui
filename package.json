@@ -1,10 +1,11 @@
 {
   "name": "monkeyui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "title": "monkeyui",
   "description": "react components.",
   "author": "bebeanan",
   "license": "MIT",
+  "main": "monkeyui.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
