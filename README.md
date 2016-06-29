@@ -1,6 +1,9 @@
 # monkey-ui
 基于react的前端框架，参考antd
 
+##install:
+<code>npm install monkeyui</code>
+
 ##build:
 <code> npm install -g webpack</code>	
 
