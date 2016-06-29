@@ -7,7 +7,7 @@
 ##build:
 <code> npm install </code>
 
-<code> gulp </code>	
+<code> gulp build</code>	
 
 ##dev run:
 <code> npm run dev </code>

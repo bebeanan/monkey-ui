@@ -5,14 +5,15 @@ var  HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
 	  index : [
-      'webpack-dev-server/client?http://localhost:8080', 
-      'webpack/hot/only-dev-server',
       './demo/js/index.js'],
     vendors :['react','react-dom']
   },
   output: { 
-    path: './dist',
+    path: path.join(__dirname, "dist"),
     filename: '/js/[name].js'
+  },
+  resolve: {
+        extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
@@ -30,7 +31,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendors','/js/vendors.js'),
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template : "demo/templates/index.html",
