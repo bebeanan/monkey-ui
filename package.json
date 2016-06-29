@@ -23,24 +23,24 @@
     "bebeanan"
   ],
   "devDependencies": {
-    "babel": "",
-    "babel-core": "",
+    "babel": "^6.5.2",
+    "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-assign": "^6.5.0",
-    "babel-plugin-transform-object-rest-spread": "",
-    "babel-preset-es2015": "",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-	  "webpack":"",
-    "less":"",
-    "less-loader":"",
-    "css-loader":"",
-    "style-loader":"",
-    "react-hot-loader":"",
-    "webpack-dev-server":"",
-    "gulp":"",
-    "gulp-babel":""
+	  "webpack":"^1.13.1",
+    "less":"^2.7.1",
+    "less-loader":"^2.2.3",
+    "css-loader":"^0.23.1",
+    "style-loader":"^0.13.1",
+    "react-hot-loader":"^1.3.0",
+    "webpack-dev-server":"^1.14.1",
+    "gulp":"^3.9.1",
+    "gulp-babel":"^6.1.2"
   }
 }
