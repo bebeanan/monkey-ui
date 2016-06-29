@@ -5,11 +5,9 @@
 <code>npm install monkeyui</code>
 
 ##build:
-<code> npm install -g webpack</code>	
-
 <code> npm install </code>
 
-<code> webpack </code>
+<code> gulp </code>	
 
 ##dev run:
 <code> npm run dev </code>

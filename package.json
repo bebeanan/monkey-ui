@@ -39,6 +39,8 @@
     "css-loader":"",
     "style-loader":"",
     "react-hot-loader":"",
-    "webpack-dev-server":""
+    "webpack-dev-server":"",
+    "gulp":"",
+    "gulp-babel":""
   }
 }
