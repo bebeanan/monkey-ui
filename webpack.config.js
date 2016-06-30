@@ -25,6 +25,10 @@ module.exports = {
       {
         test: /\.less$/,
         loader: "react-hot!style-loader!css-loader!less-loader"
+      },
+      {
+        test: /\.css$/,
+        loader: "react-hot!style-loader!css-loader!less-loader"
       }
     ]
   },

@@ -1,5 +1,8 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
+import less from 'gulp-less';
+import concat from 'gulp-concat';
+import cssmin from 'gulp-minify-css';
 import gutil from "gulp-util";
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
@@ -7,8 +10,12 @@ import WebpackDevServer from 'webpack-dev-server';
 
 const dirs={
 	src : ['./components/**/*.js','./components/**/*.jsx'],
-	less :['./components/**/*.less'],
-	dist: 'lib'
+	less :[	'./components/style/index.less',
+			'./components/button/style/index.less',
+			'./components/layout/style/index.less'
+			],
+	lib: 'lib',
+	dist :'lib/dist'
 }
 
 gulp.task('webpack',() =>{
@@ -35,13 +42,16 @@ gulp.task('webpack',() =>{
 
 gulp.task('less',() =>{
 	return gulp.src(dirs.less)
+		.pipe(less())
+		.pipe(concat('monkeyui.css'))
+		.pipe(cssmin())
 		.pipe(gulp.dest(dirs.dist))
 });
 
 gulp.task('babel',() => {
 	return gulp.src(dirs.src)
 		.pipe(babel())
-		.pipe(gulp.dest(dirs.dist))
+		.pipe(gulp.dest(dirs.lib))
 });
 
 gulp.task('build',()=>{
