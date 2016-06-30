@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MonkeyUi from '../../components/monkeyui.js';
+// import MonkeyUi from '../../components/monkeyui.js';
 import '../../lib/dist/monkeyui.css';
-// import MonkeyUi from '../../monkeyui.js';
+import MonkeyUi from '../../monkeyui.js';
 
 var Row = MonkeyUi.Row;
 var Col = MonkeyUi.Col;
