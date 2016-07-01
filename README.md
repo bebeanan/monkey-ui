@@ -18,5 +18,3 @@
 ## use monkeyui
 
 <code>import MonkeyUi from 'monkeyui'</code>
-
-<code>import 'monkeyui/lib/dist/monkeyui.css';</code>
