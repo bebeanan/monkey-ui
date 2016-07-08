@@ -6,6 +6,7 @@ import MonkeyUi from '../../monkeyui.js';
 var Row = MonkeyUi.Row;
 var Col = MonkeyUi.Col;
 var Button = MonkeyUi.Button;
+var CheckBox = MonkeyUi.CheckBox;
 
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
 
@@ -18,3 +19,11 @@ ReactDOM.render(
   </div>
 ,
  document.getElementById('hello'));
+
+ReactDOM.render(
+  <div>
+    <CheckBox>Checkbox</CheckBox>
+  </div>
+,
+ document.getElementById('checkboxdemo'));
+ 
