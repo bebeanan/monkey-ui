@@ -10,11 +10,11 @@ let mousePositionEventBinded;
 
 export default class Modal extends React.Component {
 
-  handleCancel(e){
+  handleCancel=(e)=>{
     this.props.onCancel(e);
   }
 
-  handleOk(){
+  handleOk=()=>{
     this.props.onOk();
   }
 
