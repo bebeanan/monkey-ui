@@ -13,6 +13,7 @@ const dirs={
 	less :[	'./components/style/index.less',
 			'./components/button/style/index.less',
 			'./components/layout/style/index.less',
+			'./components/checkbox/style/index.less',
 			'./components/modal/style/index.less'
 			],
 	lib: 'lib',
