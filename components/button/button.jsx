@@ -39,7 +39,7 @@ export default class Button extends React.Component {
     button.className = button.className.replace(` ${this.props.prefixCls}-clicked`, '');
   }
 
-  handleClick(...args){
+  handleClick =(...args)=>{
     // Add click effect
     const buttonNode = findDOMNode(this);
     this.clearButton(buttonNode);
@@ -51,7 +51,7 @@ export default class Button extends React.Component {
   }
 
   // Handle auto focus when click button in Chrome
-  handleMouseUp(e){
+  handleMouseUp =(e)=>{
     findDOMNode(this).blur();
     if (this.props.onMouseUp) {
       this.props.onMouseUp(e);
@@ -87,8 +87,8 @@ export default class Button extends React.Component {
       <button {...others}
         type={htmlType || 'button'}
         className={classes}
-        onMouseUp={() => this.handleMouseUp}
-        onClick={() => this.handleClick}
+        onMouseUp={this.handleMouseUp}
+        onClick={this.handleClick}
       >
         {iconType ? <Icon type={iconType} /> : null}{kids}
       </button>

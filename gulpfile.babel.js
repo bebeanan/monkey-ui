@@ -12,7 +12,8 @@ const dirs={
 	src : ['./components/**/*.js','./components/**/*.jsx'],
 	less :[	'./components/style/index.less',
 			'./components/button/style/index.less',
-			'./components/layout/style/index.less'
+			'./components/layout/style/index.less',
+			'./components/modal/style/index.less'
 			],
 	lib: 'lib',
 	dist :'lib/dist'
