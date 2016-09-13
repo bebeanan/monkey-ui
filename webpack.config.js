@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "react-hot!style-loader!css-loader!less-loader"
+        loader: "react-hot!style-loader!css-loader"
       }
     ]
   },

@@ -90,7 +90,7 @@ ReactDOM.render(
 
 ReactDOM.render(<App />, document.getElementById('modal2'));
 
-
+const TreeNode=Tree.TreeNode;
 const Demo = React.createClass({
   getDefaultProps() {
     return {
@@ -120,8 +120,8 @@ const Demo = React.createClass({
         onSelect={this.onSelect} onCheck={this.onCheck}
       >
         <TreeNode title="parent 1" key="0-0">
-          <TreeNode title="parent 1-0" key="0-0-0" disabled>
-            <TreeNode title="leaf" key="0-0-0-0" disableCheckbox />
+          <TreeNode title="parent 1-0" key="0-0-0" >
+            <TreeNode title="leaf" key="0-0-0-0"  />
             <TreeNode title="leaf" key="0-0-0-1" />
           </TreeNode>
           <TreeNode title="parent 1-1" key="0-0-1">
