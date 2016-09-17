@@ -9,7 +9,7 @@ var Button = MonkeyUi.Button;
 var CheckBox = MonkeyUi.CheckBox;
 var Modal =MonkeyUi.Modal;
 var Tree = MonkeyUi.Tree;
-
+var message=MonkeyUi.Message;
 const confirm = Modal.confirm;
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
 
@@ -134,5 +134,16 @@ const Demo = React.createClass({
 });
 
 ReactDOM.render(<Demo />, document.getElementById('tree'));
+
+
+const success = function () {
+  // message.success('成功');
+  message.info('这是一条普通的提醒',1000);
+};
+
+ReactDOM.render(<div>
+  <Button onClick={success}>显示成功提示</Button>
+  
+</div>, document.getElementById('message'));
  
  
