@@ -10,6 +10,7 @@ var CheckBox = MonkeyUi.CheckBox;
 var Modal =MonkeyUi.Modal;
 var Tree = MonkeyUi.Tree;
 var message=MonkeyUi.Message;
+var Alert=MonkeyUi.Alert;
 const confirm = Modal.confirm;
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
 
@@ -146,4 +147,14 @@ ReactDOM.render(<div>
   
 </div>, document.getElementById('message'));
  
+
+
+
+
+ReactDOM.render(<div>
+  <Alert message="成功提示的文案" type="success" showIcon />
+  <Alert message="消息提示的文案" type="info" showIcon />
+  <Alert message="警告提示的文案" type="warning" showIcon />
+  <Alert message="错误提示的文案" type="error" showIcon />
+  </div>,document.getElementById('alert'))
  

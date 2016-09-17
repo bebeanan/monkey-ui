@@ -5,6 +5,7 @@ import CheckBox from "./checkbox/index";
 import Modal from "./modal/index";
 import Tree from "./tree/index";
 import Message from "./message/index";
+import Alert from "./alert/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -12,6 +13,7 @@ var MonkeyUi = {
 	CheckBox : CheckBox,
 	Modal : Modal,
 	Tree : Tree,
-	Message:Message
+	Message:Message,
+	Alert : Alert
 }
 export default MonkeyUi;
