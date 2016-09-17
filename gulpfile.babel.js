@@ -16,7 +16,8 @@ const dirs={
 			'./components/modal/style/index.less',
 			'./components/tree/style/index.less',
 			'./components/message/style/index.less',
-			'./components/alert/style/index.less'
+			'./components/alert/style/index.less',
+			'./components/collapse/style/index.less'
 			],
 	lib: 'lib',
 	dist :'lib/dist'
