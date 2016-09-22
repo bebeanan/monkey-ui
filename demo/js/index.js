@@ -12,6 +12,7 @@ var Tree = MonkeyUi.Tree;
 var message=MonkeyUi.Message;
 var Alert=MonkeyUi.Alert;
 var Collapse=MonkeyUi.Collapse;
+var Input=MonkeyUi.Input
 const confirm = Modal.confirm;
 const Panel=Collapse.Panel;
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
@@ -185,3 +186,7 @@ ReactDOM.render(
     </Panel>
   </Collapse>
 , document.getElementById('collapse'));
+
+
+ReactDOM.render(<Input type="textarea" rows={4} />
+, document.getElementById('input'));

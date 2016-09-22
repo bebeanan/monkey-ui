@@ -17,7 +17,8 @@ const dirs={
 			'./components/tree/style/index.less',
 			'./components/message/style/index.less',
 			'./components/alert/style/index.less',
-			'./components/collapse/style/index.less'
+			'./components/collapse/style/index.less',
+			'./components/input/style/index.less'
 			],
 	lib: 'lib',
 	dist :'lib/dist'

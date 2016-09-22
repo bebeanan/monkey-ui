@@ -7,6 +7,7 @@ import Tree from "./tree/index";
 import Message from "./message/index";
 import Alert from "./alert/index";
 import Collapse from "./collapse/index";
+import Input from "./input/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -16,6 +17,7 @@ var MonkeyUi = {
 	Tree : Tree,
 	Message:Message,
 	Alert : Alert,
-	Collapse : Collapse
+	Collapse : Collapse,
+	Input : Input
 }
 export default MonkeyUi;
