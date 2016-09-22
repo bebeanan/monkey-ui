@@ -16,8 +16,6 @@ var Input=MonkeyUi.Input
 const confirm = Modal.confirm;
 const Panel=Collapse.Panel;
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
-
-
 ReactDOM.render(
   <div>
     <Button type="primary">Primary</Button>
