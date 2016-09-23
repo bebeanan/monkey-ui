@@ -1,11 +1,11 @@
 import RcCheckbox from 'rc-checkbox';
-import * as React from 'react';
+import React from 'react';
 import CheckboxGroup from './Group';
 import classNames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import splitObject from '../_util/splitObject';
 
-interface CheckboxProps {
+export interface CheckboxProps {
   /** 指定当前是否选中*/
   checked?:boolean,
   /** 初始是否选中*/
@@ -42,3 +42,5 @@ export default class Checkbox extends React.Component<CheckboxProps, any> {
     );
   }
 }
+
+Checkbox.Group = CheckboxGroup;
