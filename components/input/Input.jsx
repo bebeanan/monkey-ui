@@ -25,34 +25,6 @@ function clearNextFrameAction(nextFrameId) {
 }
 
 export default class Input extends Component {
-  static defaultProps = {
-    defaultValue: '',
-    disabled: false,
-    prefixCls: 'ant-input',
-    type: 'text',
-    onPressEnter() {},
-    onKeyDown() {},
-    autosize: false,
-  }
-
-  static propTypes = {
-    type: PropTypes.string,
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    size: PropTypes.oneOf(['small', 'default', 'large']),
-    disabled: PropTypes.bool,
-    value: PropTypes.any,
-    defaultValue: PropTypes.any,
-    className: PropTypes.string,
-    addonBefore: PropTypes.node,
-    addonAfter: PropTypes.node,
-    prefixCls: PropTypes.string,
-    autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    onPressEnter: PropTypes.func,
-    onKeyDown: PropTypes.func,
-  }
 
   constructor(props) {
     super(props);
@@ -181,4 +153,34 @@ export default class Input extends Component {
   render() {
     return this.renderLabledInput(this.renderInput());
   }
+}
+
+
+Input.defaultProps = {
+  defaultValue: '',
+  disabled: false,
+  prefixCls: 'ant-input',
+  type: 'text',
+  onPressEnter() {},
+  onKeyDown() {},
+  autosize: false,
+}
+
+Input.propTypes = {
+  type: PropTypes.string,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  size: PropTypes.oneOf(['small', 'default', 'large']),
+  disabled: PropTypes.bool,
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
+  className: PropTypes.string,
+  addonBefore: PropTypes.node,
+  addonAfter: PropTypes.node,
+  prefixCls: PropTypes.string,
+  autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  onPressEnter: PropTypes.func,
+  onKeyDown: PropTypes.func,
 }
