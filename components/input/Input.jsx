@@ -156,15 +156,7 @@ export default class Input extends Component {
 }
 
 
-Input.defaultProps = {
-  defaultValue: '',
-  disabled: false,
-  prefixCls: 'ant-input',
-  type: 'text',
-  onPressEnter() {},
-  onKeyDown() {},
-  autosize: false,
-}
+
 
 Input.propTypes = {
   type: PropTypes.string,
@@ -183,4 +175,14 @@ Input.propTypes = {
   autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   onPressEnter: PropTypes.func,
   onKeyDown: PropTypes.func,
+}
+
+Input.defaultProps = {
+  defaultValue: '',
+  disabled: false,
+  prefixCls: 'ant-input',
+  type: 'text',
+  onPressEnter() {},
+  onKeyDown() {},
+  autosize: false,
 }
