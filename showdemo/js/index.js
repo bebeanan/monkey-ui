@@ -63,197 +63,22 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	  'div',
 	  null,
-	  _react2.default.createElement(_Page2.default, null)
+	  _react2.default.createElement(
+	    'header',
+	    { id: 'header' },
+	    '头部'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Page2.default, null)
+	  ),
+	  _react2.default.createElement(
+	    'footer',
+	    { id: 'footer' },
+	    '尾部'
+	  )
 	), document.getElementById('root'));
-	/*ar Row = MonkeyUi.Row;
-	var Col = MonkeyUi.Col;
-	var Button = MonkeyUi.Button;
-	var CheckBox = MonkeyUi.CheckBox;
-	var Modal =MonkeyUi.Modal;
-	var Tree = MonkeyUi.Tree;
-	var message=MonkeyUi.Message;
-	var Alert=MonkeyUi.Alert;
-	var Collapse=MonkeyUi.Collapse;
-	var Input=MonkeyUi.Input
-	const confirm = Modal.confirm;
-	const Panel=Collapse.Panel;
-	const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
-	ReactDOM.render(
-	  <div>
-	    <Button type="primary">Primary</Button>
-	    <Button>Default</Button>
-	    <Button type="ghost">Ghost</Button>
-	    <Button type="dashed">Dashed</Button>
-	  </div>
-	,
-	 document.getElementById('hello'));
-
-	ReactDOM.render(
-	  <div>
-	    <CheckBox>Checkbox</CheckBox>
-	  </div>
-	,
-	 document.getElementById('checkboxdemo'));
-	 
-
-	function showConfirm() {
-	  confirm({
-	    title: '您是否确认要删除这项内容',
-	    content: '点确认 1 秒后关闭',
-	    onOk() {
-	      return new Promise((resolve) => {
-	        setTimeout(resolve, 1000);
-	      });
-	    },
-	    onCancel() {},
-	  });
-	}
-
-	ReactDOM.render(
-	  <Button onClick={showConfirm}>
-	    确认对话框
-	  </Button>
-	,
-	 document.getElementById('modal'));
-	 
-	 const App = React.createClass({
-	  getInitialState() {
-	    return { visible: false };
-	  },
-	  showModal() {
-	    this.setState({
-	      visible: true,
-	    });
-	  },
-	  handleOk() {
-	    console.log('点击了确定');
-	    this.setState({
-	      visible: false,
-	    });
-	  },
-	  handleCancel(){
-	    console.log('点击了取消');
-	    this.setState({
-	      visible: false,
-	    });
-	  },
-	  render() {
-	    return (
-	      <div>
-	        <Button type="primary" onClick={this.showModal}>显示对话框</Button>
-	        <Modal title="第一个 Modal" visible={this.state.visible}
-	          onOk={this.handleOk} onCancel={this.handleCancel}
-	        >
-	          <p>对话框的内容</p>
-	          <p>对话框的内容</p>
-	          <p>对话框的内容</p>
-	        </Modal>
-	      </div>
-	    );
-	  },
-	});
-
-	ReactDOM.render(<App />, document.getElementById('modal2'));
-
-	const TreeNode=Tree.TreeNode;
-	const Demo = React.createClass({
-	  getDefaultProps() {
-	    return {
-	      keys: ['0-0-0', '0-0-1'],
-	    };
-	  },
-	  getInitialState() {
-	    const keys = this.props.keys;
-	    return {
-	      defaultExpandedKeys: keys,
-	      defaultSelectedKeys: keys,
-	      defaultCheckedKeys: keys,
-	    };
-	  },
-	  onSelect(info) {
-	    console.log('selected', info);
-	  },
-	  onCheck(info) {
-	    console.log('onCheck', info);
-	  },
-	  render() {
-	    return (
-	      <Tree className="myCls" showLine checkable
-	        defaultExpandedKeys={this.state.defaultExpandedKeys}
-	        defaultSelectedKeys={this.state.defaultSelectedKeys}
-	        defaultCheckedKeys={this.state.defaultCheckedKeys}
-	        onSelect={this.onSelect} onCheck={this.onCheck}
-	      >
-	        <TreeNode title="parent 1" key="0-0">
-	          <TreeNode title="parent 1-0" key="0-0-0" >
-	            <TreeNode title="leaf" key="0-0-0-0"  />
-	            <TreeNode title="leaf" key="0-0-0-1" />
-	          </TreeNode>
-	          <TreeNode title="parent 1-1" key="0-0-1">
-	            <TreeNode title={<span style={{ color: '#08c' }}>sss</span>} key="0-0-1-0" />
-	          </TreeNode>
-	        </TreeNode>
-	      </Tree>
-	    );
-	  },
-	});
-
-	ReactDOM.render(<Demo />, document.getElementById('tree'));
-
-
-	const success = function () {
-	  // message.success('成功');
-	  message.info('这是一条普通的提醒',1000);
-	};
-
-	ReactDOM.render(<div>
-	  <Button onClick={success}>显示成功提示</Button>
-	  
-	</div>, document.getElementById('message'));
-	 
-
-
-
-
-	ReactDOM.render(<div>
-	  <Alert message="成功提示的文案" type="success" showIcon />
-	  <Alert message="消息提示的文案" type="info" showIcon />
-	  <Alert message="警告提示的文案" type="warning" showIcon />
-	  <Alert message="错误提示的文案" type="error" showIcon />
-	  </div>,document.getElementById('alert'))
-	 
-
-	 function callback(key) {
-	  console.log(key);
-	}
-
-	const text = `
-	  A dog is a type of domesticated animal.
-	  Known for its loyalty and faithfulness,
-	  it can be found as a welcome guest in many households across the world.
-	`;
-
-	ReactDOM.render(
-	  <Collapse defaultActiveKey={['1']} onChange={callback}>
-	    <Panel header="This is panel header 1" key="1">
-	      <p>{text}</p>
-	    </Panel>
-	    <Panel header="This is panel header 2" key="2">
-	      <p>{text}</p>
-	    </Panel>
-	    <Panel header="This is panel header 3" key="3">
-	      <p>{text}</p>
-	    </Panel>
-	  </Collapse>
-	, document.getElementById('collapse'));
-
-
-	ReactDOM.render(<Input type="textarea" rows={4} />
-	, document.getElementById('input'));
-	*/
-
-	// import MonkeyUi from '../../components/monkeyui.js';
-	//import MonkeyUi from '../../monkeyui.js';
 
 /***/ },
 /* 1 */
@@ -20570,43 +20395,32 @@
 
 	var _monkeyui2 = _interopRequireDefault(_monkeyui);
 
+	var _LeftPage = __webpack_require__(234);
+
+	var _LeftPage2 = _interopRequireDefault(_LeftPage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Collapse = _monkeyui2.default.Collapse;
-	// import MonkeyUi from '../../components/monkeyui.js';
-
-	var Panel = Collapse.Panel;
+	var Row = _monkeyui2.default.Row;
+	var Col = _monkeyui2.default.Col;
 	var Page = _react2.default.createClass({
 	  displayName: 'Page',
 	  render: function render() {
 	    return _react2.default.createElement(
-	      Collapse,
+	      'div',
 	      null,
 	      _react2.default.createElement(
-	        Panel,
-	        { header: 'This is panel header 1', key: '1' },
+	        Row,
+	        null,
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          '123'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        Panel,
-	        { header: 'This is panel header 2', key: '2' },
+	          Col,
+	          { span: 12 },
+	          _react2.default.createElement(_LeftPage2.default, null)
+	        ),
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          '456'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        Panel,
-	        { header: 'This is panel header 3', key: '3' },
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          '567'
+	          Col,
+	          { span: 12 },
+	          '.ant-col-12'
 	        )
 	      )
 	    );
@@ -28406,7 +28220,7 @@
 
 	var _Input2 = _interopRequireDefault(_Input);
 
-	var _Group = __webpack_require__(232);
+	var _Group = __webpack_require__(233);
 
 	var _Group2 = _interopRequireDefault(_Group);
 
@@ -28460,6 +28274,14 @@
 	var _calculateNodeHeight = __webpack_require__(231);
 
 	var _calculateNodeHeight2 = _interopRequireDefault(_calculateNodeHeight);
+
+	var _objectAssign = __webpack_require__(183);
+
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+	var _omit = __webpack_require__(232);
+
+	var _omit2 = _interopRequireDefault(_omit);
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -28592,7 +28414,11 @@
 	    value: function renderInput() {
 	      var _classNames2;
 
-	      var props = _extends({}, this.props);
+	      var props = (0, _objectAssign2.default)({}, this.props);
+
+	      // Fix https://fb.me/react-unknown-prop
+	      var otherProps = (0, _omit2.default)(this.props, ['prefixCls', 'onPressEnter', 'autosize', 'addonBefore', 'addonAfter']);
+
 	      var prefixCls = props.prefixCls;
 	      if (!props.type) {
 	        return props.children;
@@ -28609,15 +28435,15 @@
 
 	      switch (props.type) {
 	        case 'textarea':
-	          return _react2.default.createElement('textarea', _extends({}, props, {
-	            style: _extends({}, props.style, this.state.textareaStyles),
+	          return _react2.default.createElement('textarea', _extends({}, otherProps, {
+	            style: (0, _objectAssign2.default)({}, props.style, this.state.textareaStyles),
 	            className: inputClassName,
 	            onKeyDown: this.handleKeyDown,
 	            onChange: this.handleTextareaChange,
 	            ref: 'input'
 	          }));
 	        default:
-	          return _react2.default.createElement('input', _extends({}, props, {
+	          return _react2.default.createElement('input', _extends({}, otherProps, {
 	            className: inputClassName,
 	            onKeyDown: this.handleKeyDown,
 	            ref: 'input'
@@ -28634,16 +28460,8 @@
 	  return Input;
 	}(_react.Component);
 
-	Input.defaultProps = {
-	  defaultValue: '',
-	  disabled: false,
-	  prefixCls: 'ant-input',
-	  type: 'text',
-	  onPressEnter: function onPressEnter() {},
-	  onKeyDown: function onKeyDown() {},
+	exports.default = Input;
 
-	  autosize: false
-	};
 	Input.propTypes = {
 	  type: _react.PropTypes.string,
 	  id: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
@@ -28657,9 +28475,20 @@
 	  prefixCls: _react.PropTypes.string,
 	  autosize: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.object]),
 	  onPressEnter: _react.PropTypes.func,
-	  onKeyDown: _react.PropTypes.func
+	  onKeyDown: _react.PropTypes.func,
+	  onChange: _react.PropTypes.func
 	};
-	exports.default = Input;
+
+	Input.defaultProps = {
+	  disabled: false,
+	  prefixCls: 'ant-input',
+	  type: 'text',
+	  onPressEnter: function onPressEnter() {},
+	  onKeyDown: function onKeyDown() {},
+	  onChange: function onChange() {},
+
+	  autosize: false
+	};
 
 /***/ },
 /* 231 */
@@ -28786,6 +28615,24 @@
 
 	'use strict';
 
+	var assign = __webpack_require__(183);
+
+	module.exports = function omit(obj, fields) {
+	  var copy = assign({}, obj);
+	  for (var i = 0; i < fields.length; i++) {
+	    var key = fields[i];
+	    delete copy[key];
+	  }
+	  return copy;
+	};
+
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -28823,6 +28670,71 @@
 	Group.propTypes = {
 	  children: _react2.default.PropTypes.any
 	};
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(38);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _monkeyui = __webpack_require__(169);
+
+	var _monkeyui2 = _interopRequireDefault(_monkeyui);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Collapse = _monkeyui2.default.Collapse;
+	var Panel = Collapse.Panel;
+	var Page = _react2.default.createClass({
+	  displayName: 'Page',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      Collapse,
+	      null,
+	      _react2.default.createElement(
+	        Panel,
+	        { header: 'This is panel header 1', key: '1' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          '123'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        Panel,
+	        { header: 'This is panel header 2', key: '2' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          '456'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        Panel,
+	        { header: 'This is panel header 3', key: '3' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          '567'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	exports.default = Page;
 
 /***/ }
 /******/ ]);
