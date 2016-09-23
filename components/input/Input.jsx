@@ -111,7 +111,9 @@ export default class Input extends Component {
     const otherProps = omit(this.props, [
       'prefixCls',
       'onPressEnter',
-      'autosize'
+      'autosize',
+      'addonBefore',
+      'addonAfter',
     ]);
 
     const prefixCls = props.prefixCls;
@@ -165,7 +167,7 @@ export default class Input extends Component {
 
 
 
-Input.propTypes = {
+Input.propTypes={
   type: PropTypes.string,
   id: PropTypes.oneOfType([
     PropTypes.string,
@@ -182,14 +184,15 @@ Input.propTypes = {
   autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   onPressEnter: PropTypes.func,
   onKeyDown: PropTypes.func,
+  onChange : PropTypes.func,
 }
 
 Input.defaultProps = {
-  defaultValue: '',
-  disabled: false,
-  prefixCls: 'ant-input',
-  type: 'text',
-  onPressEnter() {},
-  onKeyDown() {},
-  autosize: false,
+    disabled: false,
+    prefixCls: 'ant-input',
+    type: 'text',
+    onPressEnter() {},
+    onKeyDown() {},
+    onChange() {},
+    autosize: false,
 }
