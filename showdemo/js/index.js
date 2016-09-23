@@ -20395,7 +20395,7 @@
 
 	var _monkeyui2 = _interopRequireDefault(_monkeyui);
 
-	var _LeftPage = __webpack_require__(234);
+	var _LeftPage = __webpack_require__(229);
 
 	var _LeftPage2 = _interopRequireDefault(_LeftPage);
 
@@ -20475,7 +20475,7 @@
 
 	var _index14 = _interopRequireDefault(_index13);
 
-	var _index15 = __webpack_require__(229);
+	var _index15 = __webpack_require__(224);
 
 	var _index16 = _interopRequireDefault(_index15);
 
@@ -21181,7 +21181,7 @@
 
 	var _react = __webpack_require__(1);
 
-	var React = _interopRequireWildcard(_react);
+	var _react2 = _interopRequireDefault(_react);
 
 	var _Group = __webpack_require__(182);
 
@@ -21198,18 +21198,6 @@
 	var _splitObject3 = __webpack_require__(184);
 
 	var _splitObject4 = _interopRequireDefault(_splitObject3);
-
-	function _interopRequireWildcard(obj) {
-	  if (obj && obj.__esModule) {
-	    return obj;
-	  } else {
-	    var newObj = {};if (obj != null) {
-	      for (var key in obj) {
-	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-	      }
-	    }newObj.default = obj;return newObj;
-	  }
-	}
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -21276,18 +21264,20 @@
 	      var restProps = _splitObject2[1];
 
 	      var classString = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, className, !!className), _defineProperty(_classNames, prefixCls + '-wrapper', true), _classNames));
-	      return React.createElement('label', { className: classString, style: style }, React.createElement(_rcCheckbox2.default, _extends({}, restProps, { prefixCls: prefixCls, children: null })), children !== undefined ? React.createElement('span', null, children) : null);
+	      return _react2.default.createElement('label', { className: classString, style: style }, _react2.default.createElement(_rcCheckbox2.default, _extends({}, restProps, { prefixCls: prefixCls, children: null })), children !== undefined ? _react2.default.createElement('span', null, children) : null);
 	    }
 	  }]);
 
 	  return Checkbox;
-	}(React.Component);
+	}(_react2.default.Component);
 
 	Checkbox.Group = _Group2.default;
 	Checkbox.defaultProps = {
 	  prefixCls: 'ant-checkbox'
 	};
 	exports.default = Checkbox;
+
+	Checkbox.Group = _Group2.default;
 
 /***/ },
 /* 177 */
@@ -27724,88 +27714,9 @@
 
 /***/ },
 /* 223 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	}();
-
-	var _rcCollapse = __webpack_require__(224);
-
-	var _rcCollapse2 = _interopRequireDefault(_rcCollapse);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
-
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	}
-
-	function _possibleConstructorReturn(self, call) {
-	  if (!self) {
-	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-	}
-
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== "function" && superClass !== null) {
-	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
-
-	var Collapse = function (_React$Component) {
-	  _inherits(Collapse, _React$Component);
-
-	  function Collapse() {
-	    _classCallCheck(this, Collapse);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Collapse).apply(this, arguments));
-	  }
-
-	  _createClass(Collapse, [{
-	    key: 'render',
-
-	    // static Panel = RcCollapse.Panel;
-
-	    // static defaultProps = {
-	    //   prefixCls: 'ant-collapse',
-	    // }
-
-	    value: function render() {
-	      return _react2.default.createElement(_rcCollapse2.default, this.props);
-	    }
-	  }]);
-
-	  return Collapse;
-	}(_react2.default.Component);
-
-	exports.default = Collapse;
-
-	Collapse.Panel = _rcCollapse2.default.Panel;
-	Collapse.defaultProps = {
-	  prefixCls: 'ant-collapse'
-	};
+	"use strict";
 
 /***/ },
 /* 224 */
@@ -27813,414 +27724,15 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _Collapse = __webpack_require__(225);
-
-	var _Collapse2 = _interopRequireDefault(_Collapse);
-
-	exports['default'] = _Collapse2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-/* 225 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Panel = __webpack_require__(226);
-
-	var _Panel2 = _interopRequireDefault(_Panel);
-
-	var _openAnimationFactory = __webpack_require__(228);
-
-	var _openAnimationFactory2 = _interopRequireDefault(_openAnimationFactory);
-
-	function toArray(activeKey) {
-	  var currentActiveKey = activeKey;
-	  if (!Array.isArray(currentActiveKey)) {
-	    currentActiveKey = currentActiveKey ? [currentActiveKey] : [];
-	  }
-	  return currentActiveKey;
-	}
-
-	var Collapse = _react2['default'].createClass({
-	  displayName: 'Collapse',
-
-	  propTypes: {
-	    children: _react.PropTypes.any,
-	    prefixCls: _react.PropTypes.string,
-	    activeKey: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.arrayOf(_react.PropTypes.string)]),
-	    defaultActiveKey: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.arrayOf(_react.PropTypes.string)]),
-	    openAnimation: _react.PropTypes.object,
-	    onChange: _react.PropTypes.func,
-	    accordion: _react.PropTypes.bool
-	  },
-
-	  statics: {
-	    Panel: _Panel2['default']
-	  },
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      prefixCls: 'rc-collapse',
-	      onChange: function onChange() {},
-	      accordion: false
-	    };
-	  },
-
-	  getInitialState: function getInitialState() {
-	    var _props = this.props;
-	    var activeKey = _props.activeKey;
-	    var defaultActiveKey = _props.defaultActiveKey;
-
-	    var currentActiveKey = defaultActiveKey;
-	    if ('activeKey' in this.props) {
-	      currentActiveKey = activeKey;
-	    }
-	    return {
-	      openAnimation: this.props.openAnimation || (0, _openAnimationFactory2['default'])(this.props.prefixCls),
-	      activeKey: toArray(currentActiveKey)
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if ('activeKey' in nextProps) {
-	      this.setState({
-	        activeKey: toArray(nextProps.activeKey)
-	      });
-	    }
-	    if ('openAnimation' in nextProps) {
-	      this.setState({
-	        openAnimation: nextProps.openAnimation
-	      });
-	    }
-	  },
-
-	  onClickItem: function onClickItem(key) {
-	    var _this = this;
-
-	    return function () {
-	      var activeKey = _this.state.activeKey;
-	      if (_this.props.accordion) {
-	        activeKey = activeKey[0] === key ? [] : [key];
-	      } else {
-	        activeKey = [].concat(_toConsumableArray(activeKey));
-	        var index = activeKey.indexOf(key);
-	        var isActive = index > -1;
-	        if (isActive) {
-	          // remove active state
-	          activeKey.splice(index, 1);
-	        } else {
-	          activeKey.push(key);
-	        }
-	      }
-	      _this.setActiveKey(activeKey);
-	    };
-	  },
-
-	  getItems: function getItems() {
-	    var _this2 = this;
-
-	    var activeKey = this.state.activeKey;
-	    var _props2 = this.props;
-	    var prefixCls = _props2.prefixCls;
-	    var accordion = _props2.accordion;
-
-	    return _react.Children.map(this.props.children, function (child, index) {
-	      // If there is no key provide, use the panel order as default key
-	      var key = child.key || String(index);
-	      var header = child.props.header;
-	      var isActive = false;
-	      if (accordion) {
-	        isActive = activeKey[0] === key;
-	      } else {
-	        isActive = activeKey.indexOf(key) > -1;
-	      }
-
-	      var props = {
-	        key: key,
-	        header: header,
-	        isActive: isActive,
-	        prefixCls: prefixCls,
-	        openAnimation: _this2.state.openAnimation,
-	        children: child.props.children,
-	        onItemClick: _this2.onClickItem(key).bind(_this2)
-	      };
-
-	      return _react2['default'].cloneElement(child, props);
-	    });
-	  },
-
-	  setActiveKey: function setActiveKey(activeKey) {
-	    if (!('activeKey' in this.props)) {
-	      this.setState({
-	        activeKey: activeKey
-	      });
-	    }
-	    this.props.onChange(this.props.accordion ? activeKey[0] : activeKey);
-	  },
-
-	  render: function render() {
-	    var prefixCls = this.props.prefixCls;
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: prefixCls },
-	      this.getItems()
-	    );
-	  }
-	});
-
-	exports['default'] = Collapse;
-	module.exports = exports['default'];
-
-/***/ },
-/* 226 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _classnames = __webpack_require__(171);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	var _PanelContent = __webpack_require__(227);
-
-	var _PanelContent2 = _interopRequireDefault(_PanelContent);
-
-	var _rcAnimate = __webpack_require__(191);
-
-	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
-
-	var CollapsePanel = _react2['default'].createClass({
-	  displayName: 'CollapsePanel',
-
-	  propTypes: {
-	    className: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]),
-	    children: _react.PropTypes.any,
-	    openAnimation: _react.PropTypes.object,
-	    prefixCls: _react.PropTypes.string,
-	    header: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number, _react.PropTypes.node]),
-	    isActive: _react.PropTypes.bool,
-	    onItemClick: _react.PropTypes.func
-	  },
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      isActive: false,
-	      onItemClick: function onItemClick() {}
-	    };
-	  },
-
-	  handleItemClick: function handleItemClick() {
-	    this.props.onItemClick();
-	  },
-
-	  render: function render() {
-	    var _classNames;
-
-	    var _props = this.props;
-	    var className = _props.className;
-	    var prefixCls = _props.prefixCls;
-	    var header = _props.header;
-	    var children = _props.children;
-	    var isActive = _props.isActive;
-
-	    var headerCls = prefixCls + '-header';
-	    var itemCls = (0, _classnames2['default'])((_classNames = {}, _defineProperty(_classNames, prefixCls + '-item', true), _defineProperty(_classNames, prefixCls + '-item-active', isActive), _defineProperty(_classNames, className, className), _classNames));
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: itemCls },
-	      _react2['default'].createElement(
-	        'div',
-	        {
-	          className: headerCls,
-	          onClick: this.handleItemClick,
-	          role: 'tab',
-	          'aria-expanded': isActive
-	        },
-	        _react2['default'].createElement('i', { className: 'arrow' }),
-	        header
-	      ),
-	      _react2['default'].createElement(
-	        _rcAnimate2['default'],
-	        {
-	          showProp: 'isActive',
-	          exclusive: true,
-	          component: '',
-	          animation: this.props.openAnimation
-	        },
-	        _react2['default'].createElement(
-	          _PanelContent2['default'],
-	          { prefixCls: prefixCls, isActive: isActive },
-	          children
-	        )
-	      )
-	    );
-	  }
-	});
-
-	exports['default'] = CollapsePanel;
-	module.exports = exports['default'];
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _classnames2 = __webpack_require__(171);
-
-	var _classnames3 = _interopRequireDefault(_classnames2);
-
-	var PanelContent = _react2['default'].createClass({
-	  displayName: 'PanelContent',
-
-	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    isActive: _react.PropTypes.bool,
-	    children: _react.PropTypes.any
-	  },
-	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
-	    return this.props.isActive || nextProps.isActive;
-	  },
-	  render: function render() {
-	    var _classnames;
-
-	    this._isActived = this._isActived || this.props.isActive;
-	    if (!this._isActived) {
-	      return null;
-	    }
-	    var _props = this.props;
-	    var prefixCls = _props.prefixCls;
-	    var isActive = _props.isActive;
-	    var children = _props.children;
-
-	    var contentCls = (0, _classnames3['default'])((_classnames = {}, _defineProperty(_classnames, prefixCls + '-content', true), _defineProperty(_classnames, prefixCls + '-content-active', isActive), _defineProperty(_classnames, prefixCls + '-content-inactive', !isActive), _classnames));
-	    return _react2['default'].createElement(
-	      'div',
-	      {
-	        className: contentCls,
-	        role: 'tabpanel'
-	      },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-content-box' },
-	        children
-	      )
-	    );
-	  }
-	});
-
-	exports['default'] = PanelContent;
-	module.exports = exports['default'];
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _cssAnimation = __webpack_require__(213);
-
-	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
-
-	function animate(node, show, transitionName, done) {
-	  var height = undefined;
-	  return (0, _cssAnimation2['default'])(node, transitionName, {
-	    start: function start() {
-	      if (!show) {
-	        node.style.height = node.offsetHeight + 'px';
-	      } else {
-	        height = node.offsetHeight;
-	        node.style.height = 0;
-	      }
-	    },
-	    active: function active() {
-	      node.style.height = (show ? height : 0) + 'px';
-	    },
-	    end: function end() {
-	      node.style.height = '';
-	      done();
-	    }
-	  });
-	}
-
-	function animation(prefixCls) {
-	  return {
-	    enter: function enter(node, done) {
-	      return animate(node, true, prefixCls + '-anim', done);
-	    },
-	    leave: function leave(node, done) {
-	      return animate(node, false, prefixCls + '-anim', done);
-	    }
-	  };
-	}
-
-	exports['default'] = animation;
-	module.exports = exports['default'];
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _Input = __webpack_require__(230);
+	var _Input = __webpack_require__(225);
 
 	var _Input2 = _interopRequireDefault(_Input);
 
-	var _Group = __webpack_require__(233);
+	var _Group = __webpack_require__(228);
 
 	var _Group2 = _interopRequireDefault(_Group);
 
@@ -28232,7 +27744,7 @@
 	exports.default = _Input2.default;
 
 /***/ },
-/* 230 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28271,7 +27783,7 @@
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _calculateNodeHeight = __webpack_require__(231);
+	var _calculateNodeHeight = __webpack_require__(226);
 
 	var _calculateNodeHeight2 = _interopRequireDefault(_calculateNodeHeight);
 
@@ -28279,7 +27791,7 @@
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _omit = __webpack_require__(232);
+	var _omit = __webpack_require__(227);
 
 	var _omit2 = _interopRequireDefault(_omit);
 
@@ -28491,7 +28003,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 226 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28610,7 +28122,7 @@
 	}
 
 /***/ },
-/* 232 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28628,7 +28140,7 @@
 
 
 /***/ },
-/* 233 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28672,7 +28184,7 @@
 	};
 
 /***/ },
-/* 234 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
