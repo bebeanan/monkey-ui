@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import calculateNodeHeight from './calculateNodeHeight';
+import assign from 'object-assign';
+import omit from 'omit.js';
 
 function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
@@ -25,34 +27,6 @@ function clearNextFrameAction(nextFrameId) {
 }
 
 export default class Input extends Component {
-  static defaultProps = {
-    defaultValue: '',
-    disabled: false,
-    prefixCls: 'ant-input',
-    type: 'text',
-    onPressEnter() {},
-    onKeyDown() {},
-    autosize: false,
-  }
-
-  static propTypes = {
-    type: PropTypes.string,
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    size: PropTypes.oneOf(['small', 'default', 'large']),
-    disabled: PropTypes.bool,
-    value: PropTypes.any,
-    defaultValue: PropTypes.any,
-    className: PropTypes.string,
-    addonBefore: PropTypes.node,
-    addonAfter: PropTypes.node,
-    prefixCls: PropTypes.string,
-    autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    onPressEnter: PropTypes.func,
-    onKeyDown: PropTypes.func,
-  }
 
   constructor(props) {
     super(props);
@@ -131,7 +105,15 @@ export default class Input extends Component {
   }
 
   renderInput() {
-    const props = { ...this.props };
+    const props = assign({}, this.props);
+    
+     // Fix https://fb.me/react-unknown-prop
+    const otherProps = omit(this.props, [
+      'prefixCls',
+      'onPressEnter',
+      'autosize'
+    ]);
+
     const prefixCls = props.prefixCls;
     if (!props.type) {
       return props.children;
@@ -155,11 +137,8 @@ export default class Input extends Component {
       case 'textarea':
         return (
           <textarea
-            {...props}
-            style={{
-              ...props.style,
-              ...this.state.textareaStyles,
-            }}
+            {...otherProps}
+            style={assign({}, props.style, this.state.textareaStyles)}
             className={inputClassName}
             onKeyDown={this.handleKeyDown}
             onChange={this.handleTextareaChange}
@@ -169,7 +148,7 @@ export default class Input extends Component {
       default:
         return (
           <input
-            {...props}
+            {...otherProps}
             className={inputClassName}
             onKeyDown={this.handleKeyDown}
             ref="input"
@@ -181,4 +160,36 @@ export default class Input extends Component {
   render() {
     return this.renderLabledInput(this.renderInput());
   }
+}
+
+
+
+
+Input.propTypes = {
+  type: PropTypes.string,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  size: PropTypes.oneOf(['small', 'default', 'large']),
+  disabled: PropTypes.bool,
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
+  className: PropTypes.string,
+  addonBefore: PropTypes.node,
+  addonAfter: PropTypes.node,
+  prefixCls: PropTypes.string,
+  autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  onPressEnter: PropTypes.func,
+  onKeyDown: PropTypes.func,
+}
+
+Input.defaultProps = {
+  defaultValue: '',
+  disabled: false,
+  prefixCls: 'ant-input',
+  type: 'text',
+  onPressEnter() {},
+  onKeyDown() {},
+  autosize: false,
 }
