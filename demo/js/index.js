@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import MonkeyUi from '../../components/monkeyui.js';
-import MonkeyUi from '../../monkeyui.js';
-
-var Row = MonkeyUi.Row;
+//import MonkeyUi from '../../monkeyui.js';
+import Page from './Page.js';
+ReactDOM.render(
+  <div>
+    <Page />
+  </div>
+,
+ document.getElementById('root'));
+/*ar Row = MonkeyUi.Row;
 var Col = MonkeyUi.Col;
 var Button = MonkeyUi.Button;
 var CheckBox = MonkeyUi.CheckBox;
@@ -188,3 +194,4 @@ ReactDOM.render(
 
 ReactDOM.render(<Input type="textarea" rows={4} />
 , document.getElementById('input'));
+*/
