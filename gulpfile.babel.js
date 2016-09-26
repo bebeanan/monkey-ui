@@ -31,6 +31,15 @@ gulp.task('less',() =>{
 		.pipe(gulp.dest(dirs.dist))
 		.pipe(gulp.dest('./showdemo/css'))
 });
+//demo的css
+gulp.task('demoless',() =>{
+	return gulp.src('./demo/css/democss.css')
+		.pipe(less())
+		.pipe(concat('democss.css'))
+		.pipe(cssmin())
+		.pipe(gulp.dest(dirs.dist))
+		.pipe(gulp.dest('./showdemo/css'))
+});
 
 gulp.task('babel',() => {
 	return gulp.src(dirs.src)
@@ -80,7 +89,7 @@ gulp.task('demojs',() => {
 
 
 gulp.task('build',()=>{
-	gulp.start('babel', 'less','demojs','html');
+	gulp.start('babel', 'less','demoless','demojs','html');
 });
 
 // 监控修改自动编译
