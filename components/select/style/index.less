@@ -2,7 +2,7 @@
 @import './index.less';
 
 // style dependencies
-@import '../../input/style';
+@import '../../input/style/index.less';
 
 
 @import "../../style/themes/default";
@@ -34,7 +34,7 @@
   transition: color 0.3s ease, opacity 0.15s ease;
   &:before {
     display: block;
-    .iconfont-font("\e631");
+    // .iconfont-font("\e631");
   }
   &:hover {
     color: #999;
@@ -487,7 +487,7 @@
   &&--multiple {
     .@{select-prefix-cls}-dropdown-menu-item {
       &:after {
-        .iconfont-font("\e62e");
+        // .iconfont-font("\e62e");
         color: transparent;
         .iconfont-size-under-12px(10px);
         transition: all 0.2s ease;

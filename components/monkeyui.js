@@ -8,7 +8,7 @@ import Message from "./message/index";
 import Alert from "./alert/index";
 import Collapse from "./collapse/index";
 import Input from "./input/index";
-// import Table from "./table/index";
+import Table from "./table/index";
 import Radio from "./radio/index";
 var MonkeyUi = {
 	Row : Row,
@@ -21,7 +21,7 @@ var MonkeyUi = {
 	Alert : Alert,
 	Collapse : Collapse,
 	Input : Input,
-	// Table : Table,
+	Table : Table,
 	Radio : Radio
 }
 export default MonkeyUi;

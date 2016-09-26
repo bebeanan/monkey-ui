@@ -5,6 +5,7 @@ import LeftPage from './LeftPage.js';
 var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
+var Table=MonkeyUi.Table
 
 const dataSource = [{
   key: '1',
@@ -45,6 +46,7 @@ const Page = React.createClass({
         <Col span={12}>.ant-col-12</Col>
         </Row>
         <Radio>Radio</Radio>
+        <Table columns={columns} dataSource={dataSource} />
       </div>
     );
   },
