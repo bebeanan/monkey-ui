@@ -5,8 +5,11 @@ import classNames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default class Checkbox extends React.Component {
+  static Group = CheckboxGroup;
+  static defaultProps = {
+    prefixCls: 'ant-checkbox',
+  }
   shouldComponentUpdate(...args) {
-    console.log(args);
     return PureRenderMixin.shouldComponentUpdate.apply(this, args);
   }
   render() {
@@ -23,8 +26,3 @@ export default class Checkbox extends React.Component {
     );
   }
 }
-Checkbox.defaultProps = {
-  prefixCls: 'ant-checkbox'
-}
-
-Checkbox.Group = CheckboxGroup;

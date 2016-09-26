@@ -8,6 +8,8 @@ import Message from "./message/index";
 import Alert from "./alert/index";
 import Collapse from "./collapse/index";
 import Input from "./input/index";
+// import Table from "./table/index";
+import Radio from "./radio/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -18,6 +20,8 @@ var MonkeyUi = {
 	Message:Message,
 	Alert : Alert,
 	Collapse : Collapse,
-	Input : Input
+	Input : Input,
+	// Table : Table,
+	Radio : Radio
 }
 export default MonkeyUi;

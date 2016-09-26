@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import calculateNodeHeight from './calculateNodeHeight';
-import assign from 'object-assign';
-import omit from 'omit.js';
+import omit from 'object.omit';
 
 function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
@@ -49,21 +48,21 @@ export default class Input extends Component {
     }
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown(e){
     if (e.keyCode === 13) {
       this.props.onPressEnter(e);
     }
     this.props.onKeyDown(e);
   }
 
-  handleTextareaChange = (e) => {
+  handleTextareaChange(e){
     this.resizeTextarea();
     if (this.props.onChange) {
       this.props.onChange(e);
     }
   }
 
-  resizeTextarea = () => {
+  resizeTextarea(){
     const { type, autosize } = this.props;
     if (type !== 'textarea' || !autosize || !this.refs.input) {
       return;
@@ -105,7 +104,7 @@ export default class Input extends Component {
   }
 
   renderInput() {
-    const props = assign({}, this.props);
+    const props = { ...this.props };
     
      // Fix https://fb.me/react-unknown-prop
     const otherProps = omit(this.props, [
@@ -140,7 +139,10 @@ export default class Input extends Component {
         return (
           <textarea
             {...otherProps}
-            style={assign({}, props.style, this.state.textareaStyles)}
+            style={{
+              ...props.style,
+              ...this.state.textareaStyles,
+            }}
             className={inputClassName}
             onKeyDown={this.handleKeyDown}
             onChange={this.handleTextareaChange}
