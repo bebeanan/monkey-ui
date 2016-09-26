@@ -4,7 +4,20 @@ import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
 var Collapse=MonkeyUi.Collapse;
 var Checkbox=MonkeyUi.Checkbox;
+var CheckboxGroup = Checkbox.Group;
 const Panel=Collapse.Panel;
+
+const optionsWithDisabled = [
+  { label: '苹果', value: 'Apple' },
+  { label: '梨', value: 'Pear' },
+  { label: '橘', value: 'Orange'},
+];
+
+function onChange(e) {
+  console.log(`checked = ${e.target.checked}`);
+}
+
+
 const Page = React.createClass({
   render() {
     return (
@@ -20,7 +33,9 @@ const Page = React.createClass({
             <p>567</p>
           </Panel>
         </Collapse>
-            <Checkbox>Checkbox</Checkbox>
+         <Checkbox >Checkbox</Checkbox>
+        <CheckboxGroup options={optionsWithDisabled} defaultValue={['Apple']} />
+
       </div>
     );
   },

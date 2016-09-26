@@ -1,7 +1,7 @@
 import Row from "./layout/row";
 import Col from "./layout/col";
 import Button from "./button/index";
-import CheckBox from "./checkbox/index";
+import Checkbox from "./checkbox/index";
 import Modal from "./modal/index";
 import Tree from "./tree/index";
 import Message from "./message/index";
@@ -12,7 +12,7 @@ var MonkeyUi = {
 	Row : Row,
 	Col : Col,
 	Button : Button,
-	CheckBox : CheckBox,
+	Checkbox : Checkbox,
 	Modal : Modal,
 	Tree : Tree,
 	Message:Message,
