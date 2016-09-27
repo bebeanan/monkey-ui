@@ -10,6 +10,10 @@ import Collapse from "./collapse/index";
 import Input from "./input/index";
 import Table from "./table/index";
 import Radio from "./radio/index";
+import Select from "./select/index";
+import Pagination from "./pagination/index";
+import Spin from "./spin/index";
+import Dropdown from "./dropdown/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -22,6 +26,9 @@ var MonkeyUi = {
 	Collapse : Collapse,
 	Input : Input,
 	Table : Table,
-	Radio : Radio
+	Radio : Radio,
+	Select : Select,
+	Pagination : Pagination,
+	Dropdown : Dropdown,
 }
 export default MonkeyUi;

@@ -21595,6 +21595,22 @@
 
 	var _index20 = _interopRequireDefault(_index19);
 
+	var _index21 = __webpack_require__(344);
+
+	var _index22 = _interopRequireDefault(_index21);
+
+	var _index23 = __webpack_require__(336);
+
+	var _index24 = _interopRequireDefault(_index23);
+
+	var _index25 = __webpack_require__(405);
+
+	var _index26 = _interopRequireDefault(_index25);
+
+	var _index27 = __webpack_require__(272);
+
+	var _index28 = _interopRequireDefault(_index27);
+
 	function _interopRequireDefault(obj) {
 		return obj && obj.__esModule ? obj : { default: obj };
 	}
@@ -21611,7 +21627,10 @@
 		Collapse: _index14.default,
 		Input: _index16.default,
 		Table: _index18.default,
-		Radio: _index20.default
+		Radio: _index20.default,
+		Select: _index22.default,
+		Pagination: _index24.default,
+		Dropdown: _index28.default
 	};
 	exports.default = MonkeyUi;
 
