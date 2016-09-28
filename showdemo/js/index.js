@@ -28899,20 +28899,6 @@
 	      }
 	    };
 
-	    _this.resizeTextarea = function () {
-	      var _this$props = _this.props;
-	      var type = _this$props.type;
-	      var autosize = _this$props.autosize;
-
-	      if (type !== 'textarea' || !autosize || !_this.refs.input) {
-	        return;
-	      }
-	      var minRows = autosize ? autosize.minRows : null;
-	      var maxRows = autosize ? autosize.maxRows : null;
-	      var textareaStyles = (0, _calculateNodeHeight2.default)(_this.refs.input, false, minRows, maxRows);
-	      _this.setState({ textareaStyles: textareaStyles });
-	    };
-
 	    _this.state = {
 	      textareaStyles: null
 	    };
@@ -28934,6 +28920,21 @@
 	        }
 	        this.nextFrameActionId = onNextFrame(this.resizeTextarea);
 	      }
+	    }
+	  }, {
+	    key: 'resizeTextarea',
+	    value: function resizeTextarea() {
+	      var _props = this.props;
+	      var type = _props.type;
+	      var autosize = _props.autosize;
+
+	      if (type !== 'textarea' || !autosize || !this.refs.input) {
+	        return;
+	      }
+	      var minRows = autosize ? autosize.minRows : null;
+	      var maxRows = autosize ? autosize.maxRows : null;
+	      var textareaStyles = (0, _calculateNodeHeight2.default)(this.refs.input, false, minRows, maxRows);
+	      this.setState({ textareaStyles: textareaStyles });
 	    }
 	  }, {
 	    key: 'renderLabledInput',
