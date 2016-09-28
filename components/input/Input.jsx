@@ -48,14 +48,14 @@ export default class Input extends Component {
     }
   }
 
-  handleKeyDown(e){
+  handleKeyDown = (e) =>{
     if (e.keyCode === 13) {
       this.props.onPressEnter(e);
     }
     this.props.onKeyDown(e);
   }
 
-  handleTextareaChange(e){
+  handleTextareaChange = (e) =>{
     this.resizeTextarea();
     if (this.props.onChange) {
       this.props.onChange(e);

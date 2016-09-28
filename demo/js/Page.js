@@ -6,6 +6,7 @@ var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
 var Table=MonkeyUi.Table
+var Input = MonkeyUi.Input
 
 const dataSource = [{
   key: '1',
@@ -35,8 +36,23 @@ const columns = [{
 
 
 
-const Page = React.createClass({
+class Page extends React.Component{
+  constructor(){
+		super();
+		this.state={
+			remark:""
+		}
+	}
+  handleChangeTextarea(e){
+		var remark = e.target.value;
+		this.setState({remark:remark});
+	}
+  handleSelectTag(name){
+		var text = this.state.remark;
+		this.setState({remark:text + " " +name});
+	}
   render() {
+    var remark = this.state.remark;
     return (
       <div>
         <Row>
@@ -47,9 +63,11 @@ const Page = React.createClass({
         </Row>
         <Radio>Radio</Radio>
         <Table columns={columns} dataSource={dataSource} />
+        <Input type="textarea" rows={4} value={remark} onChange={(e)=>{this.handleChangeTextarea(e)}}/>
+        <a href="#" onClick={(name) => {this.handleSelectTag("智力落后")}}>智力落后</a>
       </div>
     );
-  },
-});
+  }
+};
 
 export default Page;

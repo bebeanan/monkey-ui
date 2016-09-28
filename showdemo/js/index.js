@@ -21456,6 +21456,8 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -21474,10 +21476,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var Row = _monkeyui2.default.Row;
 	var Col = _monkeyui2.default.Col;
 	var Radio = _monkeyui2.default.Radio;
 	var Table = _monkeyui2.default.Table;
+	var Input = _monkeyui2.default.Input;
 
 	var dataSource = [{
 	  key: '1',
@@ -21505,35 +21514,79 @@
 	  key: 'address'
 	}];
 
-	var Page = _react2.default.createClass({
-	  displayName: 'Page',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        Row,
+	var Page = function (_React$Component) {
+	  _inherits(Page, _React$Component);
+
+	  function Page() {
+	    _classCallCheck(this, Page);
+
+	    var _this = _possibleConstructorReturn(this, (Page.__proto__ || Object.getPrototypeOf(Page)).call(this));
+
+	    _this.state = {
+	      remark: ""
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Page, [{
+	    key: 'handleChangeTextarea',
+	    value: function handleChangeTextarea(e) {
+	      var remark = e.target.value;
+	      this.setState({ remark: remark });
+	    }
+	  }, {
+	    key: 'handleSelectTag',
+	    value: function handleSelectTag(name) {
+	      var text = this.state.remark;
+	      this.setState({ remark: text + " " + name });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var remark = this.state.remark;
+	      return _react2.default.createElement(
+	        'div',
 	        null,
 	        _react2.default.createElement(
-	          Col,
-	          { span: 12 },
-	          _react2.default.createElement(_LeftPage2.default, null)
+	          Row,
+	          null,
+	          _react2.default.createElement(
+	            Col,
+	            { span: 12 },
+	            _react2.default.createElement(_LeftPage2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            Col,
+	            { span: 12 },
+	            '.ant-col-12'
+	          )
 	        ),
 	        _react2.default.createElement(
-	          Col,
-	          { span: 12 },
-	          '.ant-col-12'
+	          Radio,
+	          null,
+	          'Radio'
+	        ),
+	        _react2.default.createElement(Table, { columns: columns, dataSource: dataSource }),
+	        _react2.default.createElement(Input, { type: 'textarea', rows: 4, value: remark, onChange: function onChange(e) {
+	            _this2.handleChangeTextarea(e);
+	          } }),
+	        _react2.default.createElement(
+	          'a',
+	          { href: '#', onClick: function onClick(name) {
+	              _this2.handleSelectTag("智力落后");
+	            } },
+	          '智力落后'
 	        )
-	      ),
-	      _react2.default.createElement(
-	        Radio,
-	        null,
-	        'Radio'
-	      ),
-	      _react2.default.createElement(Table, { columns: columns, dataSource: dataSource })
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return Page;
+	}(_react2.default.Component);
+
+	;
 
 	exports.default = Page;
 
@@ -28832,6 +28885,34 @@
 
 	    var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
 
+	    _this.handleKeyDown = function (e) {
+	      if (e.keyCode === 13) {
+	        _this.props.onPressEnter(e);
+	      }
+	      _this.props.onKeyDown(e);
+	    };
+
+	    _this.handleTextareaChange = function (e) {
+	      _this.resizeTextarea();
+	      if (_this.props.onChange) {
+	        _this.props.onChange(e);
+	      }
+	    };
+
+	    _this.resizeTextarea = function () {
+	      var _this$props = _this.props;
+	      var type = _this$props.type;
+	      var autosize = _this$props.autosize;
+
+	      if (type !== 'textarea' || !autosize || !_this.refs.input) {
+	        return;
+	      }
+	      var minRows = autosize ? autosize.minRows : null;
+	      var maxRows = autosize ? autosize.maxRows : null;
+	      var textareaStyles = (0, _calculateNodeHeight2.default)(_this.refs.input, false, minRows, maxRows);
+	      _this.setState({ textareaStyles: textareaStyles });
+	    };
+
 	    _this.state = {
 	      textareaStyles: null
 	    };
@@ -28853,37 +28934,6 @@
 	        }
 	        this.nextFrameActionId = onNextFrame(this.resizeTextarea);
 	      }
-	    }
-	  }, {
-	    key: 'handleKeyDown',
-	    value: function handleKeyDown(e) {
-	      if (e.keyCode === 13) {
-	        this.props.onPressEnter(e);
-	      }
-	      this.props.onKeyDown(e);
-	    }
-	  }, {
-	    key: 'handleTextareaChange',
-	    value: function handleTextareaChange(e) {
-	      this.resizeTextarea();
-	      if (this.props.onChange) {
-	        this.props.onChange(e);
-	      }
-	    }
-	  }, {
-	    key: 'resizeTextarea',
-	    value: function resizeTextarea() {
-	      var _props = this.props;
-	      var type = _props.type;
-	      var autosize = _props.autosize;
-
-	      if (type !== 'textarea' || !autosize || !this.refs.input) {
-	        return;
-	      }
-	      var minRows = autosize ? autosize.minRows : null;
-	      var maxRows = autosize ? autosize.maxRows : null;
-	      var textareaStyles = (0, _calculateNodeHeight2.default)(this.refs.input, false, minRows, maxRows);
-	      this.setState({ textareaStyles: textareaStyles });
 	    }
 	  }, {
 	    key: 'renderLabledInput',
