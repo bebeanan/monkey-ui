@@ -62,7 +62,7 @@ export default class Input extends Component {
     }
   }
 
-  resizeTextarea(){
+  resizeTextarea = () =>{
     const { type, autosize } = this.props;
     if (type !== 'textarea' || !autosize || !this.refs.input) {
       return;
