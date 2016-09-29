@@ -56,10 +56,10 @@ class Page extends React.Component{
     return (
       <div>
         <Row>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={6} lg={4} >
           <LeftPage />
         </Col>
-        <Col span={12}>.ant-col-12</Col>
+        <Col xs={24} sm={24} md={18} lg={20}>.ant-col-12</Col>
         </Row>
         <Radio>Radio</Radio>
         <Table columns={columns} dataSource={dataSource} />

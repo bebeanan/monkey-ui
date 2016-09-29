@@ -14,6 +14,8 @@ import Select from "./select/index";
 import Pagination from "./pagination/index";
 import Spin from "./spin/index";
 import Dropdown from "./dropdown/index";
+import Menu from "./menu/index";
+import Icon from "./icon/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -30,5 +32,7 @@ var MonkeyUi = {
 	Select : Select,
 	Pagination : Pagination,
 	Dropdown : Dropdown,
+	Menu : Menu,
+	Icon : Icon,
 }
 export default MonkeyUi;

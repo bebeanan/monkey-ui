@@ -1,5 +1,4 @@
 import React from 'react';
-
 export default props => {
   let { type, className = '', ...other } = props;
   className += ` anticon anticon-${type}`;
