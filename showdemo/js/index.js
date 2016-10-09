@@ -58,6 +58,8 @@
 
 	var _Page2 = _interopRequireDefault(_Page);
 
+	var _reactRouter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -46731,11 +46733,10 @@
 	    return _react2.default.createElement(
 	      Menu,
 	      {
-	        mode: 'inline',
-	        openKeys: this.state.openKeys,
+	        onClick: this.handleClick,
+	        defaultOpenKeys: ['sub1'],
 	        selectedKeys: [this.state.current],
-	        onOpenChange: this.onOpenChange,
-	        onClick: this.handleClick
+	        mode: 'inline'
 	      },
 	      _react2.default.createElement(
 	        SubMenu,
@@ -46746,100 +46747,115 @@
 	            _react2.default.createElement(
 	              'span',
 	              null,
-	              'Navigation One'
+	              '主要模块说明'
 	            )
 	          ) },
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '1' },
-	          'Option 1'
+	          'Row'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '2' },
-	          'Option 2'
+	          'Col'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '3' },
-	          'Option 3'
+	          'Alert'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '4' },
-	          'Option 4'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        SubMenu,
-	        { key: 'sub2', title: _react2.default.createElement(
-	            'span',
-	            null,
-	            _react2.default.createElement(Icon, { type: 'appstore' }),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              'Navigation Two'
-	            )
-	          ) },
+	          'Button'
+	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '5' },
-	          'Option 5'
+	          'Checkbox'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '6' },
-	          'Option 6'
+	          'Modal'
 	        ),
 	        _react2.default.createElement(
-	          SubMenu,
-	          { key: 'sub3', title: 'Submenu' },
-	          _react2.default.createElement(
-	            Menu.Item,
-	            { key: '7' },
-	            'Option 7'
-	          ),
-	          _react2.default.createElement(
-	            Menu.Item,
-	            { key: '8' },
-	            'Option 8'
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        SubMenu,
-	        { key: 'sub4', title: _react2.default.createElement(
-	            'span',
-	            null,
-	            _react2.default.createElement(Icon, { type: 'setting' }),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              'Navigation Three'
-	            )
-	          ) },
+	          Menu.Item,
+	          { key: '7' },
+	          'Tree'
+	        ),
+	        _react2.default.createElement(
+	          Menu.Item,
+	          { key: '8' },
+	          'Message'
+	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '9' },
-	          'Option 9'
+	          'Collapse'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '10' },
-	          'Option 10'
+	          'Input'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '11' },
-	          'Option 11'
+	          'Table'
 	        ),
 	        _react2.default.createElement(
 	          Menu.Item,
 	          { key: '12' },
-	          'Option 12'
+	          'Radio'
+	        ),
+	        _react2.default.createElement(
+	          Menu.Item,
+	          { key: '13' },
+	          'Select'
+	        ),
+	        _react2.default.createElement(
+	          Menu.Item,
+	          { key: '14' },
+	          'Pagination'
+	        ),
+	        _react2.default.createElement(
+	          Menu.Item,
+	          { key: '15' },
+	          'Dropdown'
+	        ),
+	        _react2.default.createElement(
+	          Menu.Item,
+	          { key: '16' },
+	          'Menu'
+	        ),
+	        _react2.default.createElement(
+	          Menu.Item,
+	          { key: '17' },
+	          'Icon'
 	        )
-	      )
+	      ),
+	      _react2.default.createElement(SubMenu, { key: 'sub2', title: _react2.default.createElement(
+	          'span',
+	          null,
+	          _react2.default.createElement(Icon, { type: 'appstore' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '详细介绍'
+	          )
+	        ) }),
+	      _react2.default.createElement(SubMenu, { key: 'sub4', title: _react2.default.createElement(
+	          'span',
+	          null,
+	          _react2.default.createElement(Icon, { type: 'setting' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            '关于我们'
+	          )
+	        ) })
 	    );
 	  }
 	});
