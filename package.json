@@ -10,7 +10,7 @@
     "build": "webpack",
     "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
   },
-"dependencies": {
+  "dependencies": {
     "array-tree-filter": "~1.0.0",
     "classnames": "~2.2.0",
     "css-animation": "^1.2.5",
@@ -46,6 +46,7 @@
     "rc-upload": "~2.0.3",
     "rc-util": "~3.3.0",
     "react-addons-pure-render-mixin": "^15.0.0",
+    "react-router": "^2.8.1",
     "react-slick": "~0.13.3",
     "shallowequal": "^0.2.2",
     "warning": "~3.0.0"
