@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
+import {Link } from 'react-router'
 const Menu=MonkeyUi.Menu;
 const Icon=MonkeyUi.Icon;
 const SubMenu = Menu.SubMenu;
@@ -37,23 +38,22 @@ const Page = React.createClass({
         mode="inline"
       >
         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>主要模块说明</span></span>}>
-          <Menu.Item key="1">Row</Menu.Item>
-          <Menu.Item key="2">Col</Menu.Item>
-          <Menu.Item key="3">Alert</Menu.Item>
-          <Menu.Item key="4">Button</Menu.Item>
-          <Menu.Item key="5">Checkbox</Menu.Item>
-          <Menu.Item key="6">Modal</Menu.Item>
-          <Menu.Item key="7">Tree</Menu.Item>
-          <Menu.Item key="8">Message</Menu.Item>
-          <Menu.Item key="9">Collapse</Menu.Item>
-          <Menu.Item key="10">Input</Menu.Item>
-          <Menu.Item key="11">Table</Menu.Item>
-          <Menu.Item key="12">Radio</Menu.Item>
-          <Menu.Item key="13">Select</Menu.Item>
-          <Menu.Item key="14">Pagination</Menu.Item>
-          <Menu.Item key="15">Dropdown</Menu.Item>
-          <Menu.Item key="16">Menu</Menu.Item>
-          <Menu.Item key="17">Icon</Menu.Item>
+          <Menu.Item key="0"><Link to="/page">测试页面</Link></Menu.Item>
+          <Menu.Item key="3"><Link to="/alert">Alert</Link></Menu.Item>
+          <Menu.Item key="17"><Link to="/icon">Icon</Link></Menu.Item>
+          <Menu.Item key="4"><Link to="/button">Button</Link></Menu.Item>
+          <Menu.Item key="5"><Link to="/checkbox">Checkbox</Link></Menu.Item>
+          <Menu.Item key="6"><Link to="/modal">Modal</Link></Menu.Item>
+          <Menu.Item key="7"><Link to="/tree">Tree</Link></Menu.Item>
+          <Menu.Item key="8"><Link to="/message">Message</Link></Menu.Item>
+          <Menu.Item key="9"><Link to="/collapse">Collapse</Link></Menu.Item>
+          <Menu.Item key="10"><Link to="/input">Input</Link></Menu.Item>
+          <Menu.Item key="11"><Link to="/table">Table</Link></Menu.Item>
+          <Menu.Item key="12"><Link to="/radio">Radio</Link></Menu.Item>
+          <Menu.Item key="13"><Link to="/select">Select</Link></Menu.Item>
+          <Menu.Item key="14"><Link to="/pagination">Pagination</Link></Menu.Item>
+          <Menu.Item key="15"><Link to="/dropdown">Dropdown</Link></Menu.Item>
+          <Menu.Item key="16"><Link to="/menu">Menu</Link></Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>详细介绍</span></span>}>
         </SubMenu>

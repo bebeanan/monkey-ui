@@ -7,7 +7,6 @@ var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
 var Table=MonkeyUi.Table
 var Input = MonkeyUi.Input
-
 const dataSource = [{
   key: '1',
   name: '胡彦斌',
@@ -55,12 +54,6 @@ class Page extends React.Component{
     var remark = this.state.remark;
     return (
       <div>
-        <Row>
-        <Col xs={24} sm={24} md={6} lg={4} >
-          <LeftPage />
-        </Col>
-        <Col xs={24} sm={24} md={18} lg={20}>.ant-col-12</Col>
-        </Row>
         <Radio>Radio</Radio>
         <Table columns={columns} dataSource={dataSource} />
         <Input type="textarea" rows={4} value={remark} onChange={(e)=>{this.handleChangeTextarea(e)}}/>
