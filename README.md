@@ -11,9 +11,9 @@
 <code> gulp build</code>	
 
 ##dev run:
-<code> npm run dev </code>
+<code> gulp </code>
 
-<code>	http://localhost:8080/index.html</code>
+<code>	http://localhost:3000</code>
 
 
 ## use monkeyui 
