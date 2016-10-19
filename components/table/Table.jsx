@@ -717,7 +717,6 @@ export default class Table extends React.Component {
     if (!data || data.length === 0) {
       emptyText = (
         <div className="ant-table-placeholder">
-          {locale.emptyText}
         </div>
       );
       emptyClass = 'ant-table-empty';
