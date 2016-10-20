@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
 import LeftPage from './LeftPage.js';
+import Headdiv from './head.js';
 import Page from './Page.js';
 import Button from './button.js';
 import Icon from './icon.js';
@@ -26,7 +27,9 @@ const App = React.createClass({
   render() {
     return (
   <div>
-    <header id="header">头部</header>
+    <header id="header">
+      <Headdiv />
+    </header>
     <div>
         <Row>
         <Col xs={24} sm={24} md={6} lg={4} >
