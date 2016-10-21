@@ -9,6 +9,7 @@ import Icon from './icon.js';
 import Alert from './alert.js';
 import Checkbox from './checkbox.js';
 import Modal from './modal.js';
+import Timeline from './timeline.js';
 var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
@@ -53,6 +54,7 @@ ReactDOM.render(
       <Route path="/alert" component={Alert} />
       <Route path="/checkbox" component={Checkbox} />
       <Route path="/modal" component={Modal} />
+      <Route path="/timeline" component={Timeline} />
     </Route>
   </Router>
 ,

@@ -16,6 +16,7 @@ import Spin from "./spin/index";
 import Dropdown from "./dropdown/index";
 import Menu from "./menu/index";
 import Icon from "./icon/index";
+import Timeline from "./timeline/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -34,5 +35,6 @@ var MonkeyUi = {
 	Dropdown : Dropdown,
 	Menu : Menu,
 	Icon : Icon,
+	Timeline : Timeline
 }
 export default MonkeyUi;

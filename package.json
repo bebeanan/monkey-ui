@@ -66,14 +66,19 @@
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "browser-sync": "^2.16.0",
     "css-loader": "^0.23.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-less": "^3.1.0",
+    "gulp-load-plugins": "^1.3.0",
     "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
+    "gulp-webpack": "^1.5.0",
     "html-webpack-plugin": "^2.21.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
@@ -83,11 +88,6 @@
     "react-router": "^2.8.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1",
-    "browser-sync": "^2.16.0",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-uglify": "^2.0.0",
-    "gulp-load-plugins": "^1.3.0",
-    "gulp-webpack": "^1.5.0"
+    "webpack-dev-server": "^1.14.1"
   }
 }
