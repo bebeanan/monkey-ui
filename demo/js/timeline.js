@@ -18,7 +18,7 @@ class Time extends React.Component{
 		 <h3><Icon type="setting" />设置不同的icon与其颜色</h3>
 		 <Timeline>
     <Timeline.Item color="green">Create a services site 2015-09-01</Timeline.Item>
-    <Timeline.Item color="green">Create a services site 2015-09-01</Timeline.Item>
+    <Timeline.Item color="green" dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />} color="red">Create a services site 2015-09-01</Timeline.Item>
     <Timeline.Item color="red">
       <p>Solve initial network problems 1</p>
       <p>Solve initial network problems 2</p>
