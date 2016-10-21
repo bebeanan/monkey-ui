@@ -8,7 +8,7 @@ var Radio=MonkeyUi.Radio;
 var Table=MonkeyUi.Table
 var Input = MonkeyUi.Input
 const dataSource = [];
-
+var RadioGroup=Radio.Group;
 const columns = [{
   title: '姓名',
   dataIndex: 'name',
@@ -29,7 +29,8 @@ class Page extends React.Component{
   constructor(){
 		super();
 		this.state={
-			remark:""
+			remark:"",
+      value:1
 		}
 	}
   handleChangeTextarea(e){
@@ -40,11 +41,23 @@ class Page extends React.Component{
 		var text = this.state.remark;
 		this.setState({remark:text + " " +name});
 	}
+  onChange(e){
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  }
   render() {
     var remark = this.state.remark;
     return (
       <div>
         <Radio>Radio</Radio>
+        <RadioGroup onChange={(e)=>{this.onChange(e)}} value={this.state.value}>
+          <Radio key="a" value={1}>A</Radio>
+          <Radio key="b" value={2}>B</Radio>
+          <Radio key="c" value={3}>C</Radio>
+          <Radio key="d" value={4}>D</Radio>
+        </RadioGroup>
         <Table columns={columns} dataSource={dataSource} />
         <Input type="textarea" rows={4} value={remark} onChange={(e)=>{this.handleChangeTextarea(e)}}/>
         <a href="#" onClick={(name) => {this.handleSelectTag("智力落后")}}>智力落后</a>

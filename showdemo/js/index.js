@@ -32817,16 +32817,6 @@
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i];for (var key in source) {
-	      if (Object.prototype.hasOwnProperty.call(source, key)) {
-	        target[key] = source[key];
-	      }
-	    }
-	  }return target;
-	};
-
 	var _createClass = function () {
 	  function defineProperties(target, props) {
 	    for (var i = 0; i < props.length; i++) {
@@ -32856,6 +32846,10 @@
 	var _reactAddonsPureRenderMixin = __webpack_require__(182);
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+
+	var _objectAssign = __webpack_require__(4);
+
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -32907,6 +32901,15 @@
 
 	    var _this = _possibleConstructorReturn(this, (RadioGroup.__proto__ || Object.getPrototypeOf(RadioGroup)).call(this, props));
 
+	    _this.onRadioChange = function (ev) {
+	      if (!('value' in _this.props)) {
+	        _this.setState({
+	          value: ev.target.value
+	        });
+	      }
+	      _this.props.onChange(ev);
+	    };
+
 	    var value = void 0;
 	    if ('value' in props) {
 	      value = props.value;
@@ -32948,16 +32951,6 @@
 	      return _reactAddonsPureRenderMixin2.default.shouldComponentUpdate.apply(this, args);
 	    }
 	  }, {
-	    key: 'onRadioChange',
-	    value: function onRadioChange(ev) {
-	      if (!('value' in this.props)) {
-	        this.setState({
-	          value: ev.target.value
-	        });
-	      }
-	      this.props.onChange(ev);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this,
@@ -32967,10 +32960,11 @@
 	      var children = _react2.default.Children.map(props.children, function (radio) {
 	        if (radio && (radio.type === _radio2.default || radio.type === _radioButton2.default) && radio.props) {
 	          var keyProps = {};
+	          // (keyProps as any)
 	          if (!('key' in radio) && typeof radio.props.value === 'string') {
 	            keyProps.key = radio.props.value;
 	          }
-	          return _react2.default.cloneElement(radio, _extends({}, keyProps, radio.props, {
+	          return _react2.default.cloneElement(radio, (0, _objectAssign2.default)({}, keyProps, radio.props, {
 	            onChange: _this2.onRadioChange,
 	            checked: _this2.state.value === radio.props.value,
 	            disabled: radio.props.disabled || _this2.props.disabled
@@ -32986,13 +32980,12 @@
 	  return RadioGroup;
 	}(_react2.default.Component);
 
-	exports.default = RadioGroup;
-
 	RadioGroup.defaultProps = {
 	  prefixCls: 'ant-radio-group',
 	  disabled: false,
 	  onChange: function onChange() {}
 	};
+	exports.default = RadioGroup;
 
 /***/ },
 /* 253 */
@@ -33065,11 +33058,10 @@
 	  return RadioButton;
 	}(_react2.default.Component);
 
-	exports.default = RadioButton;
-
 	RadioButton.defaultProps = {
 	  prefixCls: 'ant-radio-button'
 	};
+	exports.default = RadioButton;
 
 /***/ },
 /* 254 */
@@ -49771,7 +49763,7 @@
 	var Table = _monkeyui2.default.Table;
 	var Input = _monkeyui2.default.Input;
 	var dataSource = [];
-
+	var RadioGroup = Radio.Group;
 	var columns = [{
 	  title: '姓名',
 	  dataIndex: 'name',
@@ -49795,7 +49787,8 @@
 	    var _this = _possibleConstructorReturn(this, (Page.__proto__ || Object.getPrototypeOf(Page)).call(this));
 
 	    _this.state = {
-	      remark: ""
+	      remark: "",
+	      value: 1
 	    };
 	    return _this;
 	  }
@@ -49813,6 +49806,14 @@
 	      this.setState({ remark: text + " " + name });
 	    }
 	  }, {
+	    key: 'onChange',
+	    value: function onChange(e) {
+	      console.log('radio checked', e.target.value);
+	      this.setState({
+	        value: e.target.value
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -49825,6 +49826,32 @@
 	          Radio,
 	          null,
 	          'Radio'
+	        ),
+	        _react2.default.createElement(
+	          RadioGroup,
+	          { onChange: function onChange(e) {
+	              _this2.onChange(e);
+	            }, value: this.state.value },
+	          _react2.default.createElement(
+	            Radio,
+	            { key: 'a', value: 1 },
+	            'A'
+	          ),
+	          _react2.default.createElement(
+	            Radio,
+	            { key: 'b', value: 2 },
+	            'B'
+	          ),
+	          _react2.default.createElement(
+	            Radio,
+	            { key: 'c', value: 3 },
+	            'C'
+	          ),
+	          _react2.default.createElement(
+	            Radio,
+	            { key: 'd', value: 4 },
+	            'D'
+	          )
 	        ),
 	        _react2.default.createElement(Table, { columns: columns, dataSource: dataSource }),
 	        _react2.default.createElement(Input, { type: 'textarea', rows: 4, value: remark, onChange: function onChange(e) {
