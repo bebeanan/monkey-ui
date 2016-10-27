@@ -17,6 +17,7 @@ import Dropdown from "./dropdown/index";
 import Menu from "./menu/index";
 import Icon from "./icon/index";
 import Timeline from "./timeline/index";
+import Carousel from "./carousel/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -35,6 +36,7 @@ var MonkeyUi = {
 	Dropdown : Dropdown,
 	Menu : Menu,
 	Icon : Icon,
-	Timeline : Timeline
+	Timeline : Timeline,
+	Carousel:Carousel
 }
 export default MonkeyUi;
