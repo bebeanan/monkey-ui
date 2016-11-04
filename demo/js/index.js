@@ -11,6 +11,7 @@ import Checkbox from './checkbox.js';
 import Modal from './modal.js';
 import Timeline from './timeline.js';
 import Carousel from './carousel.js';
+import Tree from './tree.js';
 var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
@@ -57,6 +58,7 @@ ReactDOM.render(
       <Route path="/modal" component={Modal} />
       <Route path="/timeline" component={Timeline} />
       <Route path="/carousel" component={Carousel} />
+      <Route path="/tree" component={Tree}/>
     </Route>
   </Router>
 ,
