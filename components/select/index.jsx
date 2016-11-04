@@ -2,6 +2,15 @@ import React from 'react';
 import RcSelect, { Option, OptGroup } from 'rc-select';
 import classNames from 'classnames';
 
+//export interface OptionProps {
+//    disabled?: boolean;
+//    value?: any;
+//}
+//
+//export interface OptGroupProps {
+//    label?: string | React.ReactElement<any>;
+//}
+
 export default class Select extends React.Component {
   static Option = Option;
   static OptGroup = OptGroup;
@@ -10,11 +19,11 @@ export default class Select extends React.Component {
     prefixCls: 'ant-select',
     transitionName: 'slide-up',
     choiceTransitionName: 'zoom',
-    showSearch: false,
+    showSearch: false
   }
 
   static contextTypes = {
-    antLocale: React.PropTypes.object,
+    antLocale: React.PropTypes.object
   }
 
   render() {

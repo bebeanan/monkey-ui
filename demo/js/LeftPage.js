@@ -56,6 +56,7 @@ const Page = React.createClass({
           <Menu.Item key="16"><Link to="/menu">Menu</Link></Menu.Item>
           <Menu.Item key="18"><Link to="/timeline">Timeline</Link></Menu.Item>
           <Menu.Item key="19"><Link to="/carousel">Carousel</Link></Menu.Item>
+          <Menu.Item key="20"><Link to="/complete">Complete</Link></Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>详细介绍</span></span>}>
         </SubMenu>

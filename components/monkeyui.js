@@ -18,6 +18,7 @@ import Menu from "./menu/index";
 import Icon from "./icon/index";
 import Timeline from "./timeline/index";
 import Carousel from "./carousel/index";
+import AutoComplete from "./autoComplete/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -37,6 +38,7 @@ var MonkeyUi = {
 	Menu : Menu,
 	Icon : Icon,
 	Timeline : Timeline,
-	Carousel:Carousel
+	Carousel:Carousel,
+    AutoComplete : AutoComplete
 }
 export default MonkeyUi;

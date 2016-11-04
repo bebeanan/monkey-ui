@@ -7,6 +7,7 @@ var ButtonGroup=Button.ButtonGroup;
 var Tree=MonkeyUi.Tree;
 var TreeNode=Tree.TreeNode;
 var Modal=MonkeyUi.Modal;
+var AutoComplete=MonkeyUi.AutoComplete;
 const ModalTree = React.createClass({
     getInitialState() {
         return { visible: false };
