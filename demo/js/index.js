@@ -13,6 +13,7 @@ import Timeline from './timeline.js';
 import Carousel from './carousel.js';
 import Tree from './tree.js';
 import Complete from './complete.js';
+import Form from './form.js';
 var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
@@ -61,6 +62,7 @@ ReactDOM.render(
       <Route path="/carousel" component={Carousel} />
       <Route path="/tree" component={Tree}/>
       <Route path="/complete" component={Complete}/>
+      <Route path="/form" component={Form} />
     </Route>
   </Router>
 ,
