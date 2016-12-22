@@ -14,10 +14,10 @@ import Carousel from './carousel.js';
 import Tree from './tree.js';
 import Complete from './complete.js';
 import Form from './form.js';
+import Table from './table.js';
 var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
-var Table=MonkeyUi.Table;
 var Input = MonkeyUi.Input;
 import {
   Router,
@@ -63,6 +63,7 @@ ReactDOM.render(
       <Route path="/tree" component={Tree}/>
       <Route path="/complete" component={Complete}/>
       <Route path="/form" component={Form} />
+      <Route path="/table" component={Table} />
     </Route>
   </Router>
 ,

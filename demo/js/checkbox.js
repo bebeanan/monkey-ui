@@ -31,6 +31,10 @@ const Page6 = React.createClass({
       disabled: false,
     };
   },
+  onChange(e){
+    console.log('checked',e.target.checked);
+    this.setState({ checked: !this.state.checked });
+  },
   render() {
   	const label = `${this.state.checked ? 'Checked' : 'Unchecked'}-${this.state.disabled ? 'Disabled' : 'Enabled'}`;
     return (
@@ -39,6 +43,7 @@ const Page6 = React.createClass({
 	      <div className="mancatain_div"> 
 	        <div>简单的checkbox</div>
 			<div>
+				<Checkbox onChange={this.onChange} checked={this.state.checked}>Checkbox</Checkbox>
 				<Checkbox onChange={onChange1}>Checkbox</Checkbox>
 		    </div>
 		  </div>
