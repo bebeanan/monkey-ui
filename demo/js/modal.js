@@ -7,7 +7,8 @@ var Modal=MonkeyUi.Modal;
 const confirm = Modal.confirm;
 const LocalizedModal = React.createClass({
   getInitialState() {
-    return { visible: false };
+    return { visible: false,
+    isVisible:false };
   },
   showModal() {
     this.setState({
@@ -29,6 +30,7 @@ const LocalizedModal = React.createClass({
       <div>
         <Button type="primary" onClick={this.showModal}>Show Modal</Button>
         <Modal title="Modal" visible={this.state.visible}
+          isVisible={this.state.isVisible}
           onOk={this.handleOk} onCancel={this.handleCancel}
           okText="OK" cancelText="Cancel"
         >

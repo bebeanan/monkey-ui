@@ -22,6 +22,7 @@ import AutoComplete from "./autoComplete/index";
 import Form  from "./form/index";
 import Tooltip from "./tooltip/index";
 import Popover from "./popover/index";
+import Upload from "./upload/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -45,6 +46,7 @@ var MonkeyUi = {
     AutoComplete : AutoComplete,
 	Form : Form,
 	Tooltip : Tooltip,
-	Popover : Popover
+	Popover : Popover,
+	Upload : Upload
 }
 export default MonkeyUi;

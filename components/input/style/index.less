@@ -1,29 +1,22 @@
 @import "../../style/themes/default";
 @import "../../style/mixins/index";
+@import '../../style/index.less';
 @import "./mixin";
 @import "./search-input";
 
+
+
 // Input styles
-.ant-input {
-  .mkinput;
-}
-
-.ant-input input{
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-}
-
-.ant-input textarea{
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
+.@{ant-prefix}-input {
+  .input;
 }
 
 //== Style for input-group: input with label, with button or dropdown...
-.ant-input-group {
-  .input-group(~"ant-input");
+.@{ant-prefix}-input-group {
+  .input-group(~"@{ant-prefix}-input");
 }
 
+// Input with suffix
+.@{ant-prefix}-input-preSuffix-wrapper {
+  .input-preSuffix-wrapper(~"@{ant-prefix}-input");
+}

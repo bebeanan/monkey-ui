@@ -11,9 +11,10 @@ import browserSync from 'browser-sync';
 import webpackConfig from './webpack.config.js';
 import WebpackDevServer from 'webpack-dev-server';
 import  HtmlWebpackPlugin from 'html-webpack-plugin';
+import ts from 'ts-loader';
 const dirs={
 	demosrc : ['./demo/js/index.js'],
-	src : ['./components/**/*.js','./components/**/*.jsx'],
+	src : ['./components/**/*.js','./components/**/*.jsx','./components/**/*.ts'],
 	less :[	'./components/style/index.less',
 			'./components/**/style/index.less',
 			],
@@ -67,6 +68,11 @@ gulp.task('demojs',() => {
 		            test: /\.js$/,
 		            exclude: /node_modules/,
 		            loader: 'babel'
+		          },
+		          {
+		            test: /\.ts$/,
+		            exclude: /node_modules/,
+		            loader: 'ts-loader'
 		          }
 		        ]
       		},

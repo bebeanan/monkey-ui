@@ -13,11 +13,12 @@ import Timeline from './timeline.js';
 import Carousel from './carousel.js';
 import Tree from './tree.js';
 import Complete from './complete.js';
-import Form from './form.js';
-import Table from './table.js';
+// import TreeSelect from './treeselect.js';
+import Upload from './upload.js';
 var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
+var Table=MonkeyUi.Table;
 var Input = MonkeyUi.Input;
 import {
   Router,
@@ -31,20 +32,20 @@ import {
 const App = React.createClass({
   render() {
     return (
-  <div>
-    <header id="header">
-      <Headdiv />
-    </header>
-    <div>
-        <Row>
-        <Col xs={24} sm={24} md={6} lg={4} >
-          <LeftPage />
-        </Col>
-        <Col xs={24} sm={24} md={18} lg={20}>{this.props.children}</Col>
-        </Row>
-    </div>
-    <footer id="footer"></footer>
-  </div> 
+        <div>
+          <header id="header">
+            <Headdiv />
+          </header>
+          <div>
+              <Row>
+              <Col xs={24} sm={24} md={6} lg={4} >
+                <LeftPage />
+              </Col>
+              <Col xs={24} sm={24} md={18} lg={20}>{this.props.children}</Col>
+              </Row>
+          </div>
+          <footer id="footer"></footer>
+        </div> 
     );
   },
 });
@@ -62,8 +63,7 @@ ReactDOM.render(
       <Route path="/carousel" component={Carousel} />
       <Route path="/tree" component={Tree}/>
       <Route path="/complete" component={Complete}/>
-      <Route path="/form" component={Form} />
-      <Route path="/table" component={Table} />
+      <Route path="/upload" component={Upload}/>
     </Route>
   </Router>
 ,

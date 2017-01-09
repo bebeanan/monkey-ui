@@ -38,8 +38,8 @@ export default class Modal extends React.Component {
 
   render() {
     let props = this.props;
-
-    let { okText, cancelText } = props;
+   // let isVisible = props.isVisible;
+    let { okText, cancelText ,isVisible} = props;
     if (this.context.antLocale && this.context.antLocale.Modal) {
       okText = okText || this.context.antLocale.Modal.okText;
       cancelText = cancelText || this.context.antLocale.Modal.cancelText;
@@ -62,7 +62,7 @@ export default class Modal extends React.Component {
         {okText || '确定'}
       </Button>,
     ];
-    let footer = props.footer || defaultFooter;
+    let footer = isVisible?(props.footer || defaultFooter):[<span></span>];
     return (
       <Dialog onClose={this.handleCancel} footer={footer} {...props}
         visible={props.visible} mousePosition={mousePosition}
@@ -80,6 +80,7 @@ Modal.defaultProps = {
     maskTransitionName: 'fade',
     confirmLoading: false,
     visible: false,
+    isVisible:true
 }
 
 Button.propTypes ={
