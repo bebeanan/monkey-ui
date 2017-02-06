@@ -51,7 +51,7 @@
   color: @input-color;
   background-color: @input-bg;
   background-image: none;
-  border: 1px solid @input-border-color;
+  border: @border-width-base @border-style-base @input-border-color;
   border-radius: @border-radius-base;
   .placeholder(); // Reset placeholder
   transition: all .3s;
@@ -141,7 +141,7 @@
     color: @input-color;
     text-align: center;
     background-color: #eee;
-    border: 1px solid @input-border-color;
+    border: @border-width-base @border-style-base @input-border-color;
     border-radius: @border-radius-base;
     position: relative;
     transition: all .3s;
@@ -152,9 +152,8 @@
 
       .@{ant-prefix}-select-selection {
         background-color: inherit;
-        border: 0;
         margin: -1px;
-        border: 1px solid transparent;
+        border: @border-width-base @border-style-base transparent;
         box-shadow: none;
       }
 
@@ -244,6 +243,7 @@
     & > * {
       border-radius: 0;
       border-right-width: 0;
+      vertical-align: middle;
     }
 
     // Undo float for .ant-input-group .ant-input

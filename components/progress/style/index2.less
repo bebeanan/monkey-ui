@@ -1,14 +1,14 @@
 @import "../../style/themes/default";
 @import "../../style/mixins/index";
 
-@progress-prefix-cls: ant-progress;
+@progress-prefix-cls: ~"@{ant-prefix}-progress";
 
 .@{progress-prefix-cls} {
   display: inline-block;
 
   &-line {
     width: 100%;
-    font-size: 12px;
+    font-size: @font-size-base;
     position: relative;
   }
 
@@ -33,7 +33,7 @@
 
   &-bg {
     border-radius: 100px;
-    background-color: @info-color;
+    background-color: @process-default-color;
     transition: all .4s @ease-out-circ 0s;
     position: relative;
   }
@@ -46,8 +46,10 @@
     vertical-align: middle;
     display: inline-block;
     font-family: tahoma;
-    .anticon {
-      font-size: 12px;
+    position: relative;
+    top: -1px;
+    .@{iconfont-css-prefix} {
+      font-size: @font-size-base;
     }
   }
 
@@ -60,9 +62,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #fff;
+      background: @component-background;
       border-radius: 10px;
-      animation: ant-progress-active 2s @ease-out-quint infinite;
+      animation: ~"@{ant-prefix}-progress-active" 2.4s @ease-out-quint infinite;
     }
   }
 
@@ -102,7 +104,7 @@
     font-family: tahoma;
     margin: 0;
 
-    .anticon {
+    .@{iconfont-css-prefix} {
       font-size: 14 / 12em;
     }
   }
@@ -119,9 +121,13 @@
   }
 }
 
-@keyframes ant-progress-active {
+@keyframes ~"@{ant-prefix}-progress-active" {
   0% {
-    opacity: .3;
+    opacity: 0.1;
+    width: 0;
+  }
+  20% {
+    opacity: 0.5;
     width: 0;
   }
   100% {

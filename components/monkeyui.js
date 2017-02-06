@@ -23,6 +23,8 @@ import Form  from "./form/index";
 import Tooltip from "./tooltip/index";
 import Popover from "./popover/index";
 import Upload from "./upload/index";
+import Cascader from "./cascader/index";
+import TreeSelect from "./treeSelect/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -47,6 +49,8 @@ var MonkeyUi = {
 	Form : Form,
 	Tooltip : Tooltip,
 	Popover : Popover,
-	Upload : Upload
+	Upload : Upload,
+	Cascader : Cascader,
+	TreeSelect : TreeSelect
 }
 export default MonkeyUi;
