@@ -6,6 +6,8 @@ var Row=MonkeyUi.Row;
 var Col=MonkeyUi.Col;
 var Radio=MonkeyUi.Radio;
 var Table=MonkeyUi.Table;
+const Select= MonkeyUi.Select;
+const Option=Select.Option;
 const Button=MonkeyUi.Button;
 const Upload=MonkeyUi.Upload;
 const Icon=MonkeyUi.Icon;
@@ -147,6 +149,11 @@ class Page extends React.Component{
           </TreeNode>
         </TreeNode>
       </TreeSelect>
+      <Select>
+        <Option value="1">1</Option>
+      </Select>
+      <form className="pure-form"><input type="date"/></form>
+      
       </div>
     );
   }

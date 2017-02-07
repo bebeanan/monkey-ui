@@ -61111,6 +61111,8 @@
 	var Col = _monkeyui2.default.Col;
 	var Radio = _monkeyui2.default.Radio;
 	var Table = _monkeyui2.default.Table;
+	var Select = _monkeyui2.default.Select;
+	var Option = Select.Option;
 	var Button = _monkeyui2.default.Button;
 	var Upload = _monkeyui2.default.Upload;
 	var Icon = _monkeyui2.default.Icon;
@@ -61322,6 +61324,20 @@
 	                ), key: 'random3' })
 	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          Select,
+	          null,
+	          _react2.default.createElement(
+	            Option,
+	            { value: '1' },
+	            '1'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { className: 'pure-form' },
+	          _react2.default.createElement('input', { type: 'date' })
 	        )
 	      );
 	    }
