@@ -17,20 +17,70 @@ const TreeSelect=MonkeyUi.TreeSelect;
 var Input = MonkeyUi.Input;
 var Search = Input.Search;
 var Cascader = MonkeyUi.Cascader;
-const dataSource = [];
+const dataSource = [{name:"yy2222222222222222222222222222222222222222222x",
+age:1111111111111111111111111111111111111111111111113,
+age1:11111111111111111111111113,
+age2:1222222222222223,
+age3:12222222222222222222223,
+age4:"fdsafdsaaaaaasssssssssssfds",
+age5:"fdsafdsafdsaaaaaaafdsfdsfdsfd",age6:13,age7:13,age8:13,address:'12121'}];
 var RadioGroup=Radio.Group;
 const columns = [{
   title: '姓名',
   dataIndex: 'name',
   key: 'name',
+  fixed:'left',
+  width:150
 }, {
   title: '年龄',
   dataIndex: 'age',
   key: 'age',
-}, {
+  width:150
+} , {
+  title: '年龄',
+  dataIndex: 'age1',
+  key: 'age1',
+  width:150
+},{
+  title: '年龄',
+  dataIndex: 'age2',
+  key: 'age2',
+  width:150
+},{
+  title: '年龄',
+  dataIndex: 'age3',
+  key: 'age3',
+  width:150
+},{
+  title: '年龄',
+  dataIndex: 'age4',
+  key: 'age4',
+  width:350
+},{
+  title: '年龄',
+  dataIndex: 'age5',
+  key: 'age5',
+  width:150
+},{
+  title: '年龄',
+  dataIndex: 'age6',
+  key: 'age6',
+  width:150
+},{
+  title: '年龄',
+  dataIndex: 'age7',
+  key: 'age7',
+  width:250
+},{
+  title: '年龄',
+  dataIndex: 'age8',
+  key: 'age8',
+  width:150
+},{
   title: '住址',
   dataIndex: 'address',
   key: 'address',
+  fixed:'right'
 }];
 
 const options = [{
@@ -88,12 +138,17 @@ class Page extends React.Component{
   console.log(date, dateString);
 }
     const props = {
-      action: '/upload.do',
+      action: 'http://172.16.26.19:8090/DT/uploadImage.action',
       onChange(info) {
         if (info.file.status !== 'uploading') {
           console.log(info.file);
           console.log(info.fileList);
         }
+      },
+      onSuccess(response, file){
+        console.log(22)
+        console.log(response);
+        console.log(file)
       },
       defaultFileList: [{
         uid: -1,
@@ -116,7 +171,7 @@ class Page extends React.Component{
             <Radio key="c" value={3}>C</Radio>
             <Radio key="d" value={4}>D</Radio>
           </RadioGroup>
-          <Table columns={columns} dataSource={dataSource} />
+          <Table columns={columns} style={{width:'600px'}} dataSource={dataSource} scroll={{x:500}}/>
           <Input type="textarea" rows={4} value={remark} onChange={(e)=>{this.handleChangeTextarea(e)}}/>
           <a href="#" onClick={(name) => {this.handleSelectTag("智力落后")}}>智力落后</a>
           <Search placeholder="input search text" onSearch={value => console.log(value)} />

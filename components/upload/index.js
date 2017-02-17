@@ -73,6 +73,7 @@ export default class Upload extends React.Component {
     listType: 'text', // or pictrue
     className: '',
     disabled: false,
+    onSuccess:noop
   }
 
   constructor(props) {
@@ -141,6 +142,7 @@ export default class Upload extends React.Component {
     let targetItem = getFileItem(file, fileList);
     // removed
     if (!targetItem) {
+      this.props.onSuccess(response, file);
       return;
     }
     targetItem.status = 'done';
@@ -149,6 +151,7 @@ export default class Upload extends React.Component {
       file: targetItem,
       fileList,
     });
+    this.props.onSuccess(response, file);
   }
 
   onProgress = (e, file) => {
