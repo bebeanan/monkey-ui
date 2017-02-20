@@ -25,6 +25,7 @@ import Popover from "./popover/index";
 import Upload from "./upload/index";
 import Cascader from "./cascader/index";
 import TreeSelect from "./treeSelect/index";
+import Switch from "./switch/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -51,6 +52,7 @@ var MonkeyUi = {
 	Popover : Popover,
 	Upload : Upload,
 	Cascader : Cascader,
-	TreeSelect : TreeSelect
+	TreeSelect : TreeSelect,
+	Switch : Switch
 }
 export default MonkeyUi;

@@ -10,6 +10,7 @@ const Select= MonkeyUi.Select;
 const Option=Select.Option;
 const Button=MonkeyUi.Button;
 const Upload=MonkeyUi.Upload;
+const Switch=MonkeyUi.Switch;
 const Icon=MonkeyUi.Icon;
 const Tree=MonkeyUi.Tree;
 const TreeNode=Tree.TreeNode;
@@ -183,7 +184,13 @@ class Page extends React.Component{
             </Button>
           </Upload>
           <Cascader options={options}  placeholder="Please select" />
-
+          <br/>
+          <Switch checkedChildren={'开'} unCheckedChildren={'关'} />
+          <br />
+          <Switch checkedChildren="1" unCheckedChildren="0" />
+          <br />
+          <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="cross" />} />
+          <br/>
            <TreeSelect
         showSearch
         style={{ width: 300 }}
