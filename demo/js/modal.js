@@ -31,6 +31,7 @@ const LocalizedModal = React.createClass({
         <Button type="primary" onClick={this.showModal}>Show Modal</Button>
         <Modal title="Modal" visible={this.state.visible}
           isVisible={this.state.isVisible}
+          transitionName="move-right"
           onOk={this.handleOk} onCancel={this.handleCancel}
           okText="OK" cancelText="Cancel"
         >

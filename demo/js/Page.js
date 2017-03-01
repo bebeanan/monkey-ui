@@ -9,6 +9,8 @@ var Table=MonkeyUi.Table;
 const Select= MonkeyUi.Select;
 const Option=Select.Option;
 const Button=MonkeyUi.Button;
+const DatePicker=MonkeyUi.DatePicker;
+const { MonthPicker, RangePicker } = DatePicker;
 const Upload=MonkeyUi.Upload;
 const Switch=MonkeyUi.Switch;
 const Icon=MonkeyUi.Icon;
@@ -172,7 +174,7 @@ class Page extends React.Component{
             <Radio key="c" value={3}>C</Radio>
             <Radio key="d" value={4}>D</Radio>
           </RadioGroup>
-          <Table columns={columns} style={{width:'600px'}} dataSource={dataSource} scroll={{x:500}}/>
+          <Table columns={columns}  dataSource={dataSource} scroll={{x:500,y:800}}/>
           <Input type="textarea" rows={4} value={remark} onChange={(e)=>{this.handleChangeTextarea(e)}}/>
           <a href="#" onClick={(name) => {this.handleSelectTag("智力落后")}}>智力落后</a>
           <Search placeholder="input search text" onSearch={value => console.log(value)} />
@@ -190,6 +192,12 @@ class Page extends React.Component{
           <Switch checkedChildren="1" unCheckedChildren="0" />
           <br />
           <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="cross" />} />
+          <br/>
+          <DatePicker onChange={onChange} />
+          <br />
+          <MonthPicker onChange={onChange} placeholder="Select month" />
+          <br />
+          <RangePicker onChange={onChange} />
           <br/>
            <TreeSelect
         showSearch

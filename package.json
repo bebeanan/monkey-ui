@@ -1,6 +1,6 @@
 {
   "name": "monkeyui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "title": "monkeyui",
   "description": "react components.",
   "author": "bebeanan",
@@ -85,6 +85,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "moment": "^2.17.1",
+    "rc-table": "^5.2.14",
     "rc-time-picker": "^1.1.6",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
