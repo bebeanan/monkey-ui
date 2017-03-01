@@ -9,8 +9,6 @@ var Table=MonkeyUi.Table;
 const Select= MonkeyUi.Select;
 const Option=Select.Option;
 const Button=MonkeyUi.Button;
-const DatePicker=MonkeyUi.DatePicker;
-const { MonthPicker, RangePicker } = DatePicker;
 const Upload=MonkeyUi.Upload;
 const Switch=MonkeyUi.Switch;
 const Icon=MonkeyUi.Icon;
@@ -192,12 +190,6 @@ class Page extends React.Component{
           <Switch checkedChildren="1" unCheckedChildren="0" />
           <br />
           <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="cross" />} />
-          <br/>
-          <DatePicker onChange={onChange} />
-          <br />
-          <MonthPicker onChange={onChange} placeholder="Select month" />
-          <br />
-          <RangePicker onChange={onChange} />
           <br/>
            <TreeSelect
         showSearch

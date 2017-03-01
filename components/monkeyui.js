@@ -26,7 +26,6 @@ import Upload from "./upload/index";
 import Cascader from "./cascader/index";
 import TreeSelect from "./treeSelect/index";
 import Switch from "./switch/index";
-import DatePicker from "./date-picker/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -54,7 +53,6 @@ var MonkeyUi = {
 	Upload : Upload,
 	Cascader : Cascader,
 	TreeSelect : TreeSelect,
-	Switch : Switch,
-	DatePicker : DatePicker
+	Switch : Switch
 }
 export default MonkeyUi;
