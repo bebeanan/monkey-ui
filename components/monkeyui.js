@@ -26,6 +26,8 @@ import Upload from "./upload/index";
 import Cascader from "./cascader/index";
 import TreeSelect from "./treeSelect/index";
 import Switch from "./switch/index";
+import PreviewPicture from "./previewPicture/index";
+import NewCascader from "./newCascader/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -40,6 +42,7 @@ var MonkeyUi = {
 	Table : Table,
 	Radio : Radio,
 	Select : Select,
+	Spin : Spin,
 	Pagination : Pagination,
 	Dropdown : Dropdown,
 	Menu : Menu,
@@ -53,6 +56,8 @@ var MonkeyUi = {
 	Upload : Upload,
 	Cascader : Cascader,
 	TreeSelect : TreeSelect,
-	Switch : Switch
+	Switch : Switch,
+	PreviewPicture : PreviewPicture,
+	NewCascader : NewCascader 
 }
 export default MonkeyUi;

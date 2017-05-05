@@ -58,59 +58,59 @@
 
 	var _monkeyui2 = _interopRequireDefault(_monkeyui);
 
-	var _LeftPage = __webpack_require__(513);
+	var _LeftPage = __webpack_require__(516);
 
 	var _LeftPage2 = _interopRequireDefault(_LeftPage);
 
-	var _head = __webpack_require__(575);
+	var _head = __webpack_require__(578);
 
 	var _head2 = _interopRequireDefault(_head);
 
-	var _Page = __webpack_require__(576);
+	var _Page = __webpack_require__(579);
 
 	var _Page2 = _interopRequireDefault(_Page);
 
-	var _button = __webpack_require__(577);
+	var _button = __webpack_require__(580);
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _icon = __webpack_require__(578);
+	var _icon = __webpack_require__(581);
 
 	var _icon2 = _interopRequireDefault(_icon);
 
-	var _alert = __webpack_require__(579);
+	var _alert = __webpack_require__(582);
 
 	var _alert2 = _interopRequireDefault(_alert);
 
-	var _checkbox = __webpack_require__(580);
+	var _checkbox = __webpack_require__(583);
 
 	var _checkbox2 = _interopRequireDefault(_checkbox);
 
-	var _modal = __webpack_require__(581);
+	var _modal = __webpack_require__(584);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
-	var _timeline = __webpack_require__(582);
+	var _timeline = __webpack_require__(585);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
-	var _carousel = __webpack_require__(583);
+	var _carousel = __webpack_require__(586);
 
 	var _carousel2 = _interopRequireDefault(_carousel);
 
-	var _tree = __webpack_require__(584);
+	var _tree = __webpack_require__(587);
 
 	var _tree2 = _interopRequireDefault(_tree);
 
-	var _complete = __webpack_require__(585);
+	var _complete = __webpack_require__(588);
 
 	var _complete2 = _interopRequireDefault(_complete);
 
-	var _upload = __webpack_require__(586);
+	var _upload = __webpack_require__(589);
 
 	var _upload2 = _interopRequireDefault(_upload);
 
-	var _reactRouter = __webpack_require__(514);
+	var _reactRouter = __webpack_require__(517);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21666,6 +21666,14 @@
 
 	var _index52 = _interopRequireDefault(_index51);
 
+	var _index53 = __webpack_require__(513);
+
+	var _index54 = _interopRequireDefault(_index53);
+
+	var _index55 = __webpack_require__(515);
+
+	var _index56 = _interopRequireDefault(_index55);
+
 	function _interopRequireDefault(obj) {
 		return obj && obj.__esModule ? obj : { default: obj };
 	}
@@ -21684,6 +21692,7 @@
 		Table: _index18.default,
 		Radio: _index20.default,
 		Select: _index22.default,
+		Spin: _index26.default,
 		Pagination: _index24.default,
 		Dropdown: _index28.default,
 		Menu: _index30.default,
@@ -21697,7 +21706,9 @@
 		Upload: _index46.default,
 		Cascader: _index48.default,
 		TreeSelect: _index50.default,
-		Switch: _index52.default
+		Switch: _index52.default,
+		PreviewPicture: _index54.default,
+		NewCascader: _index56.default
 	};
 	exports.default = MonkeyUi;
 
@@ -44525,6 +44536,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _rcAnimate = __webpack_require__(198);
+
+	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
+
 	var _reactDom = __webpack_require__(34);
 
 	var _classnames = __webpack_require__(174);
@@ -44587,7 +44602,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (Spin.__proto__ || Object.getPrototypeOf(Spin)).call(this, props));
 
-	    var spinning = _this.getSpinning(props);
+	    var spinning = props.spinning;
 	    _this.state = {
 	      spinning: spinning
 	    };
@@ -44602,7 +44617,6 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      (0, _warning2.default)(!('spining' in this.props), '`spining` property of Popover is a spell mistake, use `spinning` instead.');
 	      if (!(0, _isCssAnimationSupported2.default)()) {
 	        // Show text in IE8/9
 	        (0, _reactDom.findDOMNode)(this).className += ' ' + this.props.prefixCls + '-show-text';
@@ -44614,33 +44628,37 @@
 	      if (this.debounceTimeout) {
 	        clearTimeout(this.debounceTimeout);
 	      }
-	    }
-	  }, {
-	    key: 'getSpinning',
-	    value: function getSpinning(props) {
-	      // Backwards support
-	      if ('spining' in props) {
-	        (0, _warning2.default)(false, '`spining` property of Spin is a spell mistake, use `spinning` instead.');
-	        return props.spining;
+	      if (this.delayTimeout) {
+	        clearTimeout(this.delayTimeout);
 	      }
-	      return props.spinning;
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      var _this2 = this;
 
-	      var currentSpinning = this.getSpinning(this.props);
-	      var spinning = this.getSpinning(nextProps);
+	      var currentSpinning = this.props.spinning;
+	      var spinning = nextProps.spinning;
+	      var delay = this.props.delay;
+
 	      if (this.debounceTimeout) {
 	        clearTimeout(this.debounceTimeout);
 	      }
 	      if (currentSpinning && !spinning) {
 	        this.debounceTimeout = setTimeout(function () {
 	          return _this2.setState({ spinning: spinning });
-	        }, 500);
+	        }, 300);
+	        if (this.delayTimeout) {
+	          clearTimeout(this.delayTimeout);
+	        }
 	      } else {
-	        this.setState({ spinning: spinning });
+	        if (spinning && delay && !isNaN(Number(delay))) {
+	          this.delayTimeout = setTimeout(function () {
+	            return _this2.setState({ spinning: spinning });
+	          }, delay);
+	        } else {
+	          this.setState({ spinning: spinning });
+	        }
 	      }
 	    }
 	  }, {
@@ -44657,15 +44675,22 @@
 
 	      var spinning = this.state.spinning;
 
-	      var spinClassName = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, prefixCls, true), _defineProperty(_classNames, prefixCls + '-sm', size === 'small'), _defineProperty(_classNames, prefixCls + '-lg', size === 'large'), _defineProperty(_classNames, prefixCls + '-spinning', spinning), _defineProperty(_classNames, prefixCls + '-show-text', !!this.props.tip), _defineProperty(_classNames, className, !!className), _classNames));
+	      var spinClassName = (0, _classnames2.default)(prefixCls, (_classNames = {}, _defineProperty(_classNames, prefixCls + '-sm', size === 'small'), _defineProperty(_classNames, prefixCls + '-lg', size === 'large'), _defineProperty(_classNames, prefixCls + '-spinning', spinning), _defineProperty(_classNames, prefixCls + '-show-text', !!tip), _classNames), className);
 
 	      // fix https://fb.me/react-unknown-prop
-	      var divProps = (0, _object2.default)(restProps, ['spinning']);
+	      var divProps = (0, _object2.default)(restProps, ['spinning', 'delay']);
 
-	      var spinElement = _react2.default.createElement('div', _extends({}, divProps, { className: spinClassName }), _react2.default.createElement('span', { className: prefixCls + '-dot' }), _react2.default.createElement('div', { className: prefixCls + '-text' }, tip || '加载中...'));
-
+	      var spinElement = _react2.default.createElement('div', _extends({}, divProps, { className: spinClassName }), _react2.default.createElement('span', { className: prefixCls + '-dot' }, _react2.default.createElement('i', null), _react2.default.createElement('i', null), _react2.default.createElement('i', null), _react2.default.createElement('i', null)), tip ? _react2.default.createElement('div', { className: prefixCls + '-text' }, tip) : null);
 	      if (this.isNestedPattern()) {
-	        return _react2.default.createElement('div', _extends({}, divProps, { className: spinning ? prefixCls + '-nested-loading' : '' }), spinElement, _react2.default.createElement('div', { className: prefixCls + '-container' }, this.props.children));
+	        var _classNames2;
+
+	        var containerClassName = (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, prefixCls + '-container', true), _defineProperty(_classNames2, prefixCls + '-blur', spinning), _classNames2));
+	        return _react2.default.createElement(_rcAnimate2.default, _extends({}, divProps, {
+	          component: 'div',
+	          className: prefixCls + '-nested-loading',
+	          style: null,
+	          transitionName: 'fade'
+	        }), spinning && _react2.default.createElement('div', { key: 'loading' }, spinElement), _react2.default.createElement('div', { className: containerClassName, key: 'container' }, this.props.children));
 	      }
 	      return spinElement;
 	    }
@@ -44676,11 +44701,8 @@
 
 	Spin.defaultProps = {
 	  prefixCls: 'ant-spin',
-	  spinning: true
-	};
-	Spin.propTypes = {
-	  className: _react2.default.PropTypes.string,
-	  size: _react2.default.PropTypes.oneOf(['small', 'default', 'large'])
+	  spinning: true,
+	  size: 'default'
 	};
 	exports.default = Spin;
 
@@ -56331,6 +56353,502 @@
 
 	'use strict';
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	}();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _index = __webpack_require__(192);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _viewPic = __webpack_require__(514);
+
+	var _viewPic2 = _interopRequireDefault(_viewPic);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	function _possibleConstructorReturn(self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	}
+
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	} //容器
+	/*
+	*
+	接口设计
+	参数设计：
+	visible  //modal hide show
+	viewData  //图片列表数据
+	删除图片接口设计
+	//动态渲染左侧缩略图 and 同时删除外层上传数据和显示数据 and 删除按钮设计
+	//点击左侧缩略图左侧对应大图展示
+	// 阻止删除和展示事件传递和冒泡，防止预览触发删除，或删除触发预览
+	//bug 修复 upload组件删除事件会触发预览事件
+	*/
+
+	var getFileList = function getFileList() {
+	  return {
+	    type: '标题',
+	    url: '',
+	    uid: '',
+	    thumbUrl: ''
+	  };
+	};
+
+	var noop = function noop() {};
+
+	var Container = function (_React$Component) {
+	  _inherits(Container, _React$Component);
+
+	  function Container(props) {
+	    _classCallCheck(this, Container);
+
+	    var _this = _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
+
+	    _this.state = {
+	      visible: false,
+	      fileList: _this.props.fileList,
+	      width: _this.props.width ? _this.props.width : "1000px", //模态框宽度
+	      top: _this.props.top ? _this.props.top : '100px', //模态框距离顶部高度
+	      title: _this.props.title
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Container, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({ visible: nextProps.visible, fileList: nextProps.fileList });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {}
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {}
+	  }, {
+	    key: 'hideModal',
+	    value: function hideModal() {
+	      this.setState({ visible: false });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var props = {
+	        delFlag: this.props.delFlag,
+	        del: this.props.del ? this.props.del : noop,
+	        fileList: this.props.fileList
+	      };
+	      var fileList = this.state.fileList;
+	      return _react2.default.createElement(_index2.default, {
+	        title: this.state.title,
+	        visible: this.state.visible,
+	        footer: null,
+	        width: this.state.width,
+	        style: { top: this.state.top },
+	        onCancel: function onCancel() {
+	          return _this2.hideModal();
+	        }
+
+	      }, _react2.default.createElement(_viewPic2.default, props));
+	    }
+	  }]);
+
+	  return Container;
+	}(_react2.default.Component);
+
+	;
+
+	module.exports = Container;
+
+/***/ },
+/* 514 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	}();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _col = __webpack_require__(175);
+
+	var _col2 = _interopRequireDefault(_col);
+
+	var _row = __webpack_require__(173);
+
+	var _row2 = _interopRequireDefault(_row);
+
+	var _index = __webpack_require__(178);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	function _possibleConstructorReturn(self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	}
+
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	} //预览
+
+
+	var ViewPic = function (_React$Component) {
+	  _inherits(ViewPic, _React$Component);
+
+	  function ViewPic(props) {
+	    _classCallCheck(this, ViewPic);
+
+	    var _this = _possibleConstructorReturn(this, (ViewPic.__proto__ || Object.getPrototypeOf(ViewPic)).call(this, props));
+
+	    _this.props.fileList[0].active = true;
+	    _this.state = {
+	      fileList: _this.props.fileList,
+	      rightUrl: _this.props.fileList.length == 0 ? "" : _this.props.fileList[0].url
+	    };
+	    return _this;
+	  }
+
+	  _createClass(ViewPic, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+
+	      nextProps.fileList[0].active = true;
+	      this.setState({ fileList: nextProps.fileList });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {}
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var deg = 0;
+	      document.getElementById("rotate").onclick = function () {
+	        deg += 90;
+	        document.getElementById("bigImg").style.transform = "rotate(" + deg + "deg)";
+	      };
+	    }
+	  }, {
+	    key: 'changeUrl',
+	    value: function changeUrl(id) {
+	      this.setState({ rightUrl: "" });
+	      this.setState({ rightUrl: this.leftToRight(id) });
+	    }
+	  }, {
+	    key: 'leftToRight',
+	    value: function leftToRight(id) {
+	      var fileList = this.state.fileList;
+	      var _id = "";
+	      for (var i = 0; i < fileList.length; i++) {
+	        if (fileList[i].uid == id) {
+	          fileList[i].active = true;
+	          _id = fileList[i].url;
+	        } else fileList[i].active = false;
+	      }
+	      this.setState({ fileList: this.state.fileList });
+	      return _id;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var fileList = this.state.fileList;
+	      var delFlag = this.props.delFlag || 'block';
+	      return _react2.default.createElement(_row2.default, null, _react2.default.createElement(_col2.default, { span: 4 }, _react2.default.createElement('div', { className: 'leftNav' }, _react2.default.createElement('ul', { style: { height: '100%', overflowY: 'auto' } }, fileList.length != 0 ? this.state.fileList.map(function (item, index) {
+	        return _react2.default.createElement('li', { key: item.uid, onClick: function onClick() {
+	            return _this2.changeUrl(item.uid);
+	          } }, _react2.default.createElement('img', {
+	          style: { border: item.active ? "2px solid red" : "2px solid #108ee9" },
+	          src: item.thumbUrl }), _react2.default.createElement('span', { style: { display: delFlag },
+	          onClick: function onClick(e) {
+	            return _this2.props.del(e, item.uid);
+	          } }, '\xD7'));
+	      }) : null))), _react2.default.createElement(_col2.default, { span: 20 }, _react2.default.createElement('div', { className: 'picContainer' }, _react2.default.createElement('div', { id: 'rotate' }, _react2.default.createElement(_index2.default, { type: 'retweet' }), '\u65CB\u8F6C'), _react2.default.createElement('img', { src: this.state.rightUrl, id: 'bigImg' }))));
+	    }
+	  }]);
+
+	  return ViewPic;
+	}(_react2.default.Component);
+
+	;
+
+	module.exports = ViewPic;
+
+/***/ },
+/* 515 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () {
+	    function defineProperties(target, props) {
+	        for (var i = 0; i < props.length; i++) {
+	            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	        }
+	    }return function (Constructor, protoProps, staticProps) {
+	        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	    };
+	}();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	function _classCallCheck(instance, Constructor) {
+	    if (!(instance instanceof Constructor)) {
+	        throw new TypeError("Cannot call a class as a function");
+	    }
+	}
+
+	function _possibleConstructorReturn(self, call) {
+	    if (!self) {
+	        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	}
+
+	function _inherits(subClass, superClass) {
+	    if (typeof superClass !== "function" && superClass !== null) {
+	        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	}
+
+	// 接口参数设计：
+	// 参数属性：areaTree（数据源）
+	// value
+	// text
+	// 函数属性：close（关闭模态框）
+	// onChange(选择地区后回调函数，返回value，text)
+
+
+	var noop = function noop() {};
+
+	var getChild = function getChild(area, idArr) {
+	    var l = idArr.length;
+	    var j = 0;
+	    var children = area;
+	    if (!idArr || l == 0) return area;
+	    while (j < l) {
+	        for (var i = 0; i < children.length; i++) {
+	            if (children[i].value == idArr[j]) {
+	                children = children[i].children;
+	                j++;
+	                break;
+	            }
+	        }
+	    }
+
+	    return children;
+	};
+
+	var AreaCascader = function (_Component) {
+	    _inherits(AreaCascader, _Component);
+
+	    function AreaCascader(props) {
+	        _classCallCheck(this, AreaCascader);
+
+	        var _this = _possibleConstructorReturn(this, (AreaCascader.__proto__ || Object.getPrototypeOf(AreaCascader)).call(this, props));
+
+	        _initialiseProps.call(_this);
+
+	        var value = void 0;var text = void 0;
+	        if ('value' in props) value = props.value;else if ('defaultValue' in props) value = props.defaultValue;else value = [];
+
+	        if ('text' in props) text = props.text;else text = [];
+
+	        if ('onChange' in props) _this.onChange = props.onChange;else _this.onChange = noop;
+	        _this.state = {
+	            selectedList: value,
+	            showList: _this.props.areaTree,
+	            showText: text,
+	            areaTree: _this.props.areaTree,
+	            show: 'none'
+	        };
+	        return _this;
+	    }
+
+	    _createClass(AreaCascader, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({ areaTree: nextProps.areaTree, showList: nextProps.areaTree, selectedList: nextProps.value, showText: nextProps.text });
+	        }
+	    }, {
+	        key: 'getValue',
+	        value: function getValue(e) {
+	            e.stopPropagation();
+	            var value = e.target.value;
+	            var text = e.target.innerText;
+	            this.state.showText.push(text);
+	            this.state.selectedList.push(value);
+	            var children = getChild(this.state.areaTree, this.state.selectedList);
+	            this.setState({ selectedList: this.state.selectedList, showText: this.state.showText, showList: children });
+	            if (children.length == 0) {
+	                this.setState({ show: 'none' });
+	                // this.close();//关闭模态框
+	                this.onChange(this.state.selectedList, this.state.showText); //回调函数
+	            }
+	        }
+	        ///////////////
+
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var showText = this.state.showText;
+	            var text = this.state.showText.join('/');
+	            if (showText.length == 0) text = this.props.placeholder ? this.props.placeholder : "请点击选择地区";
+	            return _react2.default.createElement('div', { onClick: function onClick() {
+	                    return _this2.open();
+	                } }, _react2.default.createElement('div', { className: 'excluedText' }, text), _react2.default.createElement('div', { style: { display: this.state.show == 'block' ? 'block' : 'none' } }, _react2.default.createElement('div', { className: 'zhe' }), _react2.default.createElement('div', { className: 'main' }, _react2.default.createElement('div', { className: 'title' }, "\u6237\u7C4D\u6240\u5728\u5730", _react2.default.createElement('span', { className: 'close', onClick: function onClick(event) {
+	                    return _this2.close(event);
+	                } }, '\xD7')), _react2.default.createElement('div', { className: 'title_border' }, this.getSelectTitle(this.state.showText)), _react2.default.createElement('div', { className: 'c_body' }, _react2.default.createElement('ul', null, this.childToList(this.state.showList))))));
+	        }
+	    }]);
+
+	    return AreaCascader;
+	}(_react.Component);
+
+	var _initialiseProps = function _initialiseProps() {
+	    var _this3 = this;
+
+	    this.childToList = function (arr) {
+	        if (!arr || arr.length == 0) return null;
+	        return arr.map(function (item) {
+	            return _react2.default.createElement('li', { key: item.value, value: item.value, onClick: function onClick(e) {
+	                    return _this3.getValue(e);
+	                } }, item.label);
+	        });
+	    };
+
+	    this.clickTitle = function (e) {
+	        var value = e.target.id;
+	        var text = e.target.innerText;
+	        var selectedList = _this3.state.selectedList;
+	        var showText = _this3.state.showText;
+	        var index = 0;
+	        var index_t = 0;
+	        // let index=this.state.selectedList.indexOf(value);
+	        for (var i = 0; i < selectedList.length; i++) {
+	            if (selectedList[i] == value) {
+	                index = i;
+	                break;
+	            }
+	        }
+	        for (var _i = 0; _i < showText.length; _i++) {
+	            if (showText[_i] == text) {
+	                index_t = _i;
+	                break;
+	            }
+	        }
+	        selectedList = selectedList.slice(0, index);
+	        showText = showText.slice(0, index_t);
+	        var children = getChild(_this3.state.areaTree, selectedList);
+	        _this3.setState({ showList: children, selectedList: selectedList, showText: showText });
+	    };
+
+	    this.getSelectTitle = function (arr) {
+	        var list = [];
+	        if (!arr || arr.length == 0) return null;
+	        for (var i = 0; i < arr.length; i++) {
+	            list.push(_react2.default.createElement('span', { key: arr[i], className: 'title_li', id: _this3.state.selectedList[i], onClick: function onClick(e) {
+	                    return _this3.clickTitle(e);
+	                } }, arr[i]));
+	        }
+	        return list;
+	    };
+
+	    this.onChange = function (value, text) {
+	        console.log(1);
+	    };
+
+	    this.close = function (event) {
+	        event.stopPropagation();
+	        _this3.state.show = 'none';
+	        _this3.setState(_this3.state);
+	    };
+
+	    this.open = function () {
+	        _this3.setState({ show: 'block' });
+	    };
+	};
+
+	exports.default = AreaCascader;
+
+/***/ },
+/* 516 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -56347,7 +56865,7 @@
 
 	var _monkeyui2 = _interopRequireDefault(_monkeyui);
 
-	var _reactRouter = __webpack_require__(514);
+	var _reactRouter = __webpack_require__(517);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56630,7 +57148,7 @@
 	exports.default = Page;
 
 /***/ },
-/* 514 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56638,7 +57156,7 @@
 	exports.__esModule = true;
 	exports.createMemoryHistory = exports.hashHistory = exports.browserHistory = exports.applyRouterMiddleware = exports.formatPattern = exports.useRouterHistory = exports.match = exports.routerShape = exports.locationShape = exports.PropTypes = exports.RoutingContext = exports.RouterContext = exports.createRoutes = exports.useRoutes = exports.RouteContext = exports.Lifecycle = exports.History = exports.Route = exports.Redirect = exports.IndexRoute = exports.IndexRedirect = exports.withRouter = exports.IndexLink = exports.Link = exports.Router = undefined;
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
 	Object.defineProperty(exports, 'createRoutes', {
 	  enumerable: true,
@@ -56647,7 +57165,7 @@
 	  }
 	});
 
-	var _PropTypes2 = __webpack_require__(516);
+	var _PropTypes2 = __webpack_require__(519);
 
 	Object.defineProperty(exports, 'locationShape', {
 	  enumerable: true,
@@ -56662,7 +57180,7 @@
 	  }
 	});
 
-	var _PatternUtils = __webpack_require__(520);
+	var _PatternUtils = __webpack_require__(523);
 
 	Object.defineProperty(exports, 'formatPattern', {
 	  enumerable: true,
@@ -56671,85 +57189,85 @@
 	  }
 	});
 
-	var _Router2 = __webpack_require__(522);
+	var _Router2 = __webpack_require__(525);
 
 	var _Router3 = _interopRequireDefault(_Router2);
 
-	var _Link2 = __webpack_require__(553);
+	var _Link2 = __webpack_require__(556);
 
 	var _Link3 = _interopRequireDefault(_Link2);
 
-	var _IndexLink2 = __webpack_require__(554);
+	var _IndexLink2 = __webpack_require__(557);
 
 	var _IndexLink3 = _interopRequireDefault(_IndexLink2);
 
-	var _withRouter2 = __webpack_require__(555);
+	var _withRouter2 = __webpack_require__(558);
 
 	var _withRouter3 = _interopRequireDefault(_withRouter2);
 
-	var _IndexRedirect2 = __webpack_require__(556);
+	var _IndexRedirect2 = __webpack_require__(559);
 
 	var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
 
-	var _IndexRoute2 = __webpack_require__(558);
+	var _IndexRoute2 = __webpack_require__(561);
 
 	var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
 
-	var _Redirect2 = __webpack_require__(557);
+	var _Redirect2 = __webpack_require__(560);
 
 	var _Redirect3 = _interopRequireDefault(_Redirect2);
 
-	var _Route2 = __webpack_require__(559);
+	var _Route2 = __webpack_require__(562);
 
 	var _Route3 = _interopRequireDefault(_Route2);
 
-	var _History2 = __webpack_require__(560);
+	var _History2 = __webpack_require__(563);
 
 	var _History3 = _interopRequireDefault(_History2);
 
-	var _Lifecycle2 = __webpack_require__(561);
+	var _Lifecycle2 = __webpack_require__(564);
 
 	var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
 
-	var _RouteContext2 = __webpack_require__(562);
+	var _RouteContext2 = __webpack_require__(565);
 
 	var _RouteContext3 = _interopRequireDefault(_RouteContext2);
 
-	var _useRoutes2 = __webpack_require__(563);
+	var _useRoutes2 = __webpack_require__(566);
 
 	var _useRoutes3 = _interopRequireDefault(_useRoutes2);
 
-	var _RouterContext2 = __webpack_require__(550);
+	var _RouterContext2 = __webpack_require__(553);
 
 	var _RouterContext3 = _interopRequireDefault(_RouterContext2);
 
-	var _RoutingContext2 = __webpack_require__(564);
+	var _RoutingContext2 = __webpack_require__(567);
 
 	var _RoutingContext3 = _interopRequireDefault(_RoutingContext2);
 
 	var _PropTypes3 = _interopRequireDefault(_PropTypes2);
 
-	var _match2 = __webpack_require__(565);
+	var _match2 = __webpack_require__(568);
 
 	var _match3 = _interopRequireDefault(_match2);
 
-	var _useRouterHistory2 = __webpack_require__(569);
+	var _useRouterHistory2 = __webpack_require__(572);
 
 	var _useRouterHistory3 = _interopRequireDefault(_useRouterHistory2);
 
-	var _applyRouterMiddleware2 = __webpack_require__(570);
+	var _applyRouterMiddleware2 = __webpack_require__(573);
 
 	var _applyRouterMiddleware3 = _interopRequireDefault(_applyRouterMiddleware2);
 
-	var _browserHistory2 = __webpack_require__(571);
+	var _browserHistory2 = __webpack_require__(574);
 
 	var _browserHistory3 = _interopRequireDefault(_browserHistory2);
 
-	var _hashHistory2 = __webpack_require__(574);
+	var _hashHistory2 = __webpack_require__(577);
 
 	var _hashHistory3 = _interopRequireDefault(_hashHistory2);
 
-	var _createMemoryHistory2 = __webpack_require__(566);
+	var _createMemoryHistory2 = __webpack_require__(569);
 
 	var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
 
@@ -56791,7 +57309,7 @@
 	exports.createMemoryHistory = _createMemoryHistory3.default;
 
 /***/ },
-/* 515 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56889,7 +57407,7 @@
 	}
 
 /***/ },
-/* 516 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -56899,15 +57417,15 @@
 
 	var _react = __webpack_require__(1);
 
-	var _deprecateObjectProperties = __webpack_require__(517);
+	var _deprecateObjectProperties = __webpack_require__(520);
 
 	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
 	var InternalPropTypes = _interopRequireWildcard(_InternalPropTypes);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -56996,7 +57514,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 517 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57004,7 +57522,7 @@
 	exports.__esModule = true;
 	exports.canUseMembrane = undefined;
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -57077,7 +57595,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 518 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57118,7 +57636,7 @@
 	}
 
 /***/ },
-/* 519 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57155,7 +57673,7 @@
 	var routes = exports.routes = oneOfType([route, arrayOf(route)]);
 
 /***/ },
-/* 520 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57167,7 +57685,7 @@
 	exports.getParams = getParams;
 	exports.formatPattern = formatPattern;
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -57373,7 +57891,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 521 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -57431,7 +57949,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 522 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57440,15 +57958,15 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _createHashHistory = __webpack_require__(523);
+	var _createHashHistory = __webpack_require__(526);
 
 	var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
-	var _useQueries = __webpack_require__(539);
+	var _useQueries = __webpack_require__(542);
 
 	var _useQueries2 = _interopRequireDefault(_useQueries);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -57456,21 +57974,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _createTransitionManager = __webpack_require__(542);
+	var _createTransitionManager = __webpack_require__(545);
 
 	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
-	var _RouterContext = __webpack_require__(550);
+	var _RouterContext = __webpack_require__(553);
 
 	var _RouterContext2 = _interopRequireDefault(_RouterContext);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
-	var _RouterUtils = __webpack_require__(552);
+	var _RouterUtils = __webpack_require__(555);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -57661,7 +58179,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 523 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57672,25 +58190,25 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _Actions = __webpack_require__(525);
+	var _Actions = __webpack_require__(528);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
-	var _ExecutionEnvironment = __webpack_require__(527);
+	var _ExecutionEnvironment = __webpack_require__(530);
 
-	var _DOMUtils = __webpack_require__(528);
+	var _DOMUtils = __webpack_require__(531);
 
-	var _DOMStateStorage = __webpack_require__(529);
+	var _DOMStateStorage = __webpack_require__(532);
 
-	var _createDOMHistory = __webpack_require__(530);
+	var _createDOMHistory = __webpack_require__(533);
 
 	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
 
@@ -57913,7 +58431,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 524 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -57980,7 +58498,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 525 */
+/* 528 */
 /***/ function(module, exports) {
 
 	/**
@@ -58016,7 +58534,7 @@
 	};
 
 /***/ },
-/* 526 */
+/* 529 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58027,7 +58545,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -58069,7 +58587,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 527 */
+/* 530 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -58079,7 +58597,7 @@
 	exports.canUseDOM = canUseDOM;
 
 /***/ },
-/* 528 */
+/* 531 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -58159,7 +58677,7 @@
 	}
 
 /***/ },
-/* 529 */
+/* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*eslint-disable no-empty */
@@ -58171,7 +58689,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -58238,7 +58756,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 530 */
+/* 533 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58249,15 +58767,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _ExecutionEnvironment = __webpack_require__(527);
+	var _ExecutionEnvironment = __webpack_require__(530);
 
-	var _DOMUtils = __webpack_require__(528);
+	var _DOMUtils = __webpack_require__(531);
 
-	var _createHistory = __webpack_require__(531);
+	var _createHistory = __webpack_require__(534);
 
 	var _createHistory2 = _interopRequireDefault(_createHistory);
 
@@ -58284,7 +58802,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 531 */
+/* 534 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58295,29 +58813,29 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _deepEqual = __webpack_require__(532);
+	var _deepEqual = __webpack_require__(535);
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
-	var _AsyncUtils = __webpack_require__(535);
+	var _AsyncUtils = __webpack_require__(538);
 
-	var _Actions = __webpack_require__(525);
+	var _Actions = __webpack_require__(528);
 
-	var _createLocation2 = __webpack_require__(536);
+	var _createLocation2 = __webpack_require__(539);
 
 	var _createLocation3 = _interopRequireDefault(_createLocation2);
 
-	var _runTransitionHook = __webpack_require__(537);
+	var _runTransitionHook = __webpack_require__(540);
 
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 
-	var _deprecate = __webpack_require__(538);
+	var _deprecate = __webpack_require__(541);
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
@@ -58578,12 +59096,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 532 */
+/* 535 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var pSlice = Array.prototype.slice;
-	var objectKeys = __webpack_require__(533);
-	var isArguments = __webpack_require__(534);
+	var objectKeys = __webpack_require__(536);
+	var isArguments = __webpack_require__(537);
 
 	var deepEqual = module.exports = function (actual, expected, opts) {
 	  if (!opts) opts = {};
@@ -58678,7 +59196,7 @@
 
 
 /***/ },
-/* 533 */
+/* 536 */
 /***/ function(module, exports) {
 
 	exports = module.exports = typeof Object.keys === 'function'
@@ -58693,7 +59211,7 @@
 
 
 /***/ },
-/* 534 */
+/* 537 */
 /***/ function(module, exports) {
 
 	var supportsArgumentsClass = (function(){
@@ -58719,7 +59237,7 @@
 
 
 /***/ },
-/* 535 */
+/* 538 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58782,7 +59300,7 @@
 	}
 
 /***/ },
-/* 536 */
+/* 539 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58793,13 +59311,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _Actions = __webpack_require__(525);
+	var _Actions = __webpack_require__(528);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
 	function createLocation() {
 	  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
@@ -58839,7 +59357,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 537 */
+/* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58848,7 +59366,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -58869,7 +59387,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 538 */
+/* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58878,7 +59396,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -58894,7 +59412,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 539 */
+/* 542 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58905,19 +59423,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _queryString = __webpack_require__(540);
+	var _queryString = __webpack_require__(543);
 
-	var _runTransitionHook = __webpack_require__(537);
+	var _runTransitionHook = __webpack_require__(540);
 
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
-	var _deprecate = __webpack_require__(538);
+	var _deprecate = __webpack_require__(541);
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
@@ -59076,11 +59594,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 540 */
+/* 543 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var strictUriEncode = __webpack_require__(541);
+	var strictUriEncode = __webpack_require__(544);
 
 	exports.extract = function (str) {
 		return str.split('?')[1] || '';
@@ -59148,7 +59666,7 @@
 
 
 /***/ },
-/* 541 */
+/* 544 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59160,7 +59678,7 @@
 
 
 /***/ },
-/* 542 */
+/* 545 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59171,25 +59689,25 @@
 
 	exports.default = createTransitionManager;
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _computeChangedRoutes2 = __webpack_require__(543);
+	var _computeChangedRoutes2 = __webpack_require__(546);
 
 	var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
 
-	var _TransitionUtils = __webpack_require__(544);
+	var _TransitionUtils = __webpack_require__(547);
 
-	var _isActive2 = __webpack_require__(546);
+	var _isActive2 = __webpack_require__(549);
 
 	var _isActive3 = _interopRequireDefault(_isActive2);
 
-	var _getComponents = __webpack_require__(547);
+	var _getComponents = __webpack_require__(550);
 
 	var _getComponents2 = _interopRequireDefault(_getComponents);
 
-	var _matchRoutes = __webpack_require__(549);
+	var _matchRoutes = __webpack_require__(552);
 
 	var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
 
@@ -59468,14 +59986,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 543 */
+/* 546 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _PatternUtils = __webpack_require__(520);
+	var _PatternUtils = __webpack_require__(523);
 
 	function routeParamsChanged(route, prevState, nextState) {
 	  if (!route.path) return false;
@@ -59550,7 +60068,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 544 */
+/* 547 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59560,9 +60078,9 @@
 	exports.runChangeHooks = runChangeHooks;
 	exports.runLeaveHooks = runLeaveHooks;
 
-	var _AsyncUtils = __webpack_require__(545);
+	var _AsyncUtils = __webpack_require__(548);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -59678,7 +60196,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 545 */
+/* 548 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -59771,7 +60289,7 @@
 	}
 
 /***/ },
-/* 546 */
+/* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59782,7 +60300,7 @@
 
 	exports.default = isActive;
 
-	var _PatternUtils = __webpack_require__(520);
+	var _PatternUtils = __webpack_require__(523);
 
 	function deepEqual(a, b) {
 	  if (a == b) return true;
@@ -59928,16 +60446,16 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 547 */
+/* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _AsyncUtils = __webpack_require__(545);
+	var _AsyncUtils = __webpack_require__(548);
 
-	var _makeStateWithLocation = __webpack_require__(548);
+	var _makeStateWithLocation = __webpack_require__(551);
 
 	var _makeStateWithLocation2 = _interopRequireDefault(_makeStateWithLocation);
 
@@ -59979,7 +60497,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 548 */
+/* 551 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59990,9 +60508,9 @@
 
 	exports.default = makeStateWithLocation;
 
-	var _deprecateObjectProperties = __webpack_require__(517);
+	var _deprecateObjectProperties = __webpack_require__(520);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -60034,7 +60552,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 549 */
+/* 552 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60047,19 +60565,19 @@
 
 	exports.default = matchRoutes;
 
-	var _AsyncUtils = __webpack_require__(545);
+	var _AsyncUtils = __webpack_require__(548);
 
-	var _makeStateWithLocation = __webpack_require__(548);
+	var _makeStateWithLocation = __webpack_require__(551);
 
 	var _makeStateWithLocation2 = _interopRequireDefault(_makeStateWithLocation);
 
-	var _PatternUtils = __webpack_require__(520);
+	var _PatternUtils = __webpack_require__(523);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60291,7 +60809,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 550 */
+/* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60302,7 +60820,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -60310,17 +60828,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _deprecateObjectProperties = __webpack_require__(517);
+	var _deprecateObjectProperties = __webpack_require__(520);
 
 	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
 
-	var _getRouteParams = __webpack_require__(551);
+	var _getRouteParams = __webpack_require__(554);
 
 	var _getRouteParams2 = _interopRequireDefault(_getRouteParams);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -60453,14 +60971,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 551 */
+/* 554 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _PatternUtils = __webpack_require__(520);
+	var _PatternUtils = __webpack_require__(523);
 
 	/**
 	 * Extracts an object of params the given route cares about from
@@ -60484,7 +61002,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 552 */
+/* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60496,7 +61014,7 @@
 	exports.createRouterObject = createRouterObject;
 	exports.createRoutingHistory = createRoutingHistory;
 
-	var _deprecateObjectProperties = __webpack_require__(517);
+	var _deprecateObjectProperties = __webpack_require__(520);
 
 	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
 
@@ -60522,7 +61040,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 553 */
+/* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60535,15 +61053,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _PropTypes = __webpack_require__(516);
+	var _PropTypes = __webpack_require__(519);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60704,7 +61222,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 554 */
+/* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60717,7 +61235,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Link = __webpack_require__(553);
+	var _Link = __webpack_require__(556);
 
 	var _Link2 = _interopRequireDefault(_Link);
 
@@ -60737,7 +61255,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 555 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60748,7 +61266,7 @@
 
 	exports.default = withRouter;
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -60760,7 +61278,7 @@
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _PropTypes = __webpack_require__(516);
+	var _PropTypes = __webpack_require__(519);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60807,7 +61325,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 556 */
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60818,19 +61336,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _Redirect = __webpack_require__(557);
+	var _Redirect = __webpack_require__(560);
 
 	var _Redirect2 = _interopRequireDefault(_Redirect);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60876,7 +61394,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 557 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60887,15 +61405,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
-	var _PatternUtils = __webpack_require__(520);
+	var _PatternUtils = __webpack_require__(523);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60984,7 +61502,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 558 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60995,17 +61513,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61050,7 +61568,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 559 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61061,13 +61579,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61113,18 +61631,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 560 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	exports.__esModule = true;
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _InternalPropTypes = __webpack_require__(519);
+	var _InternalPropTypes = __webpack_require__(522);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61148,14 +61666,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 561 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	exports.__esModule = true;
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -61163,7 +61681,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -61222,14 +61740,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 562 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	exports.__esModule = true;
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -61273,7 +61791,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 563 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61282,15 +61800,15 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _useQueries = __webpack_require__(539);
+	var _useQueries = __webpack_require__(542);
 
 	var _useQueries2 = _interopRequireDefault(_useQueries);
 
-	var _createTransitionManager = __webpack_require__(542);
+	var _createTransitionManager = __webpack_require__(545);
 
 	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -61330,7 +61848,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 564 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61341,11 +61859,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RouterContext = __webpack_require__(550);
+	var _RouterContext = __webpack_require__(553);
 
 	var _RouterContext2 = _interopRequireDefault(_RouterContext);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -61366,7 +61884,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 565 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61375,23 +61893,23 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _Actions = __webpack_require__(525);
+	var _Actions = __webpack_require__(528);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _createMemoryHistory = __webpack_require__(566);
+	var _createMemoryHistory = __webpack_require__(569);
 
 	var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
 
-	var _createTransitionManager = __webpack_require__(542);
+	var _createTransitionManager = __webpack_require__(545);
 
 	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-	var _RouteUtils = __webpack_require__(515);
+	var _RouteUtils = __webpack_require__(518);
 
-	var _RouterUtils = __webpack_require__(552);
+	var _RouterUtils = __webpack_require__(555);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61455,7 +61973,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 566 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61463,15 +61981,15 @@
 	exports.__esModule = true;
 	exports.default = createMemoryHistory;
 
-	var _useQueries = __webpack_require__(539);
+	var _useQueries = __webpack_require__(542);
 
 	var _useQueries2 = _interopRequireDefault(_useQueries);
 
-	var _useBasename = __webpack_require__(567);
+	var _useBasename = __webpack_require__(570);
 
 	var _useBasename2 = _interopRequireDefault(_useBasename);
 
-	var _createMemoryHistory = __webpack_require__(568);
+	var _createMemoryHistory = __webpack_require__(571);
 
 	var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
 
@@ -61492,7 +62010,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 567 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61503,19 +62021,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _ExecutionEnvironment = __webpack_require__(527);
+	var _ExecutionEnvironment = __webpack_require__(530);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
-	var _runTransitionHook = __webpack_require__(537);
+	var _runTransitionHook = __webpack_require__(540);
 
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 
-	var _deprecate = __webpack_require__(538);
+	var _deprecate = __webpack_require__(541);
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
@@ -61656,7 +62174,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 568 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61667,19 +62185,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(524);
+	var _warning = __webpack_require__(527);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
-	var _Actions = __webpack_require__(525);
+	var _Actions = __webpack_require__(528);
 
-	var _createHistory = __webpack_require__(531);
+	var _createHistory = __webpack_require__(534);
 
 	var _createHistory2 = _interopRequireDefault(_createHistory);
 
@@ -61816,7 +62334,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 569 */
+/* 572 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61824,11 +62342,11 @@
 	exports.__esModule = true;
 	exports.default = useRouterHistory;
 
-	var _useQueries = __webpack_require__(539);
+	var _useQueries = __webpack_require__(542);
 
 	var _useQueries2 = _interopRequireDefault(_useQueries);
 
-	var _useBasename = __webpack_require__(567);
+	var _useBasename = __webpack_require__(570);
 
 	var _useBasename2 = _interopRequireDefault(_useBasename);
 
@@ -61844,7 +62362,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 570 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61857,11 +62375,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RouterContext = __webpack_require__(550);
+	var _RouterContext = __webpack_require__(553);
 
 	var _RouterContext2 = _interopRequireDefault(_RouterContext);
 
-	var _routerWarning = __webpack_require__(518);
+	var _routerWarning = __webpack_require__(521);
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
@@ -61907,18 +62425,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 571 */
+/* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _createBrowserHistory = __webpack_require__(572);
+	var _createBrowserHistory = __webpack_require__(575);
 
 	var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
 
-	var _createRouterHistory = __webpack_require__(573);
+	var _createRouterHistory = __webpack_require__(576);
 
 	var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
 
@@ -61928,7 +62446,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 572 */
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61939,21 +62457,21 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _invariant = __webpack_require__(521);
+	var _invariant = __webpack_require__(524);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _Actions = __webpack_require__(525);
+	var _Actions = __webpack_require__(528);
 
-	var _PathUtils = __webpack_require__(526);
+	var _PathUtils = __webpack_require__(529);
 
-	var _ExecutionEnvironment = __webpack_require__(527);
+	var _ExecutionEnvironment = __webpack_require__(530);
 
-	var _DOMUtils = __webpack_require__(528);
+	var _DOMUtils = __webpack_require__(531);
 
-	var _DOMStateStorage = __webpack_require__(529);
+	var _DOMStateStorage = __webpack_require__(532);
 
-	var _createDOMHistory = __webpack_require__(530);
+	var _createDOMHistory = __webpack_require__(533);
 
 	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
 
@@ -62114,7 +62632,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 573 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62127,7 +62645,7 @@
 	  return history;
 	};
 
-	var _useRouterHistory = __webpack_require__(569);
+	var _useRouterHistory = __webpack_require__(572);
 
 	var _useRouterHistory2 = _interopRequireDefault(_useRouterHistory);
 
@@ -62138,18 +62656,18 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 574 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _createHashHistory = __webpack_require__(523);
+	var _createHashHistory = __webpack_require__(526);
 
 	var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
-	var _createRouterHistory = __webpack_require__(573);
+	var _createRouterHistory = __webpack_require__(576);
 
 	var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
 
@@ -62159,7 +62677,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 575 */
+/* 578 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62287,7 +62805,7 @@
 	exports.default = Head;
 
 /***/ },
-/* 576 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62310,7 +62828,7 @@
 
 	var _monkeyui2 = _interopRequireDefault(_monkeyui);
 
-	var _LeftPage = __webpack_require__(513);
+	var _LeftPage = __webpack_require__(516);
 
 	var _LeftPage2 = _interopRequireDefault(_LeftPage);
 
@@ -62333,11 +62851,16 @@
 	var Switch = _monkeyui2.default.Switch;
 	var Icon = _monkeyui2.default.Icon;
 	var Tree = _monkeyui2.default.Tree;
+	var NewCascader = _monkeyui2.default.NewCascader;
 	var TreeNode = Tree.TreeNode;
+	var Spin = _monkeyui2.default.Spin;
+	var Collapse = _monkeyui2.default.Collapse;
+	var Panel = Collapse.Panel;
 	var TreeSelect = _monkeyui2.default.TreeSelect;
 	var Input = _monkeyui2.default.Input;
 	var Search = Input.Search;
 	var Cascader = _monkeyui2.default.Cascader;
+	var areaTree = { "result": "success", "message": null, "data": [{ "value": "37", "label": "山东省", "id": "1555", "pid": "1", "children": [{ "value": "3701", "label": "济南市", "id": "1556", "pid": "1555", "children": [{ "value": "370102", "label": "历下区", "id": "1557", "pid": "1556", "children": [] }, { "value": "370103", "label": "市中区（济南）", "id": "1582", "pid": "1556", "children": [] }, { "value": "370104", "label": "槐荫区", "id": "2414", "pid": "1556", "children": [] }, { "value": "370105", "label": "天桥区", "id": "2415", "pid": "1556", "children": [] }, { "value": "370112", "label": "历城区", "id": "2416", "pid": "1556", "children": [] }, { "value": "370113", "label": "长清区", "id": "2417", "pid": "1556", "children": [] }, { "value": "370124", "label": "平阴县", "id": "2418", "pid": "1556", "children": [] }, { "value": "370125", "label": "济阳县", "id": "2419", "pid": "1556", "children": [] }] }, { "value": "3702", "label": "青岛市", "id": "1791", "pid": "1555", "children": [{ "value": "370203", "label": "市北区", "id": "1869", "pid": "1791", "children": [] }] }, { "value": "3703", "label": "淄博市", "id": "1563", "pid": "1555", "children": [{ "value": "370303", "label": "张店区", "id": "1564", "pid": "1563", "children": [] }] }, { "value": "3704", "label": "枣庄市", "id": "1577", "pid": "1555", "children": [{ "value": "370402", "label": "市中区", "id": "1578", "pid": "1577", "children": [] }] }, { "value": "3705", "label": "东营市", "id": "1793", "pid": "1555", "children": [{ "value": "370502", "label": "东营区", "id": "1883", "pid": "1793", "children": [] }] }, { "value": "3706", "label": "烟台市", "id": "1717", "pid": "1555", "children": [{ "value": "370602", "label": "芝罘区", "id": "1718", "pid": "1717", "children": [] }] }, { "value": "3707", "label": "潍坊市", "id": "1689", "pid": "1555", "children": [{ "value": "370702", "label": "潍城区", "id": "1690", "pid": "1689", "children": [] }] }, { "value": "3708", "label": "济宁市", "id": "1636", "pid": "1555", "children": [{ "value": "370802", "label": "市中区（济宁市）", "id": "1638", "pid": "1636", "children": [] }] }, { "value": "3709", "label": "泰安市", "id": "1687", "pid": "1555", "children": [{ "value": "370902", "label": "泰山区", "id": "1688", "pid": "1687", "children": [] }] }, { "value": "3710", "label": "威海市", "id": "1801", "pid": "1555", "children": [{ "value": "371002", "label": "环翠区", "id": "1884", "pid": "1801", "children": [] }] }, { "value": "3711", "label": "日照市", "id": "1802", "pid": "1555", "children": [{ "value": "371102", "label": "东港区", "id": "1885", "pid": "1802", "children": [] }] }, { "value": "3712", "label": "莱芜市", "id": "1806", "pid": "1555", "children": [{ "value": "371202", "label": "莱城区", "id": "1892", "pid": "1806", "children": [] }] }, { "value": "3713", "label": "临沂市", "id": "1565", "pid": "1555", "children": [{ "value": "371302", "label": "兰山区", "id": "1566", "pid": "1565", "children": [] }] }, { "value": "3714", "label": "德州市", "id": "1811", "pid": "1555", "children": [{ "value": "371402", "label": "德城区", "id": "1904", "pid": "1811", "children": [] }] }, { "value": "3715", "label": "聊城市", "id": "1603", "pid": "1555", "children": [{ "value": "371502", "label": "东昌府区", "id": "1604", "pid": "1603", "children": [] }] }, { "value": "3716", "label": "滨州市", "id": "1816", "pid": "1555", "children": [{ "value": "371602", "label": "滨城区", "id": "1919", "pid": "1816", "children": [] }] }, { "value": "3717", "label": "菏泽市", "id": "1561", "pid": "1555", "children": [{ "value": "371702", "label": "牡丹区", "id": "1562", "pid": "1561", "children": [] }] }] }, { "value": "64", "label": "宁夏回族自治区", "id": "1527", "pid": "1", "children": [{ "value": "6401", "label": "银川市", "id": "1528", "pid": "1527", "children": [{ "value": "640104", "label": "兴庆区", "id": "1529", "pid": "1528", "children": [] }] }] }, { "value": "62", "label": "甘肃省", "id": "1420", "pid": "1", "children": [{ "value": "6201", "label": "兰州市", "id": "1421", "pid": "1420", "children": [{ "value": "620102", "label": "城关区", "id": "1423", "pid": "1421", "children": [] }, { "value": "620103", "label": "七里河区", "id": "1422", "pid": "1421", "children": [] }, { "value": "620104", "label": "西固区", "id": "1886", "pid": "1421", "children": [] }, { "value": "620105", "label": "安宁区", "id": "1887", "pid": "1421", "children": [] }, { "value": "620111", "label": "红古区", "id": "1888", "pid": "1421", "children": [] }, { "value": "620121", "label": "永登县", "id": "1889", "pid": "1421", "children": [] }, { "value": "620122", "label": "皋兰县", "id": "1890", "pid": "1421", "children": [] }, { "value": "620123", "label": "榆中县", "id": "1891", "pid": "1421", "children": [] }] }, { "value": "6202", "label": "嘉峪关市", "id": "1691", "pid": "1420", "children": [{ "value": "620201", "label": "市辖区", "id": "1694", "pid": "1691", "children": [] }] }, { "value": "6203", "label": "金昌市", "id": "1692", "pid": "1420", "children": [{ "value": "620302", "label": "金川区", "id": "1693", "pid": "1692", "children": [] }, { "value": "620321", "label": "永昌县", "id": "1893", "pid": "1692", "children": [] }] }, { "value": "6204", "label": "白银市", "id": "1695", "pid": "1420", "children": [{ "value": "620402", "label": "白银区", "id": "1696", "pid": "1695", "children": [] }, { "value": "620403", "label": "平川区", "id": "1894", "pid": "1695", "children": [] }, { "value": "620421", "label": "靖远县", "id": "1895", "pid": "1695", "children": [] }, { "value": "620422", "label": "会宁县", "id": "1896", "pid": "1695", "children": [] }, { "value": "620423", "label": "景泰县", "id": "1897", "pid": "1695", "children": [] }] }, { "value": "6205", "label": "天水市", "id": "1424", "pid": "1420", "children": [{ "value": "620502", "label": "秦州区", "id": "1898", "pid": "1424", "children": [] }, { "value": "620503", "label": "麦积区", "id": "1425", "pid": "1424", "children": [] }, { "value": "620521", "label": "清水县", "id": "1899", "pid": "1424", "children": [] }, { "value": "620522", "label": "秦安县", "id": "1900", "pid": "1424", "children": [] }, { "value": "620523", "label": "甘谷县", "id": "1901", "pid": "1424", "children": [] }, { "value": "620524", "label": "武山县", "id": "1902", "pid": "1424", "children": [] }, { "value": "620525", "label": "张家川回族自治县", "id": "1903", "pid": "1424", "children": [] }] }, { "value": "6206", "label": "武威市", "id": "1681", "pid": "1420", "children": [{ "value": "620602", "label": "凉州区", "id": "1682", "pid": "1681", "children": [] }, { "value": "620621", "label": "民勤县", "id": "1905", "pid": "1681", "children": [] }, { "value": "620622", "label": "古浪县", "id": "1906", "pid": "1681", "children": [] }, { "value": "620623", "label": "天祝藏族自治县", "id": "1907", "pid": "1681", "children": [] }] }, { "value": "6207", "label": "张掖市", "id": "1428", "pid": "1420", "children": [{ "value": "620702", "label": "甘州区", "id": "1429", "pid": "1428", "children": [] }, { "value": "620721", "label": "肃南裕固族自治县", "id": "1908", "pid": "1428", "children": [] }, { "value": "620722", "label": "民乐县", "id": "1909", "pid": "1428", "children": [] }, { "value": "620723", "label": "临泽县", "id": "1910", "pid": "1428", "children": [] }, { "value": "620724", "label": "高台县", "id": "1911", "pid": "1428", "children": [] }, { "value": "620725", "label": "山丹县", "id": "1912", "pid": "1428", "children": [] }] }, { "value": "6208", "label": "平凉市", "id": "1426", "pid": "1420", "children": [{ "value": "620802", "label": "崆峒区", "id": "1427", "pid": "1426", "children": [] }, { "value": "620821", "label": "泾川县", "id": "1913", "pid": "1426", "children": [] }, { "value": "620822", "label": "灵台县", "id": "1914", "pid": "1426", "children": [] }, { "value": "620823", "label": "崇信县", "id": "1915", "pid": "1426", "children": [] }, { "value": "620824", "label": "华亭县", "id": "1916", "pid": "1426", "children": [] }, { "value": "620825", "label": "庄浪县", "id": "1917", "pid": "1426", "children": [] }, { "value": "620826", "label": "静宁县", "id": "1918", "pid": "1426", "children": [] }] }, { "value": "6209", "label": "酒泉市", "id": "1697", "pid": "1420", "children": [{ "value": "620902", "label": "肃州区", "id": "1698", "pid": "1697", "children": [] }, { "value": "620921", "label": "金塔县", "id": "1920", "pid": "1697", "children": [] }, { "value": "620922", "label": "瓜州县", "id": "1921", "pid": "1697", "children": [] }, { "value": "620923", "label": "肃北蒙古族自治县", "id": "1922", "pid": "1697", "children": [] }, { "value": "620924", "label": "阿克塞哈萨克族自治县", "id": "1923", "pid": "1697", "children": [] }, { "value": "620981", "label": "玉门市", "id": "1924", "pid": "1697", "children": [] }, { "value": "620982", "label": "敦煌市", "id": "1925", "pid": "1697", "children": [] }] }, { "value": "6210", "label": "庆阳市", "id": "1702", "pid": "1420", "children": [{ "value": "621002", "label": "西峰区", "id": "1703", "pid": "1702", "children": [] }, { "value": "621021", "label": "庆城县", "id": "1926", "pid": "1702", "children": [] }, { "value": "621022", "label": "环县", "id": "1927", "pid": "1702", "children": [] }, { "value": "621023", "label": "华池县", "id": "1928", "pid": "1702", "children": [] }, { "value": "621024", "label": "合水县", "id": "1929", "pid": "1702", "children": [] }, { "value": "621025", "label": "正宁县", "id": "1930", "pid": "1702", "children": [] }, { "value": "621026", "label": "宁县", "id": "1931", "pid": "1702", "children": [] }, { "value": "621027", "label": "镇原县", "id": "1932", "pid": "1702", "children": [] }] }, { "value": "6211", "label": "定西市", "id": "1685", "pid": "1420", "children": [{ "value": "621102", "label": "安定区", "id": "1686", "pid": "1685", "children": [] }, { "value": "621121", "label": "通渭县", "id": "1933", "pid": "1685", "children": [] }, { "value": "621122", "label": "陇西县", "id": "1934", "pid": "1685", "children": [] }, { "value": "621123", "label": "渭源县", "id": "1935", "pid": "1685", "children": [] }, { "value": "621124", "label": "临洮县", "id": "1936", "pid": "1685", "children": [] }, { "value": "621125", "label": "漳县", "id": "1937", "pid": "1685", "children": [] }, { "value": "621126", "label": "岷县", "id": "1938", "pid": "1685", "children": [] }] }, { "value": "6212", "label": "陇南市", "id": "1683", "pid": "1420", "children": [{ "value": "621202", "label": "武都区", "id": "1684", "pid": "1683", "children": [] }, { "value": "621221", "label": "成县", "id": "1939", "pid": "1683", "children": [] }, { "value": "621222", "label": "文县", "id": "1940", "pid": "1683", "children": [] }, { "value": "621223", "label": "宕昌县", "id": "1941", "pid": "1683", "children": [] }, { "value": "621224", "label": "康县", "id": "1942", "pid": "1683", "children": [] }, { "value": "621225", "label": "西和县", "id": "1943", "pid": "1683", "children": [] }, { "value": "621226", "label": "礼县", "id": "1944", "pid": "1683", "children": [] }, { "value": "621227", "label": "徽县", "id": "1945", "pid": "1683", "children": [] }, { "value": "621228", "label": "两当县", "id": "1946", "pid": "1683", "children": [] }] }, { "value": "6229", "label": "临夏回族自治州", "id": "1700", "pid": "1420", "children": [{ "value": "622901", "label": "临夏市", "id": "1701", "pid": "1700", "children": [] }, { "value": "622921", "label": "临夏县", "id": "1947", "pid": "1700", "children": [] }, { "value": "622922", "label": "康乐县", "id": "1948", "pid": "1700", "children": [] }, { "value": "622923", "label": "永靖县", "id": "1949", "pid": "1700", "children": [] }, { "value": "622924", "label": "广河县", "id": "1950", "pid": "1700", "children": [] }, { "value": "622925", "label": "和政县", "id": "1951", "pid": "1700", "children": [] }, { "value": "622926", "label": "东乡族自治县", "id": "1952", "pid": "1700", "children": [] }, { "value": "622927", "label": "积石山保安族东乡族撒拉族自治县", "id": "1953", "pid": "1700", "children": [] }] }, { "value": "6230", "label": "甘南藏族自治州", "id": "1704", "pid": "1420", "children": [{ "value": "623001", "label": "合作市", "id": "1705", "pid": "1704", "children": [] }, { "value": "623021", "label": "临潭县", "id": "1954", "pid": "1704", "children": [] }, { "value": "623022", "label": "卓尼县", "id": "1955", "pid": "1704", "children": [] }, { "value": "623023", "label": "舟曲县", "id": "1956", "pid": "1704", "children": [] }, { "value": "623024", "label": "迭部县", "id": "1957", "pid": "1704", "children": [] }, { "value": "623025", "label": "玛曲县", "id": "1958", "pid": "1704", "children": [] }, { "value": "623026", "label": "碌曲县", "id": "1959", "pid": "1704", "children": [] }, { "value": "623027", "label": "夏河县", "id": "1960", "pid": "1704", "children": [] }] }] }, { "value": "61", "label": "陕西省", "id": "1496", "pid": "1", "children": [{ "value": "6101", "label": "西安市", "id": "1499", "pid": "1496", "children": [{ "value": "610102", "label": "新城区", "id": "1753", "pid": "1499", "children": [] }, { "value": "610104", "label": "莲湖区", "id": "1501", "pid": "1499", "children": [] }, { "value": "610113", "label": "雁塔区", "id": "1500", "pid": "1499", "children": [] }] }, { "value": "6102", "label": "铜川市", "id": "1512", "pid": "1496", "children": [{ "value": "610203", "label": "印台区", "id": "1513", "pid": "1512", "children": [] }] }, { "value": "6103", "label": "宝鸡市", "id": "1510", "pid": "1496", "children": [{ "value": "610302", "label": "渭滨区", "id": "1511", "pid": "1510", "children": [] }] }, { "value": "6104", "label": "咸阳市", "id": "1504", "pid": "1496", "children": [{ "value": "610402", "label": "秦都区", "id": "1505", "pid": "1504", "children": [] }] }, { "value": "6105", "label": "渭南市", "id": "1506", "pid": "1496", "children": [{ "value": "610502", "label": "临渭区", "id": "1507", "pid": "1506", "children": [] }] }, { "value": "6106", "label": "延安市", "id": "1502", "pid": "1496", "children": [{ "value": "610602", "label": "宝塔区", "id": "1503", "pid": "1502", "children": [] }] }, { "value": "6107", "label": "汉中市", "id": "1497", "pid": "1496", "children": [{ "value": "610702", "label": "汉台区", "id": "1498", "pid": "1497", "children": [] }] }, { "value": "6109", "label": "安康市", "id": "1661", "pid": "1496", "children": [{ "value": "610902", "label": "汉滨区", "id": "1662", "pid": "1661", "children": [] }] }, { "value": "6110", "label": "商洛市", "id": "1508", "pid": "1496", "children": [{ "value": "611002", "label": "商州区", "id": "1509", "pid": "1508", "children": [] }] }] }, { "value": "52", "label": "贵州省", "id": "1442", "pid": "1", "children": [{ "value": "5201", "label": "贵阳市", "id": "1443", "pid": "1442", "children": [{ "value": "520102", "label": "南明区", "id": "1444", "pid": "1443", "children": [] }, { "value": "520103", "label": "云岩区", "id": "1633", "pid": "1443", "children": [] }, { "value": "520112", "label": "乌当区", "id": "1632", "pid": "1443", "children": [] }] }, { "value": "5202", "label": "六盘水市", "id": "1451", "pid": "1442", "children": [{ "value": "520201", "label": "钟山区", "id": "1452", "pid": "1451", "children": [] }] }, { "value": "5203", "label": "遵义市", "id": "1639", "pid": "1442", "children": [{ "value": "520302", "label": "红花岗区", "id": "1640", "pid": "1639", "children": [] }] }, { "value": "5204", "label": "安顺市", "id": "1446", "pid": "1442", "children": [{ "value": "520402", "label": "西秀区", "id": "1447", "pid": "1446", "children": [] }] }, { "value": "5224", "label": "毕节市", "id": "1449", "pid": "1442", "children": [{ "value": "522401", "label": "七星关区", "id": "1450", "pid": "1449", "children": [] }] }, { "value": "5226", "label": "黔东南苗族侗族自治州", "id": "1634", "pid": "1442", "children": [{ "value": "522631", "label": "黎平县", "id": "1635", "pid": "1634", "children": [] }] }] }, { "value": "51", "label": "四川省", "id": "1514", "pid": "1", "children": [{ "value": "5101", "label": "成都市", "id": "1515", "pid": "1514", "children": [{ "value": "510105", "label": "青羊区", "id": "1754", "pid": "1515", "children": [] }, { "value": "510107", "label": "武侯区", "id": "1516", "pid": "1515", "children": [] }] }, { "value": "5103", "label": "自贡市", "id": "1519", "pid": "1514", "children": [{ "value": "510304", "label": "大安区", "id": "1520", "pid": "1519", "children": [] }] }, { "value": "5106", "label": "德阳市", "id": "1607", "pid": "1514", "children": [{ "value": "510603", "label": "旌阳区", "id": "1608", "pid": "1607", "children": [] }] }, { "value": "5107", "label": "绵阳市", "id": "1521", "pid": "1514", "children": [{ "value": "510703", "label": "涪城区", "id": "1522", "pid": "1521", "children": [] }] }, { "value": "5108", "label": "广元市", "id": "1609", "pid": "1514", "children": [{ "value": "510802", "label": "利州区", "id": "1610", "pid": "1609", "children": [] }] }, { "value": "5111", "label": "乐山市", "id": "1525", "pid": "1514", "children": [{ "value": "511102", "label": "市中区（乐山市）", "id": "1598", "pid": "1525", "children": [] }] }, { "value": "5113", "label": "南充市", "id": "1517", "pid": "1514", "children": [{ "value": "511302", "label": "顺庆区", "id": "1518", "pid": "1517", "children": [] }] }, { "value": "5115", "label": "宜宾市", "id": "1523", "pid": "1514", "children": [{ "value": "511502", "label": "翠屏区", "id": "1524", "pid": "1523", "children": [] }] }, { "value": "5117", "label": "达州市", "id": "1605", "pid": "1514", "children": [{ "value": "511721", "label": "达川区", "id": "1606", "pid": "1605", "children": [] }] }, { "value": "5119", "label": "巴中市", "id": "1611", "pid": "1514", "children": [{ "value": "511902", "label": "巴州区", "id": "1612", "pid": "1611", "children": [] }] }] }, { "value": "46", "label": "海南省", "id": "1709", "pid": "1", "children": [{ "value": "4601", "label": "海口市", "id": "1710", "pid": "1709", "children": [{ "value": "460105", "label": "秀英区", "id": "1714", "pid": "1710", "children": [] }, { "value": "460106", "label": "龙华区", "id": "1712", "pid": "1710", "children": [] }, { "value": "460108", "label": "美兰区", "id": "1716", "pid": "1710", "children": [] }] }, { "value": "4602", "label": "三亚市", "id": "1711", "pid": "1709", "children": [{ "value": "460201", "label": "天涯区", "id": "1715", "pid": "1711", "children": [] }] }] }, { "value": "45", "label": "广西壮族自治区", "id": "1430", "pid": "1", "children": [{ "value": "4501", "label": "南宁市", "id": "1431", "pid": "1430", "children": [{ "value": "450102", "label": "兴宁区", "id": "1433", "pid": "1431", "children": [] }, { "value": "450107", "label": "西乡塘区", "id": "1432", "pid": "1431", "children": [] }] }, { "value": "4504", "label": "梧州市", "id": "1644", "pid": "1430", "children": [{ "value": "450405", "label": "长洲区", "id": "1648", "pid": "1644", "children": [] }] }, { "value": "4505", "label": "北海市", "id": "1643", "pid": "1430", "children": [{ "value": "450502", "label": "海城区", "id": "1647", "pid": "1643", "children": [] }] }, { "value": "4507", "label": "钦州市", "id": "1642", "pid": "1430", "children": [{ "value": "450702", "label": "钦南区", "id": "1646", "pid": "1642", "children": [] }] }, { "value": "4509", "label": "玉林市", "id": "1641", "pid": "1430", "children": [{ "value": "450902", "label": "玉州区", "id": "1645", "pid": "1641", "children": [] }] }, { "value": "4510", "label": "百色市", "id": "1438", "pid": "1430", "children": [{ "value": "451002", "label": "右江区", "id": "1439", "pid": "1438", "children": [] }] }, { "value": "4511", "label": "贺州市", "id": "1436", "pid": "1430", "children": [{ "value": "451102", "label": "八步区", "id": "1437", "pid": "1436", "children": [] }] }, { "value": "4512", "label": "河池市", "id": "1440", "pid": "1430", "children": [{ "value": "451202", "label": "金城江区", "id": "1441", "pid": "1440", "children": [] }] }, { "value": "4513", "label": "来宾市", "id": "1434", "pid": "1430", "children": [{ "value": "451302", "label": "兴宾区", "id": "1435", "pid": "1434", "children": [] }] }] }, { "value": "43", "label": "湖南省", "id": "1472", "pid": "1", "children": [{ "value": "4301", "label": "长沙市", "id": "1479", "pid": "1472", "children": [{ "value": "430102", "label": "芙蓉区", "id": "1721", "pid": "1479", "children": [] }, { "value": "430103", "label": "天心区", "id": "2049", "pid": "1479", "children": [] }, { "value": "430104", "label": "岳麓区", "id": "2050", "pid": "1479", "children": [] }, { "value": "430105", "label": "开福区", "id": "1483", "pid": "1479", "children": [] }, { "value": "430111", "label": "雨花区", "id": "1480", "pid": "1479", "children": [] }, { "value": "430121", "label": "长沙县", "id": "2051", "pid": "1479", "children": [] }, { "value": "430122", "label": "望城区", "id": "2052", "pid": "1479", "children": [] }, { "value": "430124", "label": "宁乡县", "id": "2053", "pid": "1479", "children": [] }, { "value": "430181", "label": "浏阳市", "id": "2054", "pid": "1479", "children": [] }] }, { "value": "4302", "label": "株洲市", "id": "2055", "pid": "1472", "children": [{ "value": "430202", "label": "荷塘区", "id": "2056", "pid": "2055", "children": [] }, { "value": "430203", "label": "芦淞区", "id": "2057", "pid": "2055", "children": [] }, { "value": "430204", "label": "石峰区", "id": "2058", "pid": "2055", "children": [] }, { "value": "430211", "label": "天元区", "id": "2059", "pid": "2055", "children": [] }, { "value": "430221", "label": "株洲县", "id": "2060", "pid": "2055", "children": [] }, { "value": "430223", "label": "攸县", "id": "2061", "pid": "2055", "children": [] }, { "value": "430224", "label": "茶陵县", "id": "2062", "pid": "2055", "children": [] }, { "value": "430225", "label": "炎陵县", "id": "2063", "pid": "2055", "children": [] }, { "value": "430281", "label": "醴陵市", "id": "2064", "pid": "2055", "children": [] }] }, { "value": "4303", "label": "湘潭市", "id": "1484", "pid": "1472", "children": [{ "value": "430302", "label": "雨湖区", "id": "2065", "pid": "1484", "children": [] }, { "value": "430304", "label": "岳塘区", "id": "1485", "pid": "1484", "children": [] }, { "value": "430321", "label": "湘潭县", "id": "2066", "pid": "1484", "children": [] }, { "value": "430381", "label": "湘乡市", "id": "2067", "pid": "1484", "children": [] }, { "value": "430382", "label": "韶山市", "id": "2068", "pid": "1484", "children": [] }] }, { "value": "4304", "label": "衡阳市", "id": "1481", "pid": "1472", "children": [{ "value": "430405", "label": "珠晖区", "id": "2069", "pid": "1481", "children": [] }, { "value": "430406", "label": "雁峰区", "id": "1482", "pid": "1481", "children": [] }, { "value": "430407", "label": "石鼓区", "id": "2070", "pid": "1481", "children": [] }, { "value": "430408", "label": "蒸湘区", "id": "2071", "pid": "1481", "children": [] }, { "value": "430412", "label": "南岳区", "id": "2072", "pid": "1481", "children": [] }, { "value": "430421", "label": "衡阳县", "id": "2073", "pid": "1481", "children": [] }, { "value": "430422", "label": "衡南县", "id": "2074", "pid": "1481", "children": [] }, { "value": "430423", "label": "衡山县", "id": "2075", "pid": "1481", "children": [] }, { "value": "430424", "label": "衡东县", "id": "2076", "pid": "1481", "children": [] }, { "value": "430426", "label": "祁东县", "id": "2077", "pid": "1481", "children": [] }, { "value": "430481", "label": "耒阳市", "id": "2078", "pid": "1481", "children": [] }, { "value": "430482", "label": "常宁市", "id": "2079", "pid": "1481", "children": [] }] }, { "value": "4305", "label": "邵阳市", "id": "2080", "pid": "1472", "children": [{ "value": "430502", "label": "双清区", "id": "2081", "pid": "2080", "children": [] }, { "value": "430503", "label": "大祥区", "id": "2082", "pid": "2080", "children": [] }, { "value": "430511", "label": "北塔区", "id": "2083", "pid": "2080", "children": [] }, { "value": "430521", "label": "邵东县", "id": "2084", "pid": "2080", "children": [] }, { "value": "430522", "label": "新邵县", "id": "2085", "pid": "2080", "children": [] }, { "value": "430523", "label": "邵阳县", "id": "2086", "pid": "2080", "children": [] }, { "value": "430524", "label": "隆回县", "id": "2087", "pid": "2080", "children": [] }, { "value": "430525", "label": "洞口县", "id": "2088", "pid": "2080", "children": [] }, { "value": "430527", "label": "绥宁县", "id": "2089", "pid": "2080", "children": [] }, { "value": "430528", "label": "新宁县", "id": "2090", "pid": "2080", "children": [] }, { "value": "430529", "label": "城步苗族自治县", "id": "2091", "pid": "2080", "children": [] }, { "value": "430581", "label": "武冈市", "id": "2092", "pid": "2080", "children": [] }] }, { "value": "4306", "label": "岳阳市", "id": "1477", "pid": "1472", "children": [{ "value": "430602", "label": "岳阳楼区", "id": "1478", "pid": "1477", "children": [] }, { "value": "430603", "label": "云溪区", "id": "2093", "pid": "1477", "children": [] }, { "value": "430611", "label": "君山区", "id": "2094", "pid": "1477", "children": [] }, { "value": "430621", "label": "岳阳县", "id": "2095", "pid": "1477", "children": [] }, { "value": "430623", "label": "华容县", "id": "2096", "pid": "1477", "children": [] }, { "value": "430624", "label": "湘阴县", "id": "2097", "pid": "1477", "children": [] }, { "value": "430626", "label": "平江县", "id": "2098", "pid": "1477", "children": [] }, { "value": "430681", "label": "汨罗市", "id": "2099", "pid": "1477", "children": [] }, { "value": "430682", "label": "临湘市", "id": "2100", "pid": "1477", "children": [] }] }, { "value": "4307", "label": "常德市", "id": "2104", "pid": "1472", "children": [{ "value": "430702", "label": "武陵区", "id": "2105", "pid": "2104", "children": [] }, { "value": "430703", "label": "鼎城区", "id": "2106", "pid": "2104", "children": [] }, { "value": "430721", "label": "安乡县", "id": "2107", "pid": "2104", "children": [] }, { "value": "430722", "label": "汉寿县", "id": "2108", "pid": "2104", "children": [] }, { "value": "430723", "label": "澧县", "id": "2109", "pid": "2104", "children": [] }, { "value": "430724", "label": "临澧县", "id": "2110", "pid": "2104", "children": [] }, { "value": "430725", "label": "桃源县", "id": "2111", "pid": "2104", "children": [] }, { "value": "430726", "label": "石门县", "id": "2112", "pid": "2104", "children": [] }, { "value": "430781", "label": "津市市", "id": "2113", "pid": "2104", "children": [] }] }, { "value": "4308", "label": "张家界市", "id": "2114", "pid": "1472", "children": [{ "value": "430802", "label": "永定区", "id": "2115", "pid": "2114", "children": [] }, { "value": "430811", "label": "武陵源区", "id": "2116", "pid": "2114", "children": [] }, { "value": "430821", "label": "慈利县", "id": "2117", "pid": "2114", "children": [] }, { "value": "430822", "label": "桑植县", "id": "2118", "pid": "2114", "children": [] }] }, { "value": "4309", "label": "益阳市", "id": "2119", "pid": "1472", "children": [{ "value": "430902", "label": "资阳区", "id": "2120", "pid": "2119", "children": [] }, { "value": "430903", "label": "赫山区", "id": "2121", "pid": "2119", "children": [] }, { "value": "430921", "label": "南县", "id": "2122", "pid": "2119", "children": [] }, { "value": "430922", "label": "桃江县", "id": "2123", "pid": "2119", "children": [] }, { "value": "430923", "label": "安化县", "id": "2124", "pid": "2119", "children": [] }, { "value": "430981", "label": "沅江市", "id": "2125", "pid": "2119", "children": [] }] }, { "value": "4310", "label": "郴州市", "id": "1671", "pid": "1472", "children": [{ "value": "431002", "label": "北湖区", "id": "1672", "pid": "1671", "children": [] }, { "value": "431003", "label": "苏仙区", "id": "1722", "pid": "1671", "children": [] }, { "value": "431021", "label": "桂阳县", "id": "2126", "pid": "1671", "children": [] }, { "value": "431022", "label": "宜章县", "id": "2127", "pid": "1671", "children": [] }, { "value": "431023", "label": "永兴县", "id": "2128", "pid": "1671", "children": [] }, { "value": "431024", "label": "嘉禾县", "id": "2129", "pid": "1671", "children": [] }, { "value": "431025", "label": "临武县", "id": "2130", "pid": "1671", "children": [] }, { "value": "431026", "label": "汝城县", "id": "2131", "pid": "1671", "children": [] }, { "value": "431027", "label": "桂东县", "id": "2132", "pid": "1671", "children": [] }, { "value": "431028", "label": "安仁县", "id": "2133", "pid": "1671", "children": [] }, { "value": "431081", "label": "资兴市", "id": "2134", "pid": "1671", "children": [] }] }, { "value": "4311", "label": "永州市", "id": "2135", "pid": "1472", "children": [{ "value": "431102", "label": "零陵区", "id": "2136", "pid": "2135", "children": [] }, { "value": "431103", "label": "冷水滩区", "id": "2137", "pid": "2135", "children": [] }, { "value": "431121", "label": "祁阳县", "id": "2138", "pid": "2135", "children": [] }, { "value": "431122", "label": "东安县", "id": "2139", "pid": "2135", "children": [] }, { "value": "431123", "label": "双牌县", "id": "2140", "pid": "2135", "children": [] }, { "value": "431124", "label": "道县", "id": "2141", "pid": "2135", "children": [] }, { "value": "431125", "label": "江永县", "id": "2142", "pid": "2135", "children": [] }, { "value": "431126", "label": "宁远县", "id": "2143", "pid": "2135", "children": [] }, { "value": "431127", "label": "蓝山县", "id": "2144", "pid": "2135", "children": [] }, { "value": "431128", "label": "新田县", "id": "2145", "pid": "2135", "children": [] }, { "value": "431129", "label": "江华瑶族自治县", "id": "2146", "pid": "2135", "children": [] }] }, { "value": "4312", "label": "怀化市", "id": "1475", "pid": "1472", "children": [{ "value": "431202", "label": "鹤城区", "id": "1476", "pid": "1475", "children": [] }, { "value": "431221", "label": "中方县", "id": "2147", "pid": "1475", "children": [] }, { "value": "431222", "label": "沅陵县", "id": "2148", "pid": "1475", "children": [] }, { "value": "431223", "label": "辰溪县", "id": "2149", "pid": "1475", "children": [] }, { "value": "431224", "label": "溆浦县", "id": "2150", "pid": "1475", "children": [] }, { "value": "431225", "label": "会同县", "id": "2151", "pid": "1475", "children": [] }, { "value": "431226", "label": "麻阳苗族自治县", "id": "2152", "pid": "1475", "children": [] }, { "value": "431227", "label": "新晃侗族自治县", "id": "2153", "pid": "1475", "children": [] }, { "value": "431228", "label": "芷江侗族自治县", "id": "2154", "pid": "1475", "children": [] }, { "value": "431229", "label": "靖州苗族侗族自治县", "id": "2155", "pid": "1475", "children": [] }, { "value": "431230", "label": "通道侗族自治县", "id": "2156", "pid": "1475", "children": [] }, { "value": "431281", "label": "洪江市", "id": "2157", "pid": "1475", "children": [] }] }, { "value": "4313", "label": "娄底市", "id": "1473", "pid": "1472", "children": [{ "value": "431302", "label": "娄星区", "id": "1474", "pid": "1473", "children": [] }, { "value": "431321", "label": "双峰县", "id": "2158", "pid": "1473", "children": [] }, { "value": "431322", "label": "新化县", "id": "2159", "pid": "1473", "children": [] }, { "value": "431381", "label": "冷水江市", "id": "2160", "pid": "1473", "children": [] }, { "value": "431382", "label": "涟源市", "id": "2161", "pid": "1473", "children": [] }] }, { "value": "4331", "label": "湘西土家族苗族自治州", "id": "2166", "pid": "1472", "children": [{ "value": "433101", "label": "吉首市", "id": "2167", "pid": "2166", "children": [] }, { "value": "433122", "label": "泸溪县", "id": "2172", "pid": "2166", "children": [] }, { "value": "433123", "label": "凤凰县", "id": "2173", "pid": "2166", "children": [] }, { "value": "433124", "label": "花垣县", "id": "2175", "pid": "2166", "children": [] }, { "value": "433125", "label": "保靖县", "id": "2176", "pid": "2166", "children": [] }, { "value": "433126", "label": "古丈县", "id": "2177", "pid": "2166", "children": [] }, { "value": "433127", "label": "永顺县", "id": "2178", "pid": "2166", "children": [] }, { "value": "433130", "label": "龙山县", "id": "2180", "pid": "2166", "children": [] }] }] }, { "value": "42", "label": "湖北省", "id": "1583", "pid": "1", "children": [{ "value": "4201", "label": "武汉市", "id": "1271", "pid": "1583", "children": [{ "value": "420102", "label": "江岸区", "id": "1673", "pid": "1271", "children": [] }, { "value": "420111", "label": "洪山区", "id": "1593", "pid": "1271", "children": [] }] }, { "value": "4202", "label": "黄石市", "id": "1595", "pid": "1583", "children": [{ "value": "420204", "label": "下陆区", "id": "1674", "pid": "1595", "children": [] }, { "value": "420222", "label": "阳新县", "id": "1596", "pid": "1595", "children": [] }] }, { "value": "4203", "label": "十堰市", "id": "1273", "pid": "1583", "children": [{ "value": "420302", "label": "茅箭区", "id": "1594", "pid": "1273", "children": [] }] }, { "value": "4205", "label": "宜昌市", "id": "1586", "pid": "1583", "children": [{ "value": "420503", "label": "伍家岗区", "id": "1587", "pid": "1586", "children": [] }] }, { "value": "4206", "label": "襄阳市", "id": "1617", "pid": "1583", "children": [{ "value": "420602", "label": "襄城区", "id": "1618", "pid": "1617", "children": [] }] }, { "value": "4209", "label": "孝感市", "id": "1679", "pid": "1583", "children": [{ "value": "420902", "label": "孝南区", "id": "1680", "pid": "1679", "children": [] }] }, { "value": "4210", "label": "荆州市", "id": "1677", "pid": "1583", "children": [{ "value": "421003", "label": "荆州区", "id": "1678", "pid": "1677", "children": [] }] }, { "value": "4211", "label": "黄冈市", "id": "1588", "pid": "1583", "children": [{ "value": "421102", "label": "黄州区", "id": "1589", "pid": "1588", "children": [] }] }, { "value": "4212", "label": "咸宁市", "id": "1590", "pid": "1583", "children": [{ "value": "421202", "label": "咸安区", "id": "1591", "pid": "1590", "children": [] }] }, { "value": "4228", "label": "恩施土家族苗族自治州", "id": "1584", "pid": "1583", "children": [{ "value": "422801", "label": "恩施市", "id": "1585", "pid": "1584", "children": [] }] }] }, { "value": "41", "label": "河南省", "id": "1408", "pid": "1", "children": [{ "value": "4101", "label": "郑州市", "id": "1410", "pid": "1408", "children": [{ "value": "410102", "label": "中原区", "id": "2101", "pid": "1410", "children": [] }, { "value": "410103", "label": "二七区", "id": "1743", "pid": "1410", "children": [] }, { "value": "410104", "label": "管城回族区", "id": "1744", "pid": "1410", "children": [] }, { "value": "410105", "label": "金水区", "id": "1411", "pid": "1410", "children": [] }, { "value": "410106", "label": "上街区", "id": "2102", "pid": "1410", "children": [] }, { "value": "410107", "label": "惠济区", "id": "2103", "pid": "1410", "children": [] }, { "value": "410122", "label": "中牟县", "id": "2162", "pid": "1410", "children": [] }, { "value": "410181", "label": "巩义市", "id": "2163", "pid": "1410", "children": [] }, { "value": "410182", "label": "荥阳市", "id": "2164", "pid": "1410", "children": [] }, { "value": "410183", "label": "新密市", "id": "2165", "pid": "1410", "children": [] }, { "value": "410184", "label": "新郑市", "id": "2168", "pid": "1410", "children": [] }, { "value": "410185", "label": "登封市", "id": "2169", "pid": "1410", "children": [] }] }, { "value": "4102", "label": "开封市", "id": "2170", "pid": "1408", "children": [{ "value": "410202", "label": "龙亭区", "id": "2258", "pid": "2170", "children": [] }, { "value": "410203", "label": "顺河回族区", "id": "2259", "pid": "2170", "children": [] }, { "value": "410204", "label": "鼓楼区（KF）", "id": "2260", "pid": "2170", "children": [] }, { "value": "410205", "label": "禹王台区", "id": "2261", "pid": "2170", "children": [] }, { "value": "410211", "label": "金明区", "id": "2262", "pid": "2170", "children": [] }, { "value": "410221", "label": "杞县", "id": "2263", "pid": "2170", "children": [] }, { "value": "410222", "label": "通许县", "id": "2264", "pid": "2170", "children": [] }, { "value": "410223", "label": "尉氏县", "id": "2265", "pid": "2170", "children": [] }, { "value": "410224", "label": "开封县", "id": "2266", "pid": "2170", "children": [] }, { "value": "410225", "label": "兰考县", "id": "2267", "pid": "2170", "children": [] }] }, { "value": "4103", "label": "洛阳市", "id": "2171", "pid": "1408", "children": [{ "value": "410302", "label": "老城区", "id": "2268", "pid": "2171", "children": [] }, { "value": "410303", "label": "西工区", "id": "2269", "pid": "2171", "children": [] }, { "value": "410304", "label": "瀍河回族区", "id": "2270", "pid": "2171", "children": [] }, { "value": "410305", "label": "涧西区", "id": "2271", "pid": "2171", "children": [] }, { "value": "410306", "label": "吉利区", "id": "2272", "pid": "2171", "children": [] }, { "value": "410307", "label": "洛龙区", "id": "2273", "pid": "2171", "children": [] }, { "value": "410322", "label": "孟津县", "id": "2274", "pid": "2171", "children": [] }, { "value": "410323", "label": "新安县", "id": "2275", "pid": "2171", "children": [] }, { "value": "410324", "label": "栾川县", "id": "2276", "pid": "2171", "children": [] }, { "value": "410325", "label": "嵩县", "id": "2277", "pid": "2171", "children": [] }, { "value": "410326", "label": "汝阳县", "id": "2278", "pid": "2171", "children": [] }, { "value": "410327", "label": "宜阳县", "id": "2279", "pid": "2171", "children": [] }, { "value": "410328", "label": "洛宁县", "id": "2280", "pid": "2171", "children": [] }, { "value": "410329", "label": "伊川县", "id": "2281", "pid": "2171", "children": [] }, { "value": "410381", "label": "偃师市", "id": "2282", "pid": "2171", "children": [] }] }, { "value": "4104", "label": "平顶山市", "id": "2174", "pid": "1408", "children": [{ "value": "410402", "label": "新华区（PDS）", "id": "2283", "pid": "2174", "children": [] }, { "value": "410403", "label": "卫东区", "id": "2284", "pid": "2174", "children": [] }, { "value": "410404", "label": "石龙区", "id": "2285", "pid": "2174", "children": [] }, { "value": "410411", "label": "湛河区", "id": "2286", "pid": "2174", "children": [] }, { "value": "410421", "label": "宝丰县", "id": "2287", "pid": "2174", "children": [] }, { "value": "410422", "label": "叶县", "id": "2288", "pid": "2174", "children": [] }, { "value": "410423", "label": "鲁山县", "id": "2289", "pid": "2174", "children": [] }, { "value": "410425", "label": "郏县", "id": "2290", "pid": "2174", "children": [] }, { "value": "410481", "label": "舞钢市", "id": "2291", "pid": "2174", "children": [] }, { "value": "410482", "label": "汝州市", "id": "2292", "pid": "2174", "children": [] }] }, { "value": "4105", "label": "安阳市", "id": "2179", "pid": "1408", "children": [{ "value": "410502", "label": "文峰区", "id": "2293", "pid": "2179", "children": [] }, { "value": "410503", "label": "北关区", "id": "2294", "pid": "2179", "children": [] }, { "value": "410505", "label": "殷都区", "id": "2295", "pid": "2179", "children": [] }, { "value": "410506", "label": "龙安区", "id": "2296", "pid": "2179", "children": [] }, { "value": "410522", "label": "安阳县", "id": "2297", "pid": "2179", "children": [] }, { "value": "410523", "label": "汤阴县", "id": "2298", "pid": "2179", "children": [] }, { "value": "410526", "label": "滑县", "id": "2299", "pid": "2179", "children": [] }, { "value": "410527", "label": "内黄县", "id": "2300", "pid": "2179", "children": [] }, { "value": "410581", "label": "林州市", "id": "2301", "pid": "2179", "children": [] }] }, { "value": "4106", "label": "鹤壁市", "id": "2181", "pid": "1408", "children": [{ "value": "410602", "label": "鹤山区", "id": "2302", "pid": "2181", "children": [] }, { "value": "410603", "label": "山城区", "id": "2303", "pid": "2181", "children": [] }, { "value": "410611", "label": "淇滨区", "id": "2304", "pid": "2181", "children": [] }, { "value": "410621", "label": "浚县", "id": "2305", "pid": "2181", "children": [] }, { "value": "410622", "label": "淇县", "id": "2306", "pid": "2181", "children": [] }] }, { "value": "4107", "label": "新乡市", "id": "2182", "pid": "1408", "children": [{ "value": "410702", "label": "红旗区", "id": "2307", "pid": "2182", "children": [] }, { "value": "410703", "label": "卫滨区", "id": "2308", "pid": "2182", "children": [] }, { "value": "410704", "label": "凤泉区", "id": "2309", "pid": "2182", "children": [] }, { "value": "410711", "label": "牧野区", "id": "2310", "pid": "2182", "children": [] }, { "value": "410721", "label": "新乡县", "id": "2311", "pid": "2182", "children": [] }, { "value": "410724", "label": "获嘉县", "id": "2312", "pid": "2182", "children": [] }, { "value": "410725", "label": "原阳县", "id": "2313", "pid": "2182", "children": [] }, { "value": "410726", "label": "延津县", "id": "2314", "pid": "2182", "children": [] }, { "value": "410727", "label": "封丘县", "id": "2315", "pid": "2182", "children": [] }, { "value": "410728", "label": "长垣县", "id": "2316", "pid": "2182", "children": [] }, { "value": "410781", "label": "卫辉市", "id": "2317", "pid": "2182", "children": [] }, { "value": "410782", "label": "辉县市", "id": "2318", "pid": "2182", "children": [] }] }, { "value": "4108", "label": "焦作市", "id": "2215", "pid": "1408", "children": [{ "value": "410802", "label": "解放区", "id": "2319", "pid": "2215", "children": [] }, { "value": "410803", "label": "中站区", "id": "2320", "pid": "2215", "children": [] }, { "value": "410804", "label": "马村区", "id": "2321", "pid": "2215", "children": [] }, { "value": "410811", "label": "山阳区", "id": "2322", "pid": "2215", "children": [] }, { "value": "410821", "label": "修武县", "id": "2323", "pid": "2215", "children": [] }, { "value": "410822", "label": "博爱县", "id": "2324", "pid": "2215", "children": [] }, { "value": "410823", "label": "武陟县", "id": "2325", "pid": "2215", "children": [] }, { "value": "410825", "label": "温县", "id": "2326", "pid": "2215", "children": [] }, { "value": "410881", "label": "济源市", "id": "2327", "pid": "2215", "children": [] }, { "value": "410882", "label": "沁阳市", "id": "2328", "pid": "2215", "children": [] }, { "value": "410883", "label": "孟州市", "id": "2329", "pid": "2215", "children": [] }] }, { "value": "4109", "label": "濮阳市", "id": "2330", "pid": "1408", "children": [{ "value": "410902", "label": "华龙区", "id": "2331", "pid": "2330", "children": [] }, { "value": "410922", "label": "清丰县", "id": "2332", "pid": "2330", "children": [] }, { "value": "410923", "label": "南乐县", "id": "2333", "pid": "2330", "children": [] }, { "value": "410926", "label": "范县", "id": "2334", "pid": "2330", "children": [] }, { "value": "410927", "label": "台前县", "id": "2335", "pid": "2330", "children": [] }, { "value": "410928", "label": "濮阳县", "id": "2336", "pid": "2330", "children": [] }] }, { "value": "4110", "label": "许昌市", "id": "2337", "pid": "1408", "children": [{ "value": "411002", "label": "魏都区", "id": "2338", "pid": "2337", "children": [] }, { "value": "411023", "label": "许昌县", "id": "2339", "pid": "2337", "children": [] }, { "value": "411024", "label": "鄢陵县", "id": "2340", "pid": "2337", "children": [] }, { "value": "411025", "label": "襄城县", "id": "2341", "pid": "2337", "children": [] }, { "value": "411081", "label": "禹州市", "id": "2342", "pid": "2337", "children": [] }, { "value": "411082", "label": "长葛市", "id": "2343", "pid": "2337", "children": [] }] }, { "value": "4111", "label": "漯河市", "id": "2344", "pid": "1408", "children": [{ "value": "411102", "label": "源汇区", "id": "2345", "pid": "2344", "children": [] }, { "value": "411103", "label": "郾城区", "id": "2346", "pid": "2344", "children": [] }, { "value": "411104", "label": "召陵区", "id": "2347", "pid": "2344", "children": [] }, { "value": "411121", "label": "舞阳县", "id": "2348", "pid": "2344", "children": [] }, { "value": "411122", "label": "临颍县", "id": "2349", "pid": "2344", "children": [] }, { "value": "4112", "label": "三门峡市", "id": "2350", "pid": "2344", "children": [] }, { "value": "411202", "label": "湖滨区", "id": "2351", "pid": "2344", "children": [] }, { "value": "411221", "label": "渑池县", "id": "2352", "pid": "2344", "children": [] }, { "value": "411222", "label": "陕县", "id": "2353", "pid": "2344", "children": [] }, { "value": "411224", "label": "卢氏县", "id": "2354", "pid": "2344", "children": [] }, { "value": "4112281", "label": "义马市", "id": "2355", "pid": "2344", "children": [] }, { "value": "4112282", "label": "灵宝市", "id": "2356", "pid": "2344", "children": [] }] }, { "value": "4113", "label": "南阳市", "id": "2357", "pid": "1408", "children": [{ "value": "411302", "label": "宛城区", "id": "2358", "pid": "2357", "children": [] }, { "value": "411303", "label": "卧龙区", "id": "2359", "pid": "2357", "children": [] }, { "value": "411321", "label": "南召县", "id": "2360", "pid": "2357", "children": [] }, { "value": "411322", "label": "方城县", "id": "2361", "pid": "2357", "children": [] }, { "value": "411323", "label": "西峡县", "id": "2362", "pid": "2357", "children": [] }, { "value": "411324", "label": "镇平县", "id": "2363", "pid": "2357", "children": [] }, { "value": "411325", "label": "内乡县", "id": "2364", "pid": "2357", "children": [] }, { "value": "411326", "label": "淅川县", "id": "2365", "pid": "2357", "children": [] }, { "value": "411327", "label": "社旗县", "id": "2366", "pid": "2357", "children": [] }, { "value": "411328", "label": "唐河县", "id": "2367", "pid": "2357", "children": [] }, { "value": "411329", "label": "新野县", "id": "2368", "pid": "2357", "children": [] }, { "value": "411330", "label": "桐柏县", "id": "2369", "pid": "2357", "children": [] }, { "value": "411381", "label": "邓州市", "id": "2370", "pid": "2357", "children": [] }] }, { "value": "4114", "label": "商丘市", "id": "2371", "pid": "1408", "children": [{ "value": "411402", "label": "梁园区", "id": "2372", "pid": "2371", "children": [] }, { "value": "411403", "label": "睢阳区", "id": "2373", "pid": "2371", "children": [] }, { "value": "411421", "label": "民权县", "id": "2374", "pid": "2371", "children": [] }, { "value": "411422", "label": "睢县", "id": "2375", "pid": "2371", "children": [] }, { "value": "411423", "label": "宁陵县", "id": "2376", "pid": "2371", "children": [] }, { "value": "411424", "label": "柘城县", "id": "2377", "pid": "2371", "children": [] }, { "value": "411425", "label": "虞城县", "id": "2378", "pid": "2371", "children": [] }, { "value": "411426", "label": "夏邑县", "id": "2379", "pid": "2371", "children": [] }, { "value": "411481", "label": "永城市", "id": "2380", "pid": "2371", "children": [] }] }, { "value": "4115", "label": "信阳市", "id": "2381", "pid": "1408", "children": [{ "value": "411502", "label": "浉河区", "id": "2382", "pid": "2381", "children": [] }, { "value": "411503", "label": "平桥区", "id": "2383", "pid": "2381", "children": [] }, { "value": "411521", "label": "罗山县", "id": "2384", "pid": "2381", "children": [] }, { "value": "411522", "label": "光山县", "id": "2385", "pid": "2381", "children": [] }, { "value": "411523", "label": "新县", "id": "2386", "pid": "2381", "children": [] }, { "value": "411524", "label": "商城县", "id": "2387", "pid": "2381", "children": [] }, { "value": "411525", "label": "固始县", "id": "2388", "pid": "2381", "children": [] }, { "value": "411526", "label": "潢川县", "id": "2389", "pid": "2381", "children": [] }, { "value": "411527", "label": "淮滨县", "id": "2390", "pid": "2381", "children": [] }, { "value": "411528", "label": "息县", "id": "2391", "pid": "2381", "children": [] }] }, { "value": "4116", "label": "周口市", "id": "2392", "pid": "1408", "children": [{ "value": "411602", "label": "川汇区", "id": "2394", "pid": "2392", "children": [] }, { "value": "411621", "label": "扶沟县", "id": "2395", "pid": "2392", "children": [] }, { "value": "411622", "label": "西华县", "id": "2396", "pid": "2392", "children": [] }, { "value": "411623", "label": "商水县", "id": "2397", "pid": "2392", "children": [] }, { "value": "411624", "label": "沈丘县", "id": "2398", "pid": "2392", "children": [] }, { "value": "411625", "label": "郸城县", "id": "2399", "pid": "2392", "children": [] }, { "value": "411626", "label": "淮阳县", "id": "2400", "pid": "2392", "children": [] }, { "value": "411627", "label": "太康县", "id": "2401", "pid": "2392", "children": [] }, { "value": "411628", "label": "鹿邑县", "id": "2402", "pid": "2392", "children": [] }, { "value": "411681", "label": "项城市", "id": "2403", "pid": "2392", "children": [] }] }, { "value": "4117", "label": "驻马店市", "id": "2393", "pid": "1408", "children": [{ "value": "411702", "label": "驿城区", "id": "2404", "pid": "2393", "children": [] }, { "value": "411721", "label": "西平县", "id": "2405", "pid": "2393", "children": [] }, { "value": "411722", "label": "上蔡县", "id": "2406", "pid": "2393", "children": [] }, { "value": "411723", "label": "平舆县", "id": "2407", "pid": "2393", "children": [] }, { "value": "411724", "label": "正阳县", "id": "2408", "pid": "2393", "children": [] }, { "value": "411725", "label": "确山县", "id": "2409", "pid": "2393", "children": [] }, { "value": "411726", "label": "泌阳县", "id": "2410", "pid": "2393", "children": [] }, { "value": "411727", "label": "汝南县", "id": "2411", "pid": "2393", "children": [] }, { "value": "411728", "label": "遂平县", "id": "2412", "pid": "2393", "children": [] }, { "value": "411729", "label": "新蔡县", "id": "2413", "pid": "2393", "children": [] }] }] }, { "value": "36", "label": "江西省", "id": "1708", "pid": "1", "children": [{ "value": "3601", "label": "南昌市", "id": "1725", "pid": "1708", "children": [{ "value": "360102", "label": "东湖区", "id": "1729", "pid": "1725", "children": [] }] }, { "value": "3603", "label": "萍乡市", "id": "1728", "pid": "1708", "children": [{ "value": "360302", "label": "安源区", "id": "1732", "pid": "1728", "children": [] }] }, { "value": "3604", "label": "九江市", "id": "1727", "pid": "1708", "children": [{ "value": "360403", "label": "浔阳区", "id": "1731", "pid": "1727", "children": [] }] }, { "value": "3607", "label": "赣州市", "id": "1726", "pid": "1708", "children": [{ "value": "360702", "label": "章贡区", "id": "1730", "pid": "1726", "children": [] }] }] }, { "value": "35", "label": "福建省", "id": "1580", "pid": "1", "children": [{ "value": "3501", "label": "福州市", "id": "1092", "pid": "1580", "children": [{ "value": "350102", "label": "鼓楼区", "id": "1592", "pid": "1092", "children": [] }, { "value": "350103", "label": "台江区", "id": "1719", "pid": "1092", "children": [] }, { "value": "350104", "label": "仓山区", "id": "2183", "pid": "1092", "children": [] }, { "value": "350105", "label": "马尾区", "id": "2184", "pid": "1092", "children": [] }, { "value": "350111", "label": "晋安区", "id": "2185", "pid": "1092", "children": [] }, { "value": "350121", "label": "闽侯县", "id": "2186", "pid": "1092", "children": [] }, { "value": "350122", "label": "连江县", "id": "2187", "pid": "1092", "children": [] }, { "value": "350123", "label": "罗源县", "id": "2188", "pid": "1092", "children": [] }, { "value": "350124", "label": "闽清县", "id": "2189", "pid": "1092", "children": [] }, { "value": "350125", "label": "永泰县", "id": "2190", "pid": "1092", "children": [] }, { "value": "350128", "label": "平潭县", "id": "2191", "pid": "1092", "children": [] }, { "value": "350181", "label": "福清市", "id": "2192", "pid": "1092", "children": [] }, { "value": "350182", "label": "长乐市", "id": "2193", "pid": "1092", "children": [] }] }, { "value": "3502", "label": "厦门市", "id": "1093", "pid": "1580", "children": [{ "value": "350203", "label": "思明区", "id": "1115", "pid": "1093", "children": [] }, { "value": "350205", "label": "海沧区", "id": "2194", "pid": "1093", "children": [] }, { "value": "350206", "label": "湖里区", "id": "2195", "pid": "1093", "children": [] }, { "value": "350211", "label": "集美区", "id": "2196", "pid": "1093", "children": [] }, { "value": "350212", "label": "同安区", "id": "2197", "pid": "1093", "children": [] }, { "value": "350213", "label": "翔安区", "id": "2198", "pid": "1093", "children": [] }] }, { "value": "3503", "label": "莆田市", "id": "1663", "pid": "1580", "children": [{ "value": "350302", "label": "城厢区", "id": "2199", "pid": "1663", "children": [] }, { "value": "350303", "label": "涵江区", "id": "2200", "pid": "1663", "children": [] }, { "value": "350304", "label": "荔城区", "id": "1667", "pid": "1663", "children": [] }, { "value": "350305", "label": "秀屿区", "id": "2201", "pid": "1663", "children": [] }, { "value": "350322", "label": "仙游县", "id": "2202", "pid": "1663", "children": [] }] }, { "value": "3504", "label": "三明市", "id": "1096", "pid": "1580", "children": [{ "value": "350402", "label": "梅列区", "id": "2203", "pid": "1096", "children": [] }, { "value": "350403", "label": "三元区", "id": "1548", "pid": "1096", "children": [] }, { "value": "350421", "label": "明溪县", "id": "2204", "pid": "1096", "children": [] }, { "value": "350423", "label": "清流县", "id": "2205", "pid": "1096", "children": [] }, { "value": "350424", "label": "宁化县", "id": "2206", "pid": "1096", "children": [] }, { "value": "350425", "label": "大田县", "id": "2207", "pid": "1096", "children": [] }, { "value": "350426", "label": "尤溪县", "id": "2208", "pid": "1096", "children": [] }, { "value": "350427", "label": "沙县", "id": "2209", "pid": "1096", "children": [] }, { "value": "350428", "label": "将乐县", "id": "2210", "pid": "1096", "children": [] }, { "value": "350429", "label": "泰宁县", "id": "2211", "pid": "1096", "children": [] }, { "value": "350430", "label": "建宁县", "id": "2212", "pid": "1096", "children": [] }, { "value": "350481", "label": "永安市", "id": "2213", "pid": "1096", "children": [] }] }, { "value": "3505", "label": "泉州市", "id": "1095", "pid": "1580", "children": [{ "value": "350502", "label": "鲤城区", "id": "1720", "pid": "1095", "children": [] }, { "value": "350503", "label": "丰泽区", "id": "1122", "pid": "1095", "children": [] }, { "value": "350504", "label": "洛江区", "id": "2214", "pid": "1095", "children": [] }, { "value": "350505", "label": "泉港区", "id": "2216", "pid": "1095", "children": [] }, { "value": "350521", "label": "惠安县", "id": "2217", "pid": "1095", "children": [] }, { "value": "350524", "label": "安溪县", "id": "2218", "pid": "1095", "children": [] }, { "value": "350525", "label": "永春县", "id": "2219", "pid": "1095", "children": [] }, { "value": "350526", "label": "德化县", "id": "2220", "pid": "1095", "children": [] }, { "value": "350527", "label": "金门县", "id": "2221", "pid": "1095", "children": [] }, { "value": "350581", "label": "石狮市", "id": "2222", "pid": "1095", "children": [] }, { "value": "350582", "label": "晋江市", "id": "2223", "pid": "1095", "children": [] }, { "value": "350583", "label": "南安市", "id": "2224", "pid": "1095", "children": [] }] }, { "value": "3506", "label": "漳州市", "id": "1581", "pid": "1580", "children": [{ "value": "350602", "label": "芗城区", "id": "1597", "pid": "1581", "children": [] }, { "value": "350603", "label": "龙文区", "id": "2225", "pid": "1581", "children": [] }, { "value": "350622", "label": "云霄县", "id": "2226", "pid": "1581", "children": [] }, { "value": "350623", "label": "漳浦县", "id": "2227", "pid": "1581", "children": [] }, { "value": "350624", "label": "诏安县", "id": "2228", "pid": "1581", "children": [] }, { "value": "350625", "label": "长泰县", "id": "2229", "pid": "1581", "children": [] }, { "value": "350626", "label": "东山县", "id": "2230", "pid": "1581", "children": [] }, { "value": "350627", "label": "南靖县", "id": "2231", "pid": "1581", "children": [] }, { "value": "350628", "label": "平和县", "id": "2232", "pid": "1581", "children": [] }, { "value": "350629", "label": "华安县", "id": "2233", "pid": "1581", "children": [] }, { "value": "350681", "label": "龙海市", "id": "2234", "pid": "1581", "children": [] }] }, { "value": "3507", "label": "南平市", "id": "1664", "pid": "1580", "children": [{ "value": "350702", "label": "延平区", "id": "1668", "pid": "1664", "children": [] }, { "value": "350721", "label": "顺昌县", "id": "2235", "pid": "1664", "children": [] }, { "value": "350722", "label": "浦城县", "id": "2236", "pid": "1664", "children": [] }, { "value": "350723", "label": "光泽县", "id": "2237", "pid": "1664", "children": [] }, { "value": "350724", "label": "松溪县", "id": "2238", "pid": "1664", "children": [] }, { "value": "350725", "label": "政和县", "id": "2239", "pid": "1664", "children": [] }, { "value": "350781", "label": "邵武市", "id": "2240", "pid": "1664", "children": [] }, { "value": "350782", "label": "武夷山市", "id": "2241", "pid": "1664", "children": [] }, { "value": "350783", "label": "建瓯市", "id": "2242", "pid": "1664", "children": [] }, { "value": "350784", "label": "建阳市", "id": "2243", "pid": "1664", "children": [] }] }, { "value": "3508", "label": "龙岩市", "id": "1665", "pid": "1580", "children": [{ "value": "350802", "label": "新罗区", "id": "1669", "pid": "1665", "children": [] }, { "value": "350821", "label": "长汀县", "id": "2244", "pid": "1665", "children": [] }, { "value": "350822", "label": "永定县", "id": "2245", "pid": "1665", "children": [] }, { "value": "350823", "label": "上杭县", "id": "2246", "pid": "1665", "children": [] }, { "value": "350824", "label": "武平县", "id": "2247", "pid": "1665", "children": [] }, { "value": "350825", "label": "连城县", "id": "2248", "pid": "1665", "children": [] }, { "value": "350881", "label": "漳平市", "id": "2249", "pid": "1665", "children": [] }] }, { "value": "3509", "label": "宁德市", "id": "1666", "pid": "1580", "children": [{ "value": "350902", "label": "蕉城区", "id": "1670", "pid": "1666", "children": [] }, { "value": "350921", "label": "霞浦县", "id": "2250", "pid": "1666", "children": [] }, { "value": "350922", "label": "古田县", "id": "2251", "pid": "1666", "children": [] }, { "value": "350923", "label": "屏南县", "id": "2252", "pid": "1666", "children": [] }, { "value": "350924", "label": "寿宁县", "id": "2253", "pid": "1666", "children": [] }, { "value": "350925", "label": "周宁县", "id": "2254", "pid": "1666", "children": [] }, { "value": "350926", "label": "柘荣县", "id": "2255", "pid": "1666", "children": [] }, { "value": "350981", "label": "福安市", "id": "2256", "pid": "1666", "children": [] }, { "value": "350982", "label": "福鼎市", "id": "2257", "pid": "1666", "children": [] }] }] }, { "value": "34", "label": "安徽省", "id": "1397", "pid": "1", "children": [{ "value": "3401", "label": "合肥市", "id": "1400", "pid": "1397", "children": [{ "value": "340103", "label": "庐阳区", "id": "1401", "pid": "1400", "children": [] }] }, { "value": "3402", "label": "芜湖市", "id": "1403", "pid": "1397", "children": [{ "value": "340202", "label": "镜湖区", "id": "1405", "pid": "1403", "children": [] }] }, { "value": "3403", "label": "蚌埠市", "id": "1614", "pid": "1397", "children": [{ "value": "340303", "label": "蚌山区", "id": "1616", "pid": "1614", "children": [] }] }, { "value": "3405", "label": "马鞍山市", "id": "1416", "pid": "1397", "children": [{ "value": "340503", "label": "花山区", "id": "1417", "pid": "1416", "children": [] }] }, { "value": "3408", "label": "安庆市", "id": "1402", "pid": "1397", "children": [{ "value": "340802", "label": "迎江区", "id": "1404", "pid": "1402", "children": [] }] }, { "value": "3411", "label": "滁州市", "id": "1613", "pid": "1397", "children": [{ "value": "341102", "label": "琅琊区", "id": "1615", "pid": "1613", "children": [] }] }, { "value": "3412", "label": "阜阳市", "id": "1414", "pid": "1397", "children": [{ "value": "341202", "label": "颍州区", "id": "1415", "pid": "1414", "children": [] }] }, { "value": "3415", "label": "六安市", "id": "1412", "pid": "1397", "children": [{ "value": "341503", "label": "裕安区", "id": "1413", "pid": "1412", "children": [] }] }, { "value": "3418", "label": "宣城市", "id": "1398", "pid": "1397", "children": [{ "value": "341802", "label": "宣州区", "id": "1399", "pid": "1398", "children": [] }] }] }, { "value": "33", "label": "浙江省", "id": "1706", "pid": "1", "children": [{ "value": "3301", "label": "杭州市", "id": "1745", "pid": "1706", "children": [{ "value": "330102", "label": "上城区", "id": "1877", "pid": "1745", "children": [] }, { "value": "330103", "label": "下城区", "id": "1878", "pid": "1745", "children": [] }, { "value": "330104", "label": "江干区", "id": "1879", "pid": "1745", "children": [] }, { "value": "330105", "label": "拱墅区", "id": "1880", "pid": "1745", "children": [] }, { "value": "330106", "label": "西湖区", "id": "1881", "pid": "1745", "children": [] }, { "value": "330108", "label": "滨江区", "id": "1749", "pid": "1745", "children": [] }, { "value": "330109", "label": "萧山区", "id": "1882", "pid": "1745", "children": [] }, { "value": "330110", "label": "余杭区", "id": "1962", "pid": "1745", "children": [] }, { "value": "330122", "label": "桐庐县", "id": "1963", "pid": "1745", "children": [] }, { "value": "330127", "label": "淳安县", "id": "1964", "pid": "1745", "children": [] }, { "value": "330182", "label": "建德市", "id": "1965", "pid": "1745", "children": [] }, { "value": "330183", "label": "富阳市", "id": "1966", "pid": "1745", "children": [] }, { "value": "330185", "label": "临安市", "id": "1967", "pid": "1745", "children": [] }] }, { "value": "3302", "label": "宁波市", "id": "1747", "pid": "1706", "children": [{ "value": "330203", "label": "海曙区", "id": "1751", "pid": "1747", "children": [] }, { "value": "330204", "label": "江东区", "id": "1968", "pid": "1747", "children": [] }, { "value": "330205", "label": "江北区", "id": "1969", "pid": "1747", "children": [] }, { "value": "330206", "label": "北仑区", "id": "1970", "pid": "1747", "children": [] }, { "value": "330211", "label": "镇海区", "id": "1971", "pid": "1747", "children": [] }, { "value": "330212", "label": "鄞州区", "id": "1972", "pid": "1747", "children": [] }, { "value": "330225", "label": "象山县", "id": "1973", "pid": "1747", "children": [] }, { "value": "330226", "label": "宁海县", "id": "1974", "pid": "1747", "children": [] }, { "value": "330281", "label": "余姚市", "id": "1975", "pid": "1747", "children": [] }, { "value": "330282", "label": "慈溪市", "id": "1976", "pid": "1747", "children": [] }, { "value": "330283", "label": "奉化市", "id": "1977", "pid": "1747", "children": [] }] }, { "value": "3303", "label": "温州市", "id": "1748", "pid": "1706", "children": [{ "value": "330302", "label": "鹿城区", "id": "1752", "pid": "1748", "children": [] }, { "value": "330303", "label": "龙湾区", "id": "1978", "pid": "1748", "children": [] }, { "value": "330304", "label": "瓯海区", "id": "1979", "pid": "1748", "children": [] }, { "value": "330322", "label": "洞头县", "id": "1980", "pid": "1748", "children": [] }, { "value": "330324", "label": "永嘉县", "id": "1981", "pid": "1748", "children": [] }, { "value": "330326", "label": "平阳县", "id": "1982", "pid": "1748", "children": [] }, { "value": "330327", "label": "苍南县", "id": "1983", "pid": "1748", "children": [] }, { "value": "330328", "label": "文成县", "id": "1984", "pid": "1748", "children": [] }, { "value": "330329", "label": "泰顺县", "id": "1985", "pid": "1748", "children": [] }, { "value": "330381", "label": "瑞安市", "id": "1986", "pid": "1748", "children": [] }, { "value": "330382", "label": "乐清市", "id": "1987", "pid": "1748", "children": [] }] }, { "value": "3304", "label": "嘉兴市", "id": "1988", "pid": "1706", "children": [{ "value": "330402", "label": "南湖区", "id": "1989", "pid": "1988", "children": [] }, { "value": "330411", "label": "秀洲区", "id": "1990", "pid": "1988", "children": [] }, { "value": "330421", "label": "嘉善县", "id": "1991", "pid": "1988", "children": [] }, { "value": "330424", "label": "海盐县", "id": "1992", "pid": "1988", "children": [] }, { "value": "330481", "label": "海宁市", "id": "1993", "pid": "1988", "children": [] }, { "value": "330482", "label": "平湖市", "id": "1994", "pid": "1988", "children": [] }, { "value": "330483", "label": "桐乡市", "id": "1995", "pid": "1988", "children": [] }] }, { "value": "3305", "label": "湖州市", "id": "1996", "pid": "1706", "children": [{ "value": "330502", "label": "吴兴区", "id": "1997", "pid": "1996", "children": [] }, { "value": "330503", "label": "南浔区", "id": "1998", "pid": "1996", "children": [] }, { "value": "330521", "label": "德清县", "id": "1999", "pid": "1996", "children": [] }, { "value": "330522", "label": "长兴县", "id": "2000", "pid": "1996", "children": [] }, { "value": "330523", "label": "安吉县", "id": "2001", "pid": "1996", "children": [] }] }, { "value": "3306", "label": "绍兴市", "id": "2002", "pid": "1706", "children": [{ "value": "330602", "label": "越城区", "id": "2003", "pid": "2002", "children": [] }, { "value": "330621", "label": "绍兴县", "id": "2004", "pid": "2002", "children": [] }, { "value": "330624", "label": "新昌县", "id": "2005", "pid": "2002", "children": [] }, { "value": "330681", "label": "诸暨市", "id": "2006", "pid": "2002", "children": [] }, { "value": "330682", "label": "上虞市", "id": "2007", "pid": "2002", "children": [] }, { "value": "330683", "label": "嵊州市", "id": "2008", "pid": "2002", "children": [] }] }, { "value": "3307", "label": "金华市", "id": "1746", "pid": "1706", "children": [{ "value": "330702", "label": "婺城区", "id": "1750", "pid": "1746", "children": [] }, { "value": "330703", "label": "金东区", "id": "2009", "pid": "1746", "children": [] }, { "value": "330723", "label": "武义县", "id": "2010", "pid": "1746", "children": [] }, { "value": "330726", "label": "浦江县", "id": "2011", "pid": "1746", "children": [] }, { "value": "330727", "label": "磐安县", "id": "2012", "pid": "1746", "children": [] }, { "value": "330781", "label": "兰溪市", "id": "2013", "pid": "1746", "children": [] }, { "value": "330782", "label": "义乌市", "id": "2014", "pid": "1746", "children": [] }, { "value": "330783", "label": "东阳市", "id": "2015", "pid": "1746", "children": [] }, { "value": "330784", "label": "永康市", "id": "2016", "pid": "1746", "children": [] }] }, { "value": "3308", "label": "衢州市", "id": "2017", "pid": "1706", "children": [{ "value": "330802", "label": "柯城区", "id": "2018", "pid": "2017", "children": [] }, { "value": "330803", "label": "衢江区", "id": "2019", "pid": "2017", "children": [] }, { "value": "330822", "label": "常山县", "id": "2020", "pid": "2017", "children": [] }, { "value": "330824", "label": "开化县", "id": "2021", "pid": "2017", "children": [] }, { "value": "330825", "label": "龙游县", "id": "2022", "pid": "2017", "children": [] }, { "value": "330881", "label": "江山市", "id": "2023", "pid": "2017", "children": [] }] }, { "value": "3309", "label": "舟山市", "id": "2024", "pid": "1706", "children": [{ "value": "330902", "label": "定海区", "id": "2025", "pid": "2024", "children": [] }, { "value": "330903", "label": "普陀区", "id": "2026", "pid": "2024", "children": [] }, { "value": "330921", "label": "岱山县", "id": "2027", "pid": "2024", "children": [] }, { "value": "330922", "label": "嵊泗县", "id": "2028", "pid": "2024", "children": [] }] }, { "value": "3310", "label": "台州市", "id": "2029", "pid": "1706", "children": [{ "value": "331002", "label": "椒江区", "id": "2030", "pid": "2029", "children": [] }, { "value": "331003", "label": "黄岩区", "id": "2031", "pid": "2029", "children": [] }, { "value": "331004", "label": "路桥区", "id": "2032", "pid": "2029", "children": [] }, { "value": "331021", "label": "玉环县", "id": "2033", "pid": "2029", "children": [] }, { "value": "331022", "label": "三门县", "id": "2034", "pid": "2029", "children": [] }, { "value": "331023", "label": "天台县", "id": "2035", "pid": "2029", "children": [] }, { "value": "331024", "label": "仙居县", "id": "2036", "pid": "2029", "children": [] }, { "value": "331081", "label": "温岭市", "id": "2037", "pid": "2029", "children": [] }, { "value": "331082", "label": "临海市", "id": "2038", "pid": "2029", "children": [] }] }, { "value": "3311", "label": "丽水市", "id": "2039", "pid": "1706", "children": [{ "value": "331102", "label": "莲都区", "id": "2040", "pid": "2039", "children": [] }, { "value": "331121", "label": "青田县", "id": "2041", "pid": "2039", "children": [] }, { "value": "331122", "label": "缙云县", "id": "2042", "pid": "2039", "children": [] }, { "value": "331123", "label": "遂昌县", "id": "2043", "pid": "2039", "children": [] }, { "value": "331124", "label": "松阳县", "id": "2044", "pid": "2039", "children": [] }, { "value": "331125", "label": "云和县", "id": "2045", "pid": "2039", "children": [] }, { "value": "331126", "label": "庆元县", "id": "2046", "pid": "2039", "children": [] }, { "value": "331127", "label": "景宁畲族自治县", "id": "2047", "pid": "2039", "children": [] }, { "value": "331181", "label": "龙泉市", "id": "2048", "pid": "2039", "children": [] }] }] }, { "value": "21", "label": "辽宁省", "id": "1707", "pid": "1", "children": [{ "value": "2101", "label": "沈阳市", "id": "1735", "pid": "1707", "children": [{ "value": "210102", "label": "和平区", "id": "1738", "pid": "1735", "children": [] }, { "value": "210103", "label": "沈河区", "id": "1739", "pid": "1735", "children": [] }, { "value": "210105", "label": "皇姑区", "id": "1740", "pid": "1735", "children": [] }] }, { "value": "2102", "label": "大连市", "id": "1736", "pid": "1707", "children": [{ "value": "210203", "label": "西岗区", "id": "1741", "pid": "1736", "children": [] }] }, { "value": "2107", "label": "锦州市", "id": "1737", "pid": "1707", "children": [{ "value": "210702", "label": "古塔区", "id": "1742", "pid": "1737", "children": [] }] }] }, { "value": "14", "label": "山西省", "id": "1486", "pid": "1", "children": [{ "value": "1401", "label": "太原市", "id": "1487", "pid": "1486", "children": [{ "value": "140105", "label": "小店区", "id": "1488", "pid": "1487", "children": [] }, { "value": "140106", "label": "迎泽区", "id": "1649", "pid": "1487", "children": [] }, { "value": "140107", "label": "杏花岭区", "id": "1493", "pid": "1487", "children": [] }, { "value": "140108", "label": "尖草坪区", "id": "1759", "pid": "1487", "children": [] }, { "value": "140109", "label": "万柏林区", "id": "1760", "pid": "1487", "children": [] }, { "value": "140110", "label": "晋源区", "id": "1761", "pid": "1487", "children": [] }, { "value": "140121", "label": "清徐县", "id": "1762", "pid": "1487", "children": [] }, { "value": "140122", "label": "阳曲县", "id": "1763", "pid": "1487", "children": [] }, { "value": "140123", "label": "娄烦县", "id": "1764", "pid": "1487", "children": [] }, { "value": "140181", "label": "古交市", "id": "1765", "pid": "1487", "children": [] }] }, { "value": "1402", "label": "大同市", "id": "1489", "pid": "1486", "children": [{ "value": "140202", "label": "城区(DT)", "id": "1758", "pid": "1489", "children": [] }, { "value": "140203", "label": "矿区", "id": "1766", "pid": "1489", "children": [] }, { "value": "140211", "label": "南郊区", "id": "1767", "pid": "1489", "children": [] }, { "value": "140212", "label": "新荣区", "id": "1490", "pid": "1489", "children": [] }, { "value": "140221", "label": "阳高县", "id": "1768", "pid": "1489", "children": [] }, { "value": "140222", "label": "天镇县", "id": "1769", "pid": "1489", "children": [] }, { "value": "140223", "label": "广灵县", "id": "1770", "pid": "1489", "children": [] }, { "value": "140224", "label": "灵丘县", "id": "1771", "pid": "1489", "children": [] }, { "value": "140225", "label": "浑源县", "id": "1772", "pid": "1489", "children": [] }, { "value": "140226", "label": "左云县", "id": "1773", "pid": "1489", "children": [] }, { "value": "140227", "label": "大同县", "id": "1774", "pid": "1489", "children": [] }] }, { "value": "1403", "label": "阳泉市", "id": "1652", "pid": "1486", "children": [{ "value": "140302", "label": "城区", "id": "1653", "pid": "1652", "children": [] }, { "value": "140303", "label": "矿区（YQ）", "id": "1775", "pid": "1652", "children": [] }, { "value": "140311", "label": "郊区", "id": "1776", "pid": "1652", "children": [] }, { "value": "140321", "label": "平定县", "id": "1777", "pid": "1652", "children": [] }, { "value": "140322", "label": "盂县", "id": "1778", "pid": "1652", "children": [] }] }, { "value": "1404", "label": "长治市", "id": "1491", "pid": "1486", "children": [{ "value": "140401", "label": "长治市区", "id": "1492", "pid": "1491", "children": [] }, { "value": "140421", "label": "长治县", "id": "1779", "pid": "1491", "children": [] }, { "value": "140423", "label": "襄垣县", "id": "1780", "pid": "1491", "children": [] }, { "value": "140424", "label": "屯留县", "id": "1781", "pid": "1491", "children": [] }, { "value": "140425", "label": "平顺县", "id": "1782", "pid": "1491", "children": [] }, { "value": "140426", "label": "黎城县", "id": "1783", "pid": "1491", "children": [] }, { "value": "140427", "label": "壶关县", "id": "1784", "pid": "1491", "children": [] }, { "value": "140428", "label": "长子县", "id": "1785", "pid": "1491", "children": [] }, { "value": "140429", "label": "武乡县", "id": "1786", "pid": "1491", "children": [] }, { "value": "140430", "label": "沁县", "id": "1787", "pid": "1491", "children": [] }, { "value": "140431", "label": "沁源县", "id": "1788", "pid": "1491", "children": [] }, { "value": "140481", "label": "潞城市", "id": "1789", "pid": "1491", "children": [] }, { "value": "140482", "label": "城区（CZ）", "id": "1790", "pid": "1491", "children": [] }, { "value": "140483", "label": "郊区（CZ）", "id": "1792", "pid": "1491", "children": [] }] }, { "value": "1405", "label": "晋城市", "id": "1794", "pid": "1486", "children": [{ "value": "140502", "label": "城区（JC）", "id": "1795", "pid": "1794", "children": [] }, { "value": "140521", "label": "沁水县", "id": "1796", "pid": "1794", "children": [] }, { "value": "140522", "label": "阳城县", "id": "1797", "pid": "1794", "children": [] }, { "value": "140524", "label": "陵川县", "id": "1798", "pid": "1794", "children": [] }, { "value": "140525", "label": "泽州县", "id": "1799", "pid": "1794", "children": [] }, { "value": "140581", "label": "高平市", "id": "1800", "pid": "1794", "children": [] }] }, { "value": "1406", "label": "朔州市", "id": "1803", "pid": "1486", "children": [{ "value": "140602", "label": "朔城区", "id": "1804", "pid": "1803", "children": [] }, { "value": "140603", "label": "平鲁区", "id": "1805", "pid": "1803", "children": [] }, { "value": "140621", "label": "山阴县", "id": "1807", "pid": "1803", "children": [] }, { "value": "140622", "label": "应县", "id": "1808", "pid": "1803", "children": [] }, { "value": "140623", "label": "右玉县", "id": "1809", "pid": "1803", "children": [] }, { "value": "140624", "label": "怀仁县", "id": "1810", "pid": "1803", "children": [] }] }, { "value": "1407", "label": "晋中市", "id": "1655", "pid": "1486", "children": [{ "value": "140702", "label": "榆次区", "id": "1658", "pid": "1655", "children": [] }, { "value": "140721", "label": "榆社县", "id": "1812", "pid": "1655", "children": [] }, { "value": "140722", "label": "左权县", "id": "1813", "pid": "1655", "children": [] }, { "value": "140723", "label": "和顺县", "id": "1814", "pid": "1655", "children": [] }, { "value": "140724", "label": "昔阳县", "id": "1815", "pid": "1655", "children": [] }, { "value": "140725", "label": "寿阳县", "id": "1817", "pid": "1655", "children": [] }, { "value": "140726", "label": "太谷县", "id": "1818", "pid": "1655", "children": [] }, { "value": "140727", "label": "祁县", "id": "1819", "pid": "1655", "children": [] }, { "value": "140728", "label": "平遥县", "id": "1820", "pid": "1655", "children": [] }, { "value": "140729", "label": "灵石县", "id": "1821", "pid": "1655", "children": [] }, { "value": "140781", "label": "介休市", "id": "1822", "pid": "1655", "children": [] }] }, { "value": "1408", "label": "运城市", "id": "1494", "pid": "1486", "children": [{ "value": "140802", "label": "盐湖区", "id": "1495", "pid": "1494", "children": [] }, { "value": "140821", "label": "临猗县", "id": "1823", "pid": "1494", "children": [] }, { "value": "140822", "label": "万荣县", "id": "1824", "pid": "1494", "children": [] }, { "value": "140823", "label": "闻喜县", "id": "1825", "pid": "1494", "children": [] }, { "value": "140824", "label": "稷山县", "id": "1826", "pid": "1494", "children": [] }, { "value": "140825", "label": "新绛县", "id": "1827", "pid": "1494", "children": [] }, { "value": "140826", "label": "绛县", "id": "1828", "pid": "1494", "children": [] }, { "value": "140827", "label": "垣曲县", "id": "1829", "pid": "1494", "children": [] }, { "value": "140828", "label": "夏县", "id": "1830", "pid": "1494", "children": [] }, { "value": "140829", "label": "平陆县", "id": "1831", "pid": "1494", "children": [] }, { "value": "140830", "label": "芮城县", "id": "1832", "pid": "1494", "children": [] }, { "value": "140881", "label": "永济市", "id": "1833", "pid": "1494", "children": [] }, { "value": "140882", "label": "河津市", "id": "1834", "pid": "1494", "children": [] }] }, { "value": "1409", "label": "忻州市", "id": "1650", "pid": "1486", "children": [{ "value": "140902", "label": "忻府区", "id": "1651", "pid": "1650", "children": [] }, { "value": "140921", "label": "定襄县", "id": "1835", "pid": "1650", "children": [] }, { "value": "140922", "label": "五台县", "id": "1836", "pid": "1650", "children": [] }, { "value": "140923", "label": "代县", "id": "1837", "pid": "1650", "children": [] }, { "value": "140924", "label": "繁峙县", "id": "1838", "pid": "1650", "children": [] }, { "value": "140925", "label": "宁武县", "id": "1839", "pid": "1650", "children": [] }, { "value": "140926", "label": "静乐县", "id": "1840", "pid": "1650", "children": [] }, { "value": "140927", "label": "神池县", "id": "1841", "pid": "1650", "children": [] }, { "value": "140928", "label": "五寨县", "id": "1842", "pid": "1650", "children": [] }, { "value": "140929", "label": "岢岚县", "id": "1843", "pid": "1650", "children": [] }, { "value": "140930", "label": "河曲县", "id": "1844", "pid": "1650", "children": [] }, { "value": "140931", "label": "保德县", "id": "1845", "pid": "1650", "children": [] }, { "value": "140932", "label": "偏关县", "id": "1846", "pid": "1650", "children": [] }, { "value": "140981", "label": "原平市", "id": "1847", "pid": "1650", "children": [] }] }, { "value": "1410", "label": "临汾市", "id": "1656", "pid": "1486", "children": [{ "value": "141002", "label": "尧都区", "id": "1659", "pid": "1656", "children": [] }, { "value": "141021", "label": "曲沃县", "id": "1848", "pid": "1656", "children": [] }, { "value": "141022", "label": "翼城县", "id": "1849", "pid": "1656", "children": [] }, { "value": "141023", "label": "襄汾县", "id": "1850", "pid": "1656", "children": [] }, { "value": "141024", "label": "洪洞县", "id": "1851", "pid": "1656", "children": [] }, { "value": "141025", "label": "古县", "id": "1852", "pid": "1656", "children": [] }, { "value": "141026", "label": "安泽县", "id": "1853", "pid": "1656", "children": [] }, { "value": "141027", "label": "浮山县", "id": "1854", "pid": "1656", "children": [] }, { "value": "141028", "label": "吉县", "id": "1855", "pid": "1656", "children": [] }, { "value": "141029", "label": "乡宁县", "id": "1856", "pid": "1656", "children": [] }, { "value": "141030", "label": "大宁县", "id": "1857", "pid": "1656", "children": [] }, { "value": "141031", "label": "隰县", "id": "1858", "pid": "1656", "children": [] }, { "value": "141032", "label": "永和县", "id": "1859", "pid": "1656", "children": [] }, { "value": "141033", "label": "蒲县", "id": "1860", "pid": "1656", "children": [] }, { "value": "141034", "label": "汾西县", "id": "1861", "pid": "1656", "children": [] }, { "value": "141081", "label": "侯马市", "id": "1862", "pid": "1656", "children": [] }, { "value": "141082", "label": "霍州市", "id": "1863", "pid": "1656", "children": [] }] }, { "value": "1411", "label": "吕梁市", "id": "1654", "pid": "1486", "children": [{ "value": "141102", "label": "离石区", "id": "1657", "pid": "1654", "children": [] }, { "value": "141121", "label": "文水县", "id": "1864", "pid": "1654", "children": [] }, { "value": "141122", "label": "交城县", "id": "1865", "pid": "1654", "children": [] }, { "value": "141123", "label": "兴县", "id": "1866", "pid": "1654", "children": [] }, { "value": "141124", "label": "临县", "id": "1867", "pid": "1654", "children": [] }, { "value": "141125", "label": "柳林县", "id": "1868", "pid": "1654", "children": [] }, { "value": "141126", "label": "石楼县", "id": "1870", "pid": "1654", "children": [] }, { "value": "141127", "label": "岚县", "id": "1871", "pid": "1654", "children": [] }, { "value": "141128", "label": "方山县", "id": "1872", "pid": "1654", "children": [] }, { "value": "141129", "label": "中阳县", "id": "1873", "pid": "1654", "children": [] }, { "value": "141130", "label": "交口县", "id": "1874", "pid": "1654", "children": [] }, { "value": "141181", "label": "孝义市", "id": "1875", "pid": "1654", "children": [] }, { "value": "141182", "label": "汾阳市", "id": "1876", "pid": "1654", "children": [] }] }] }, { "value": "13", "label": "河北省", "id": "1453", "pid": "1", "children": [{ "value": "1301", "label": "石家庄市", "id": "1454", "pid": "1453", "children": [{ "value": "130102", "label": "长安区", "id": "1756", "pid": "1454", "children": [] }, { "value": "130104", "label": "桥西区(SJZ)", "id": "1755", "pid": "1454", "children": [] }, { "value": "130105", "label": "新华区", "id": "1619", "pid": "1454", "children": [] }, { "value": "130108", "label": "裕华区", "id": "1455", "pid": "1454", "children": [] }] }, { "value": "1302", "label": "唐山市", "id": "1620", "pid": "1453", "children": [{ "value": "130202", "label": "路南区", "id": "1626", "pid": "1620", "children": [] }] }, { "value": "1303", "label": "秦皇岛", "id": "1459", "pid": "1453", "children": [{ "value": "130302", "label": "海港区", "id": "1460", "pid": "1459", "children": [] }] }, { "value": "1304", "label": "邯郸市", "id": "1625", "pid": "1453", "children": [{ "value": "130403", "label": "丛台区", "id": "1631", "pid": "1625", "children": [] }] }, { "value": "1305", "label": "邢台市", "id": "1624", "pid": "1453", "children": [{ "value": "130503", "label": "桥西区", "id": "1630", "pid": "1624", "children": [] }] }, { "value": "1306", "label": "保定市", "id": "1461", "pid": "1453", "children": [{ "value": "130602", "label": "新市区", "id": "1462", "pid": "1461", "children": [] }] }, { "value": "1307", "label": "张家口市", "id": "1456", "pid": "1453", "children": [{ "value": "130702", "label": "桥东区", "id": "1457", "pid": "1456", "children": [] }, { "value": "130703", "label": "桥西区(ZJK)", "id": "1757", "pid": "1456", "children": [] }] }, { "value": "1308", "label": "承德市", "id": "1463", "pid": "1453", "children": [{ "value": "130802", "label": "双桥区", "id": "1464", "pid": "1463", "children": [] }] }, { "value": "1309", "label": "沧州市", "id": "1622", "pid": "1453", "children": [{ "value": "130903", "label": "运河区", "id": "1628", "pid": "1622", "children": [] }] }, { "value": "1310", "label": "廊坊市", "id": "1621", "pid": "1453", "children": [{ "value": "131003", "label": "广阳区", "id": "1627", "pid": "1621", "children": [] }] }, { "value": "1311", "label": "衡水市", "id": "1623", "pid": "1453", "children": [{ "value": "131102", "label": "桃城区", "id": "1629", "pid": "1623", "children": [] }] }] }, { "value": "11", "label": "北京", "id": "1599", "pid": "1", "children": [{ "value": "1101", "label": "北京市", "id": "1600", "pid": "1599", "children": [{ "value": "110101", "label": "东城区", "id": "1733", "pid": "1600", "children": [] }, { "value": "110102", "label": "西城区", "id": "1734", "pid": "1600", "children": [] }, { "value": "110105", "label": "朝阳区", "id": "1601", "pid": "1600", "children": [] }, { "value": "110108", "label": "海淀区", "id": "1602", "pid": "1600", "children": [] }] }] }] };
 	var dataSource = [{ name: "yy2222222222222222222222222222222222222222222x",
 	  age: 1111111111111111111111111111111111111111111111113,
 	  age1: 11111111111111111111111113,
@@ -62552,7 +63075,45 @@
 	            return console.log(value);
 	          } }),
 	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          Collapse,
+	          { defaultActiveKey: ['1'] },
+	          _react2.default.createElement(
+	            Panel,
+	            { header: 'This is panel header 1', key: '1' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              '11111'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            Panel,
+	            { header: 'This is panel header 2', key: '2' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              '22222'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            Panel,
+	            { header: 'This is panel header 3', key: '3' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              '33333'
+	            )
+	          )
+	        ),
 	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          '-------------------------------------------------'
+	        ),
+	        _react2.default.createElement(NewCascader, { areaTree: areaTree.data }),
 	        _react2.default.createElement(
 	          Upload,
 	          props,
@@ -62571,6 +63132,7 @@
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(Switch, { checkedChildren: _react2.default.createElement(Icon, { type: 'check' }), unCheckedChildren: _react2.default.createElement(Icon, { type: 'cross' }) }),
 	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(Spin, { size: 'large' }),
 	        _react2.default.createElement(
 	          TreeSelect,
 	          {
@@ -62629,7 +63191,7 @@
 	exports.default = Page;
 
 /***/ },
-/* 577 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62887,7 +63449,7 @@
 	exports.default = Page4;
 
 /***/ },
-/* 578 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63873,7 +64435,7 @@
 	exports.default = Page3;
 
 /***/ },
-/* 579 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64099,7 +64661,7 @@
 	exports.default = Page;
 
 /***/ },
-/* 580 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64212,7 +64774,7 @@
 	exports.default = Page6;
 
 /***/ },
-/* 581 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64864,7 +65426,7 @@
 	exports.default = Page7;
 
 /***/ },
-/* 582 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65021,7 +65583,7 @@
 	exports.default = Time;
 
 /***/ },
-/* 583 */
+/* 586 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65121,7 +65683,7 @@
 	exports.default = Page11;
 
 /***/ },
-/* 584 */
+/* 587 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65301,7 +65863,7 @@
 	exports.default = Page4;
 
 /***/ },
-/* 585 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65519,7 +66081,7 @@
 	exports.default = Page5;
 
 /***/ },
-/* 586 */
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65527,6 +66089,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -65551,83 +66115,190 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	// Upload, Icon, Modal
-	var Upload = _monkeyui2.default.Upload;
-	var Icon = _monkeyui2.default.Icon;
-	var Modal = _monkeyui2.default.Modal;
+	var Upload = _monkeyui2.default.Upload,
+	    Icon = _monkeyui2.default.Icon,
+	    Modal = _monkeyui2.default.Modal,
+	    Button = _monkeyui2.default.Button,
+	    PreviewPicture = _monkeyui2.default.PreviewPicture;
+	/*
+	  资助图片列表
+	  诊疗图片列表
+	  [
+	    {
+	      name:'typeName',
+	      zlList:[]
+	    }
+	  ]
+	*/
 
 	var PicturesWall = function (_React$Component) {
 	  _inherits(PicturesWall, _React$Component);
 
-	  function PicturesWall() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
+	  function PicturesWall(props) {
 	    _classCallCheck(this, PicturesWall);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
+	    var _this = _possibleConstructorReturn(this, (PicturesWall.__proto__ || Object.getPrototypeOf(PicturesWall)).call(this, props));
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = PicturesWall.__proto__ || Object.getPrototypeOf(PicturesWall)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      previewVisible: false,
-	      previewImage: '',
-	      fileList: [{
-	        uid: -1,
-	        name: 'xxx.png',
-	        status: 'done',
-	        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-	      }]
-	    }, _this.handleCancel = function () {
-	      return _this.setState({ previewVisible: false });
-	    }, _this.handlePreview = function (file) {
-	      _this.setState({
-	        previewImage: file.url || file.thumbUrl,
-	        previewVisible: true
-	      });
-	    }, _this.handleChange = function (_ref2) {
-	      var fileList = _ref2.fileList;
-	      return _this.setState({ fileList: fileList });
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	    _this.state = {
+	      visible: false
+	    };
+	    return _this;
 	  }
 
 	  _createClass(PicturesWall, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {}
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {}
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {}
+	  }, {
+	    key: 'onPreview',
+	    value: function onPreview(file, type) {
+	      this.setState({ visible: true });
+	      console.log('yulan');
+	      console.log(type);
+	    }
+	  }, {
+	    key: 'onRemove',
+	    value: function onRemove(e, file) {
+	      console.log('remove');
+	      console.log(e);
+	      console.log(file);
+	    }
+	  }, {
+	    key: 'del',
+	    value: function del(e, data) {
+	      e.preventDefault();
+	      e.stopPropagation();
+	      console.log('del');
+	      console.log(e);
+	      console.log(data);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _state = this.state,
-	          previewVisible = _state.previewVisible,
-	          previewImage = _state.previewImage,
-	          fileList = _state.fileList;
+	      var _this2 = this;
 
-	      var uploadButton = _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(Icon, { type: 'plus' }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ant-upload-text' },
-	          'Upload'
-	        )
-	      );
+	      var props = {
+	        action: '/upload.do',
+	        listType: 'picture',
+	        defaultFileList: [{
+	          uid: -1,
+	          name: 'xxx.png',
+	          type: '资助申请表',
+	          status: 'done',
+	          fileId: '001',
+	          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+	          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+	        }, {
+	          uid: -2,
+	          name: 'yyy.png',
+	          status: 'done',
+	          type: '资助申请表',
+	          fileId: '002',
+	          url: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg',
+	          thumbUrl: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg'
+	        }, {
+	          uid: -3,
+	          name: 'xxx.png',
+	          type: '资助申请表',
+	          status: 'done',
+	          fileId: '001',
+	          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+	          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+	        }, {
+	          uid: -4,
+	          name: 'yyy.png',
+	          status: 'done',
+	          type: '资助申请表',
+	          fileId: '002',
+	          url: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg',
+	          thumbUrl: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg'
+	        }, {
+	          uid: -5,
+	          name: 'xxx.png',
+	          type: '资助申请表',
+	          status: 'done',
+	          fileId: '001',
+	          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+	          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+	        }, {
+	          uid: -6,
+	          name: 'yyy.png',
+	          status: 'done',
+	          type: '资助申请表',
+	          fileId: '002',
+	          url: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg',
+	          thumbUrl: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg'
+	        }, {
+	          uid: -7,
+	          name: 'xxx.png',
+	          type: '资助申请表',
+	          status: 'done',
+	          fileId: '001',
+	          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+	          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+	        }, {
+	          uid: -8,
+	          name: 'yyy.png',
+	          status: 'done',
+	          type: '资助申请表',
+	          fileId: '002',
+	          url: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg',
+	          thumbUrl: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg'
+	        }, {
+	          uid: -9,
+	          name: 'xxx.png',
+	          type: '资助申请表',
+	          status: 'done',
+	          fileId: '001',
+	          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+	          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+	        }, {
+	          uid: -10,
+	          name: 'yyy.png',
+	          status: 'done',
+	          type: '资助申请表',
+	          fileId: '002',
+	          url: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg',
+	          thumbUrl: 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg'
+	        }]
+	      };
+	      var _props = {
+	        fileList: props.defaultFileList,
+	        visible: this.state.visible,
+	        del: this.del,
+	        delFlag: 'block',
+	        title: "诊疗图片列表/住院报告单"
+	      };
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'clearfix' },
+	        null,
 	        _react2.default.createElement(
 	          Upload,
-	          {
-	            action: '/upload.do',
-	            listType: 'picture-card',
-	            fileList: fileList,
-	            onPreview: this.handlePreview,
-	            onChange: this.handleChange
-	          },
-	          fileList.length >= 3 ? null : uploadButton
+	          _extends({}, props, {
+	            className: 'upload-list-inline',
+	            onPreview: function onPreview(file) {
+	              return _this2.onPreview(file, "资助申请表");
+	            },
+	            onRemove: function onRemove(e, file) {
+	              return _this2.onRemove(e, file);
+	            }
+	          }),
+	          _react2.default.createElement(
+	            Button,
+	            null,
+	            _react2.default.createElement(Icon, { type: 'upload' }),
+	            ' upload'
+	          )
 	        ),
-	        _react2.default.createElement(
-	          Modal,
-	          { visible: previewVisible, footer: null, onCancel: this.handleCancel },
-	          _react2.default.createElement('img', { alt: 'example', style: { width: '100%' }, src: previewImage })
-	        )
+	        _react2.default.createElement(PreviewPicture, _props)
 	      );
 	    }
 	  }]);

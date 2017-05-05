@@ -24,7 +24,7 @@ export default class Pagination extends React.Component {
       locale = this.context.antLocale.Pagination;
     } else {
       locale = this.props.locale;
-    }
+    } 
 
     if (this.props.size === 'small') {
       className += ' mini';
