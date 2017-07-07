@@ -8,6 +8,7 @@ var Tree=MonkeyUi.Tree;
 var TreeNode=Tree.TreeNode;
 var Modal=MonkeyUi.Modal;
 var AutoComplete=MonkeyUi.AutoComplete;
+var Loading=MonkeyUi.Loading;
 const ModalTree = React.createClass({
     getInitialState() {
         return { visible: false };
@@ -32,6 +33,7 @@ const ModalTree = React.createClass({
     render() {
         return (
             <div>
+            <Loading loading="show" text="加载中..."/>
             <Button type="primary" onClick={this.showModal}>Open a modal dialog</Button>
                 <Modal title="Basic Modal" visible={this.state.visible}
                 onOk={this.handleOk} onCancel={this.handleCancel}

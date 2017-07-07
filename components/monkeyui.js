@@ -28,6 +28,7 @@ import TreeSelect from "./treeSelect/index";
 import Switch from "./switch/index";
 import PreviewPicture from "./previewPicture/index";
 import NewCascader from "./newCascader/index";
+import Loading from	 "./loading/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -58,6 +59,7 @@ var MonkeyUi = {
 	TreeSelect : TreeSelect,
 	Switch : Switch,
 	PreviewPicture : PreviewPicture,
-	NewCascader : NewCascader 
+	NewCascader : NewCascader,
+	Loading : Loading
 }
 export default MonkeyUi;
