@@ -28,7 +28,16 @@ export default class Select extends React.Component {
 
   render() {
     let {
-      size, className, combobox, notFoundContent, prefixCls, showSearch, optionLabelProp,
+      prefixCls,
+      className = '',
+      size,
+      mode,
+      multiple,
+      tags,
+      combobox,
+      notFoundContent, 
+      showSearch, 
+      optionLabelProp,
     } = this.props;
 
     const cls = classNames({
@@ -49,8 +58,17 @@ export default class Select extends React.Component {
       optionLabelProp = optionLabelProp || 'value';
     }
 
+    const isCombobox = mode === 'combobox' || combobox;
+    
+    const modeConfig = {
+      multiple: mode === 'multiple' || multiple,
+      tags: mode === 'tags' || tags,
+      combobox: isCombobox,
+    };
+
     return (
       <RcSelect {...this.props}
+        {...modeConfig}
         className={cls}
         optionLabelProp={optionLabelProp || 'children'}
         notFoundContent={notFoundContent}
