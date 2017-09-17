@@ -29,6 +29,7 @@ import Switch from "./switch/index";
 import PreviewPicture from "./previewPicture/index";
 import NewCascader from "./newCascader/index";
 import Loading from	 "./loading/index";
+import TimePicker from "./time-picker/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -60,6 +61,7 @@ var MonkeyUi = {
 	Switch : Switch,
 	PreviewPicture : PreviewPicture,
 	NewCascader : NewCascader,
-	Loading : Loading
+	Loading : Loading,
+	TimePicker: TimePicker
 }
 export default MonkeyUi;

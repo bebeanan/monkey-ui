@@ -1,10 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
+import moment from 'moment';
 var Button=MonkeyUi.Button;
 var Icon=MonkeyUi.Icon;
 var ButtonGroup=Button.ButtonGroup;
+var TimePicker = MonkeyUi.TimePicker;
 class Page4 extends React.Component{
+	constructor(){
+		super()
+		this.state={
+			open:false
+		}
+	}
+	handleOpenChange = (open) => {
+    this.setState({ open });
+  }
+
+  handleClose = () => this.setState({ open: false })
+	onChange = (time,timeString) =>{
+		console.log(time,timeString);
+	}
   render() {
     return (
       <div className="mancatain">
@@ -70,6 +86,17 @@ class Page4 extends React.Component{
 				    <Button type="dashed" disabled>Dashed</Button>
 			    </div>
 		  </div>
+			<TimePicker onChange={this.onChange} defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />
+			<TimePicker
+        open={this.state.open}
+        onOpenChange={this.handleOpenChange}
+				onChange={this.onChange}
+        addon={() => (
+          <Button size="small" type="primary" onClick={this.handleClose}>
+            Ok
+          </Button>
+        )}
+      />
       </div>
     );
   }
