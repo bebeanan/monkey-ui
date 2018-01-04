@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
 var Button=MonkeyUi.Button;
 var Icon=MonkeyUi.Icon;
+var Row=MonkeyUi.Row;
+var Col=MonkeyUi.Col;
 var Checkbox=MonkeyUi.Checkbox;
 const CheckboxGroup = Checkbox.Group;
 const defaultCheckedList = ['Apple', 'Orange'];
@@ -29,11 +31,16 @@ const Page6 = React.createClass({
       checkAll: false,
        checked: true,
       disabled: false,
+      value:[]
     };
   },
   onChange(e){
     console.log('checked',e.target.checked);
     this.setState({ checked: !this.state.checked });
+  },
+  change(checkedValues){
+    console.log(checkedValues);
+    // this.setState({value:checkedValues});
   },
   render() {
   	const label = `${this.state.checked ? 'Checked' : 'Unchecked'}-${this.state.disabled ? 'Disabled' : 'Enabled'}`;
@@ -45,7 +52,19 @@ const Page6 = React.createClass({
 			<div>
 				<Checkbox onChange={this.onChange} checked={this.state.checked}>Checkbox</Checkbox>
 				<Checkbox onChange={onChange1}>Checkbox</Checkbox>
-		    </div>
+		  </div>
+      <div>
+        <h3>CheckboxGroup</h3>
+        <CheckboxGroup style={{ width: '100%' }} onChange={this.change}>
+          <Row>
+            <Col span={8}><Checkbox value="A">A</Checkbox></Col>
+            <Col span={8}><Checkbox value="B">B</Checkbox></Col>
+            <Col span={8}><Checkbox value="C">C</Checkbox></Col>
+            <Col span={8}><Checkbox value="D">D</Checkbox></Col>
+            <Col span={8}><Checkbox value="E">E</Checkbox></Col>
+          </Row>
+        </CheckboxGroup>
+      </div>
 		  </div>
 	      <h3><Icon type="setting" />不可用</h3>
 	      <div  className="mancatain_div">
