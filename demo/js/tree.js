@@ -33,7 +33,6 @@ const ModalTree = React.createClass({
     render() {
         return (
             <div>
-            <Loading loading="show" text="加载中..."/>
             <Button type="primary" onClick={this.showModal}>Open a modal dialog</Button>
                 <Modal title="Basic Modal" visible={this.state.visible}
                 onOk={this.handleOk} onCancel={this.handleCancel}
@@ -67,7 +66,7 @@ const TreeDemo = React.createClass({
     },
     render() {
         return (
-            <Tree className="myCls" showLine checkable
+            <Tree className="myCls"  checkable
                 defaultExpandedKeys={this.state.defaultExpandedKeys}
                 defaultSelectedKeys={this.state.defaultSelectedKeys}
                 defaultCheckedKeys={this.state.defaultCheckedKeys}
