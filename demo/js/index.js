@@ -13,6 +13,7 @@ import Timeline from './timeline.js';
 import Carousel from './carousel.js';
 import Tree from './tree.js';
 import Complete from './complete.js';
+import Grid from './grid';
 // import TreeSelect from './treeselect.js';
 import Upload from './upload.js';
 var Row=MonkeyUi.Row;
@@ -64,6 +65,7 @@ ReactDOM.render(
       <Route path="/tree" component={Tree}/>
       <Route path="/complete" component={Complete}/>
       <Route path="/upload" component={Upload}/>
+      <Route path="/grid" component={Grid}/>
     </Route>
   </Router>
 ,

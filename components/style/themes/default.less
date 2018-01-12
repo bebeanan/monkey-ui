@@ -132,7 +132,18 @@
 @screen-sm              : 768px;
 @screen-sm-min          : @screen-sm;
 @screen-sm-max          : (@screen-sm-min - 1);
+////////////////
+@screen-xl              : 1200px;
+@screen-xl-min          : @screen-xl;
 
+@screen-xxl              : 1600px;
+@screen-xxl-min          : @screen-xxl;
+
+@screen-xl-max          : (@screen-xxl-min - 1px);
+
+@screen-lg-max          : (@screen-xl-min - 1px);
+// provide a maximum
+/////////////////
 // Medium screen / desktop
 @screen-md              : 992px;
 @screen-md-min          : @screen-md;
@@ -141,7 +152,7 @@
 // Large screen / wide desktop
 @screen-lg              : 1200px;
 @screen-lg-min          : @screen-lg;
-@screen-lg-max          : (@screen-lg-min - 1);
+// @screen-lg-max          : (@screen-lg-min - 1);
 
 // Grid system
 @grid-columns           : 24;

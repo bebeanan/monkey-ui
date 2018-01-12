@@ -1,5 +1,7 @@
-import Row from "./layout/row";
-import Col from "./layout/col";
+// import Row from "./layout/row";
+// import Col from "./layout/col";
+import Row from "./row/index";
+import Col from "./col/index";
 import Button from "./button/index";
 import Checkbox from "./checkbox/index";
 import Modal from "./modal/index";

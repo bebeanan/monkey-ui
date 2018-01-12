@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
+
 var Row=MonkeyUi.Row;
+console.log('------------')
+console.log(Row)
 var Button=MonkeyUi.Button;
 var Col=MonkeyUi.Col;
 var Menu=MonkeyUi.Menu;
