@@ -32,6 +32,7 @@ import PreviewPicture from "./previewPicture/index";
 import NewCascader from "./newCascader/index";
 import Loading from	 "./loading/index";
 import TimePicker from "./time-picker/index";
+import DatePicker from "./date-picker/index";
 var MonkeyUi = {
 	Row : Row,
 	Col : Col,
@@ -64,6 +65,7 @@ var MonkeyUi = {
 	PreviewPicture : PreviewPicture,
 	NewCascader : NewCascader,
 	Loading : Loading,
-	TimePicker: TimePicker
+	TimePicker: TimePicker,
+	DatePicker : DatePicker
 }
 export default MonkeyUi;
