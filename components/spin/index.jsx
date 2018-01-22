@@ -72,6 +72,7 @@ export default class Spin extends React.Component {
     const spinClassName = classNames(prefixCls, {
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-yyxlg`]: size === 'yyx-large',
       [`${prefixCls}-spinning`]: spinning,
       [`${prefixCls}-show-text`]: !!tip,
     }, className);

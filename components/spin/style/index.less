@@ -71,6 +71,18 @@
         margin-top: -@spin-dot-size-lg / 2 - 10;
       }
     }
+
+    > div > .@{spin-prefix-cls}-yyxlg {
+      .@{spin-prefix-cls}-dot {
+        margin: -@spin-dot-size-lg / 2;
+      }
+      .@{spin-prefix-cls}-text {
+        padding-top: (@spin-dot-size-lg - @font-size-base) / 2 + 2;
+      }
+      &.@{spin-prefix-cls}-show-text .@{spin-prefix-cls}-dot {
+        margin-top: -@spin-dot-size-lg / 2 - 10;
+      }
+    }
   }
 
   &-container {
@@ -168,6 +180,15 @@
     i {
       width: 14px;
       height: 14px;
+    }
+  }
+
+  //yyx_large
+  &-yyxlg &-dot {
+    .square(@spin-dot-size-yyxlg);
+    i {
+      width: 30px;
+      height: 30px;
     }
   }
 

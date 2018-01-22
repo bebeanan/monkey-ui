@@ -34,38 +34,45 @@ import Loading from	 "./loading/index";
 import TimePicker from "./time-picker/index";
 import DatePicker from "./date-picker/index";
 var MonkeyUi = {
-	Row : Row,
-	Col : Col,
-	Button : Button,
-	Checkbox : Checkbox,
-	Modal : Modal,
-	Tree : Tree,
-	Message:Message,
+	
 	Alert : Alert,
+	AutoComplete : AutoComplete,
+	Button : Button,
+	Col : Col,
 	Collapse : Collapse,
+	Checkbox : Checkbox,
+	Carousel:Carousel,
+	Cascader : Cascader,
+	Dropdown : Dropdown,
+	DatePicker : DatePicker,
+	Form : Form,
+	Icon : Icon,
 	Input : Input,
+	Loading : Loading,
 	Table : Table,
+	Popover : Popover,
+	Pagination : Pagination,
+	PreviewPicture : PreviewPicture,
 	Radio : Radio,
+	Row : Row,
 	Select : Select,
 	Spin : Spin,
-	Pagination : Pagination,
-	Dropdown : Dropdown,
-	Menu : Menu,
-	Icon : Icon,
-	Timeline : Timeline,
-	Carousel:Carousel,
-    AutoComplete : AutoComplete,
-	Form : Form,
-	Tooltip : Tooltip,
-	Popover : Popover,
-	Upload : Upload,
-	Cascader : Cascader,
-	TreeSelect : TreeSelect,
 	Switch : Switch,
-	PreviewPicture : PreviewPicture,
-	NewCascader : NewCascader,
-	Loading : Loading,
+	Tree : Tree,
+	TreeSelect : TreeSelect,
+	Tooltip : Tooltip,
 	TimePicker: TimePicker,
-	DatePicker : DatePicker
+	Timeline : Timeline,
+	Menu : Menu,
+	Modal : Modal,
+	Message:Message,
+	NewCascader : NewCascader,
+	Upload : Upload
+	
+	
+	
+	
+	
+	
 }
 export default MonkeyUi;

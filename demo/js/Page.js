@@ -213,7 +213,7 @@ class Page extends React.Component{
           <br />
           <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="cross" />} />
           <br/>
-          <Spin size="large" />
+          <Spin size="yyx-large" />
            <TreeSelect
         showSearch
         style={{ width: 300 }}

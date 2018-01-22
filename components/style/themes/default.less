@@ -81,8 +81,12 @@
 @outline-color          : @primary-color;
 
 // Background color
-@background-color-base  : #f7f7f7;        // basic gray background
+// @background-color-base  : #f7f7f7;        // basic gray background
+@background-color-base  : hsv(0, 0, 96%);  // Default grey background color
 
+// Disabled states
+@disabled-color         : fade(#000, 25%);
+@disabled-bg            : @background-color-base;
 // Shadow
 @shadow-color           : rgba(0, 0, 0, .2);
 @box-shadow-base        : @shadow-1-down;
@@ -250,6 +254,7 @@
 @spin-dot-size-sm: 14px;
 @spin-dot-size: 20px;
 @spin-dot-size-lg: 32px;
+@spin-dot-size-yyxlg:82px;
 
 // TimePicker
 // ---
