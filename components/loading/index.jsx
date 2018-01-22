@@ -32,7 +32,7 @@ class Loading extends React.Component {
     return (
       <div>
           <div className="cover" style={{display:loading=='show'?'block':'none'}}></div>
-          <div className={"spinner "+this.props.loading} style={{left:'50%',top:'50%'}}>
+          <div className={"spinner "+this.props.loading} style={{left:'50%',top:'34%'}}>
               <div className="spinner-container container1">
                 <div className="circle1"></div>
                 <div className="circle2"></div>
