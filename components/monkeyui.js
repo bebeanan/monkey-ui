@@ -33,11 +33,14 @@ import NewCascader from "./newCascader/index";
 import Loading from	 "./loading/index";
 import TimePicker from "./time-picker/index";
 import DatePicker from "./date-picker/index";
+import BatchUpload from "./batchUpload/index";
+
 var MonkeyUi = {
 	
 	Alert : Alert,
 	AutoComplete : AutoComplete,
 	Button : Button,
+	BatchUpload : BatchUpload,
 	Col : Col,
 	Collapse : Collapse,
 	Checkbox : Checkbox,

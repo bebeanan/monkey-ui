@@ -51,7 +51,30 @@ class Time extends React.Component{
 ```
 ___________________________________________
 
+##BatchUpload  component usage
+图片上传组件接口参数：
 
+	accept      string    默认为空    接受选择文件类型
+	multiple    bool      默认true	  是否支持多选
+	fileList    array     默认[]      预览图片列表
+	uploadUrl   string    not null    图片上传路径
+	onChange    func      默认noop    开始上传回调函数
+	onSuccess   func      默认noop    图片上传成功回调
+	preivewPic  func	  默认noop    预览图片回调
+	removePic   func      默认noop    删除图片回调
+```javascript
+const MonkeyUi from 'monkeyui';
+const {BatchUpload} = MonkeyUi;
+
+<BatchUpload
+    {...upload_props}
+    onChange={(file)=>{}}
+    onSuccess={(response, file)=>{}}
+    onPreview={(file)=>{}}
+    fileList={fileList}
+    removePic={(file)=>{}}
+    className="upload-list-inline"/>
+```
 ### to run the examples 
 
  1. Clone this repo
