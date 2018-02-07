@@ -1,0 +1,100 @@
+.y-con{
+    display: inline-block;
+    position: absolute;
+    width:99%;
+    min-height: 20px;
+    cursor: pointer;
+    z-index: 500;
+    background-color: white;
+}
+.y-uls{
+    list-style: none;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    z-index: 100;
+    border: 1px solid gray;
+    /* overflow-y: scroll; */
+}
+
+.special-warp li{
+        padding: 10px;
+        margin: 0px;
+        border-bottom: 1px solid #ededed;
+        height: 18px;
+        line-height: 18px;
+        list-style: none;
+}
+
+.special-warp > div {
+    overflow: hidden;
+      border: 2px solid #ddd;
+      position: absolute;
+}
+
+.arrow-up > div:after{
+    content: '▲';
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    color: gray;
+    font-size: 13px;
+}
+.arrow-down > div:after{
+    content: '▼';
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    color: gray;
+    font-size: 13px;
+}
+.special-warp li:hover{
+    background-color: #dde8f3;
+}
+.defaultText{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.arrow{
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    border-width: 0px 7px 7px 7px;
+    border-color: #3da5e7 transparent;
+    border-style: solid;
+    position: absolute;
+    right: 5%;
+    bottom: 45%;
+}
+
+.container{
+    height: 30px;
+    position: relative;
+    min-width: 100px
+}
+
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #3da5e7;
+    position: absolute;
+    right: 5%;
+    bottom: 40%;
+    transition:all 1s;
+}
+
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #3da5e7;
+    position: absolute;
+    right: 5%;
+    bottom: 40%;
+    transition:all 1s;
+}

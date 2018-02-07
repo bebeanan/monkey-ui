@@ -34,6 +34,7 @@ import Loading from	 "./loading/index";
 import TimePicker from "./time-picker/index";
 import DatePicker from "./date-picker/index";
 import BatchUpload from "./batchUpload/index";
+import PullSelect from "./pull-select/index";
 
 var MonkeyUi = {
 	
@@ -70,7 +71,8 @@ var MonkeyUi = {
 	Modal : Modal,
 	Message:Message,
 	NewCascader : NewCascader,
-	Upload : Upload
+	Upload : Upload,
+	PullSelect
 	
 	
 	
