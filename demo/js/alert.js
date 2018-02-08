@@ -4,7 +4,8 @@ import MonkeyUi from '../../lib/monkeyui.js';
 var Alert=MonkeyUi.Alert;
 var Icon=MonkeyUi.Icon;
 const onClose = function (e) {
-  console.log(e, 'I was closed.');
+	console.log(e, 'I was closed.');
+	const log = console.log;
 };
 class Page extends React.Component{
   render() {
