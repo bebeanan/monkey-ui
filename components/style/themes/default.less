@@ -37,6 +37,7 @@
 @disabled-color-dark    : fade(#fff, 35%);
 @font-size-base         : 12px;
 @font-size-lg           : @font-size-base + 2px;
+@font-size-sm           : 12px;
 @line-height-base       : 1.5;
 @border-radius-base     : 4px;
 @border-radius-sm       : 2px;
@@ -210,6 +211,9 @@
 @input-hover-border-color    : @primary-color;
 @input-disabled-bg           : @background-color-base;
 
+@background-color-light : hsv(0, 0, 98%);  // background of header and selected item
+// @background-color-base  : hsv(0, 0, 96%);  // Default grey background color
+
 // Tooltip
 // ---
 //* Tooltip max width
@@ -272,3 +276,8 @@
 // ---
 @badge-height: 20px;
 @badge-dot-size: 8px;
+
+//tabs
+@tabs-card-head-background: @background-color-light;
+@tabs-card-height: 40px;
+@tabs-title-font-size: @font-size-base;

@@ -14,6 +14,7 @@ import Carousel from './carousel.js';
 import Tree from './tree.js';
 import Complete from './complete.js';
 import Grid from './grid';
+import Tab from './tabs';
 // import TreeSelect from './treeselect.js';
 import Upload from './upload.js';
 var Row=MonkeyUi.Row;
@@ -66,6 +67,7 @@ ReactDOM.render(
       <Route path="/complete" component={Complete}/>
       <Route path="/upload" component={Upload}/>
       <Route path="/grid" component={Grid}/>
+      <Route path="/tabs" component={Tab}/>
     </Route>
   </Router>
 ,
