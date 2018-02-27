@@ -6,55 +6,55 @@ import warning from 'warning';
 function noop() {
 }
 
-export interface SelectParam {
-  key: string;
-  keyPath: Array<string>;
-  item: any;
-  domEvent: any;
-  selectedKeys: Array<string>;
-}
+// export interface SelectParam {
+//   key: string;
+//   keyPath: Array<string>;
+//   item: any;
+//   domEvent: any;
+//   selectedKeys: Array<string>;
+// }
 
-export interface ClickParam {
-  key: string;
-  keyPath: Array<string>;
-  item: any;
-  domEvent: any;
-}
+// export interface ClickParam {
+//   key: string;
+//   keyPath: Array<string>;
+//   item: any;
+//   domEvent: any;
+// }
 
-export interface MenuProps {
-  id?: string;
-  /** 主题颜色*/
-  theme?: 'light' | 'dark';
-  /** 菜单类型  enum: `vertical` `horizontal` `inline`*/
-  mode?: 'vertical' | 'horizontal' | 'inline';
-  /** 当前选中的菜单项 key 数组*/
-  selectedKeys?: Array<string>;
-  /** 初始选中的菜单项 key 数组*/
-  defaultSelectedKeys?: Array<string>;
-  /** 当前展开的菜单项 key 数组*/
-  openKeys?: Array<string>;
-  /** 初始展开的菜单项 key 数组*/
-  defaultOpenKeys?: Array<string>;
-  onOpenChange?: (openKeys: string[]) => void;
-  /**
-   * 被选中时调用
-   *
-   * @type {(item: any, key: string, selectedKeys: Array<string>) => void}
-   */
-  onSelect?: (param: SelectParam) => void;
-  /** 取消选中时调用*/
-  onDeselect?: (param: SelectParam) => void;
-  /** 点击 menuitem 调用此函数*/
-  onClick?: (param: ClickParam) => void;
-  /** 根节点样式*/
-  style?: React.CSSProperties;
-  openAnimation?: string | Object;
-  openTransitionName?: string | Object;
-  className?: string;
-  prefixCls?: string;
-}
+// export interface MenuProps {
+//   id?: string;
+//   /** 主题颜色*/
+//   theme?: 'light' | 'dark';
+//   /** 菜单类型  enum: `vertical` `horizontal` `inline`*/
+//   mode?: 'vertical' | 'horizontal' | 'inline';
+//   /** 当前选中的菜单项 key 数组*/
+//   selectedKeys?: Array<string>;
+//   /** 初始选中的菜单项 key 数组*/
+//   defaultSelectedKeys?: Array<string>;
+//   /** 当前展开的菜单项 key 数组*/
+//   openKeys?: Array<string>;
+//   /** 初始展开的菜单项 key 数组*/
+//   defaultOpenKeys?: Array<string>;
+//   onOpenChange?: (openKeys: string[]) => void;
+//   /**
+//    * 被选中时调用
+//    *
+//    * @type {(item: any, key: string, selectedKeys: Array<string>) => void}
+//    */
+//   onSelect?: (param: SelectParam) => void;
+//   /** 取消选中时调用*/
+//   onDeselect?: (param: SelectParam) => void;
+//   /** 点击 menuitem 调用此函数*/
+//   onClick?: (param: ClickParam) => void;
+//   /** 根节点样式*/
+//   style?: React.CSSProperties;
+//   openAnimation?: string | Object;
+//   openTransitionName?: string | Object;
+//   className?: string;
+//   prefixCls?: string;
+// }
 
-export default class Menu extends React.Component<MenuProps, any> {
+export default class Menu extends React.Component{
   static Divider = Divider;
   static Item = Item;
   static SubMenu = SubMenu;
@@ -66,7 +66,7 @@ export default class Menu extends React.Component<MenuProps, any> {
     className: '',
     theme: 'light',  // or dark
   };
-  switchModeFromInline: boolean;
+  switchModeFromInline;
   constructor(props) {
     super(props);
 
@@ -92,8 +92,10 @@ export default class Menu extends React.Component<MenuProps, any> {
     this.setOpenKeys([]);
     this.props.onClick(e);
   }
-  handleOpenChange = (openKeys: string[]) => {
+  handleOpenChange = (openKeys) => {
     this.setOpenKeys(openKeys);
+    console.log(openKeys)
+    console.log(this.props)
     this.props.onOpenChange(openKeys);
   }
   setOpenKeys(openKeys) {

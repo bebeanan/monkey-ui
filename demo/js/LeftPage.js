@@ -35,6 +35,7 @@ const Page = React.createClass({
         onClick={this.handleClick}
         defaultOpenKeys={['sub1']}
         selectedKeys={[this.state.current]}
+        onOpenChange={this.onOpenChange}
         mode="inline"
       >
         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>主要模块说明</span></span>}>
