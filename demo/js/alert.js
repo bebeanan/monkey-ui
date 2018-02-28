@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import MonkeyUi from '../../lib/monkeyui.js';
 var Alert=MonkeyUi.Alert;
 var Icon=MonkeyUi.Icon;
+const BatchUpload = MonkeyUi.BatchUpload
+console.log('888')
+console.log(BatchUpload)
 const onClose = function (e) {
 	console.log(e, 'I was closed.');
 	const log = console.log;

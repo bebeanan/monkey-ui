@@ -33,7 +33,7 @@ import NewCascader from "./newCascader/index";
 import Loading from	 "./loading/index";
 import TimePicker from "./time-picker/index";
 import DatePicker from "./date-picker/index";
-import BatchUpload from "./batchUpload/index";
+import BatchUpload from "./batch-upload/index";
 import PullSelect from "./pull-select/index";
 import Tabs from "./tabs/index";
 
