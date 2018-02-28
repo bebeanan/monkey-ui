@@ -1,6 +1,6 @@
 {
   "name": "monkeyui",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "title": "monkeyui",
   "description": "react components.",
   "author": "bebeanan",
@@ -33,6 +33,7 @@
     "rc-progress": "~1.0.4",
     "rc-queue-anim": "~0.12.4",
     "rc-radio": "~2.0.0",
+    "rc-tabs": "^9.1.2",
     "rc-rate": "~1.1.2",
     "rc-select": "~6.4.6",
     "rc-slider": "~4.0.0",
@@ -44,9 +45,11 @@
     "rc-tree-select": "~1.8.0",
     "rc-upload": "~2.0.3",
     "rc-util": "~3.3.0",
+    "rc-menu": "^6.2.0",
     "react-addons-pure-render-mixin": "^15.0.0",
     "react-slick": "~0.13.3",
-    "warning": "~3.0.0"
+    "warning": "~3.0.0",
+    "react-motion":"0.5.2"
   },
   "repository": {
     "type": "git",
