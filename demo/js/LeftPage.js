@@ -17,6 +17,7 @@ const Page = React.createClass({
     this.setState({ current: e.key });
   },
   onOpenChange(openKeys) {
+    console.log(openKeys)
     const latestOpenKey = openKeys.find(key => !(this.state.openKeys.indexOf(key) > -1));
     this.setState({ openKeys: this.getKeyPath(latestOpenKey) });
   },
