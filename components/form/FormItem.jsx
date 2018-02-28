@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Row from '../layout/row';
-import Col from '../layout/col';
+import Row from "../row/index";
+import Col from "../col/index";
 import { FIELD_META_PROP } from './constants';
 
 export default class FormItem extends React.Component {

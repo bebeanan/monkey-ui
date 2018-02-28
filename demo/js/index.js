@@ -15,6 +15,7 @@ import Tree from './tree.js';
 import Complete from './complete.js';
 import Grid from './grid';
 import Tab from './tabs';
+import Toolt from './tooltip';
 // import TreeSelect from './treeselect.js';
 import Upload from './upload.js';
 var Row=MonkeyUi.Row;
@@ -68,6 +69,7 @@ ReactDOM.render(
       <Route path="/upload" component={Upload}/>
       <Route path="/grid" component={Grid}/>
       <Route path="/tabs" component={Tab}/>
+      <Route path="/tooltip" component={Toolt}/>
     </Route>
   </Router>
 ,

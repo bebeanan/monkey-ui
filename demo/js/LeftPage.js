@@ -63,6 +63,7 @@ const Page = React.createClass({
           <Menu.Item key="23"><Link to="/upload">Upload</Link></Menu.Item>
           <Menu.Item key="24"><Link to="/grid">Grid</Link></Menu.Item>
           <Menu.Item key="25"><Link to="/tabs">Tabs</Link></Menu.Item>
+          <Menu.Item key="26"><Link to="/tooltip">Tooltip</Link></Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>详细介绍</span></span>}>
         </SubMenu>

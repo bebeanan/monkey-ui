@@ -1,5 +1,6 @@
 // import Row from "./layout/row";
 // import Col from "./layout/col";
+import Layout from "./layout/index";
 import Row from "./row/index";
 import Col from "./col/index";
 import Button from "./button/index";
@@ -11,6 +12,7 @@ import Alert from "./alert/index";
 import Collapse from "./collapse/index";
 import Input from "./input/index";
 import Table from "./table/index";
+import Tooltip from "./tooltip/index";
 import Radio from "./radio/index";
 import Select from "./select/index";
 import Pagination from "./pagination/index";
@@ -22,7 +24,6 @@ import Timeline from "./timeline/index";
 import Carousel from "./carousel/index";
 import AutoComplete from "./autoComplete/index";
 import Form  from "./form/index";
-import Tooltip from "./tooltip/index";
 import Popover from "./popover/index";
 import Upload from "./upload/index";
 import Cascader from "./cascader/index";
@@ -53,7 +54,8 @@ var MonkeyUi = {
 	Form : Form,
 	Icon : Icon,
 	Input : Input,
-	Loading : Loading,
+	Loading ,
+	Layout,
 	Table : Table,
 	Popover : Popover,
 	Pagination : Pagination,
