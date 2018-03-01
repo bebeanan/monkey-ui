@@ -45,21 +45,36 @@ class UploadPic extends React.Component {
     obj.index=index?index:undefined;
     return obj;
   }
-  _change(e){
+  inputChange(e){
+    let {onChange,onSuccess} = this.props;
+    onChange = onChange ? onChange : noop;
+    onSuccess = onSuccess ? onSuccess : noop;
+    
+    let responseList = [];
     let files=e.target.files;
     let length=files.length;
     var index=0;
-    this.props.onChange?this.props.onChange(files):noop();
+
+    onChange(files);
+
     this.setState({length:length});
     //loading组件初始化
     this.setLoadingComponent(1,length,'init');
-    //追加文件数据    
+    //上传文件数据    
     for(let i=0;i<length;i++){      
          
          this.upload_ajax(files[i]).then(
             (data)=>{
-                        this.props.onSuccess?this.props.onSuccess(data,this.setFileObj(data.data,++index)):noop();
+                        // responseFileObj
+                        let fileObj = this.setFileObj(data.data,++index)
+                        //单次成功回调
+                        onSuccess(data,fileObj);
+                        //缓存上传结果
+                        responseList.push(fileObj);
+                        //loading
                         this.setLoadingComponent(index,length);
+                        //是否触发批次上传成功
+                        this.emitBatchSuccess(length,index,files,responseList);
                     }
         ).catch((error)=>{alert(error);this.setState({loading:'hide'})});     
     }
@@ -67,17 +82,28 @@ class UploadPic extends React.Component {
     e.target.value="";
     
   }
+  emitBatchSuccess(length,index,files,responseList){
+    if(length!=index)
+      return;
+    let { batchSuccess } = this.props;
+    batchSuccess = batchSuccess ? batchSuccess : noop;
+
+    batchSuccess(files,responseList);
+  }
   setLoadingComponent(index,length,type){
-    let str='';
+    
+    //首次loading
     let stateObj=this.state;
     stateObj.loading='show';
     stateObj.loadingText='上传中'+index+'/'+length+'...';
     this.setState(stateObj);
-    
+    //这批次图片上传结束
     if((index==length)&&type!='init'){
         setTimeout(()=>{
             stateObj.loading='hide';
-            this.setState(stateObj);
+            this.setState(stateObj,()=>{
+
+            });
         },500)
     }
 
@@ -165,7 +191,7 @@ class UploadPic extends React.Component {
                 <input type="file"
                         {...inputFileProps} 
                         ref="inputFile" 
-                        onChange={(e)=>this._change(e)} 
+                        onChange={(e)=>this.inputChange(e)} 
                         style={{display:'none'}}/>
                 <PicList {...picListProps}/>
     </div>

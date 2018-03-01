@@ -59,6 +59,7 @@ ___________________________________________
 	fileList    array     默认[]      预览图片列表
 	uploadUrl   string    not null    图片上传路径
 	onChange    func      默认noop    开始上传回调函数
+    batchSuccess func     默认noop    批次上传成功回调
 	onSuccess   func      默认noop    图片上传成功回调
 	preivewPic  func	  默认noop    预览图片回调
 	removePic   func      默认noop    删除图片回调
@@ -70,6 +71,7 @@ const {BatchUpload} = MonkeyUi;
     {...upload_props}
     onChange={(file)=>{}}
     onSuccess={(response, file)=>{}}
+    batchSuccess={(file,responseList)=>{}}
     onPreview={(file)=>{}}
     fileList={fileList}
     removePic={(file)=>{}}
@@ -81,3 +83,8 @@ const {BatchUpload} = MonkeyUi;
  2. Run   <code>npm install</code>
  3. Start the development server with   <code>gulp</code>
  4. Open your browser to    <code>http://localhost:3000</code>
+
+ ### develop
+ 1. 开发语言js（后期采用typescript）,css 预处理器采用less
+ 2. 提供完整的接口说明文档 和 测试用例在demo中
+ 3. 后期计划基于基础的rc-*基础组件开发直接使用的业务组件，在基础组件中只提供基础的api ；组件样式定制及特殊需求 在上层组件中开发
