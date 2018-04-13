@@ -36,6 +36,7 @@ import TimePicker from "./time-picker/index";
 import DatePicker from "./date-picker/index";
 import BatchUpload from "./batch-upload/index";
 import PullSelect from "./pull-select/index";
+import Popconfirm from "./popconfirm/index";
 import Tabs from "./tabs/index";
 
 var MonkeyUi = {
@@ -76,7 +77,8 @@ var MonkeyUi = {
 	NewCascader : NewCascader,
 	Upload : Upload,
 	PullSelect,
-	Tabs
+	Tabs,
+	Popconfirm
 	
 	
 	

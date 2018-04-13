@@ -19,6 +19,8 @@ const Spin=MonkeyUi.Spin;
 const Collapse=MonkeyUi.Collapse;
 const Panel = Collapse.Panel;
 const TreeSelect=MonkeyUi.TreeSelect;
+const Popconfirm = MonkeyUi.Popconfirm;
+const Message = MonkeyUi.Message;
 var Input = MonkeyUi.Input;
 var Search = Input.Search;
 var Cascader = MonkeyUi.Cascader;
@@ -175,6 +177,12 @@ class Page extends React.Component{
     handleSelect(value){
       console.log(value)
     }
+    confirm(e){
+      Message.success("success");
+    }
+    cancel(e){
+      Message.error('Click on No');
+    }
   render() {
     var remark = this.state.remark;
     const onChange=(date, dateString) =>{
@@ -250,16 +258,18 @@ class Page extends React.Component{
           <Spin size="yyx-large" />
           
           <Demo/>
-          
+
       <Select
-         mode="multiple"
+        //  mode="multiple"
          style={{width:'100px'}}
          onChange={(value)=>this.handleSelect(value)}>
         <Option value="1">1</Option>
         <Option value="2">2</Option>
       </Select>
       <form className="pure-form"><input type="date"/></form>
-      
+      <Popconfirm title="Are you sure delete this task?" onConfirm={this.confirm} onCancel={this.cancel} okText="Yes" cancelText="No">
+        <a href="#">Delete</a>
+      </Popconfirm>
       </div>
     );
   }
