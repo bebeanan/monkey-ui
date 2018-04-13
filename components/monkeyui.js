@@ -22,7 +22,7 @@ import Menu from "./menu/index";
 import Icon from "./icon/index";
 import Timeline from "./timeline/index";
 import Carousel from "./carousel/index";
-import AutoComplete from "./autoComplete/index";
+import AutoComplete from "./auto-complete/index";
 import Form  from "./form/index";
 import Popover from "./popover/index";
 import Upload from "./upload/index";
