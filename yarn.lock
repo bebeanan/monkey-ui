@@ -4856,9 +4856,9 @@ rc-rate@~1.1.2:
   version "1.1.2"
   resolved "http://registry.npm.taobao.org/rc-rate/download/rc-rate-1.1.2.tgz#97706ef0615b5a0f4ee873898a743a4d7229f574"
 
-rc-select@^7.7.6:
-  version "7.7.6"
-  resolved "http://registry.npm.taobao.org/rc-select/download/rc-select-7.7.6.tgz#d5acc0ac9505c8d633fb00165c6afbc1ecb8fbc3"
+rc-select@7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/rc-select/-/rc-select-7.7.0.tgz#2ee7a8542182e72e17bb72c3d097aeb4244533f3"
   dependencies:
     babel-runtime "^6.23.0"
     classnames "2.x"

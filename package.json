@@ -1,6 +1,6 @@
 {
   "name": "monkeyui",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "title": "monkeyui",
   "description": "react components.",
   "author": "bebeanan",
@@ -35,7 +35,7 @@
     "rc-queue-anim": "~0.12.4",
     "rc-radio": "~2.0.0",
     "rc-rate": "~1.1.2",
-    "rc-select": "^7.7.6",
+    "rc-select": "7.7.0",
     "rc-slider": "~4.0.0",
     "rc-steps": "~2.1.5",
     "rc-switch": "~1.4.2",
