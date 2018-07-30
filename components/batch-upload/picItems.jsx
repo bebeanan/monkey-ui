@@ -14,10 +14,10 @@ class PicList extends React.Component{
 		let length=fileList.length;
 		if(length==0)
 			return null;
-		let arr=fileList.map((item)=>{
+		let arr=fileList.map((item,index)=>{
 			return <div className="picWarp" key={item.uid}>
 						<div className="picmi">
-							<span className="del" onClick={this.removePic.bind(this,item)}>×</span>
+							<span className="del" onClick={this.removePic.bind(this,item,index)}>×</span>
 							<img src={item.thumbUrl} 
 								 className="picThumbUrl"
 								 onClick={this.preivewPic.bind(this,fileList)}/>
